@@ -12,7 +12,7 @@
   const credibilitySection = document.querySelector('.credibility');
   const modalOverlay = document.querySelector('.modal-overlay');
   const stickyPromo = document.querySelector('.sticky-promo');
-  const heroVideoPlay = document.querySelector('.hero__video-play');
+  const heroVideoPlay = document.querySelector('.hero__play-btn');
 
   // ─── 1. Mobile Menu Toggle ───────────────────────────────────────────
 
@@ -222,11 +222,33 @@
     });
   });
 
-  // ─── 10. Video Play Button ───────────────────────────────────────────
+  // ─── 10. Video Play Button — YouTube Embed on Click ─────────────────
 
   if (heroVideoPlay) {
     heroVideoPlay.addEventListener('click', function () {
-      console.log('Video player would open here');
+      var videoContainer = document.querySelector('.hero__video');
+      var videoId = videoContainer ? videoContainer.getAttribute('data-video-id') : null;
+      if (!videoId) return;
+
+      var wrapper = videoContainer.querySelector('.hero__video-wrapper');
+      if (!wrapper) return;
+
+      var iframe = document.createElement('iframe');
+      iframe.setAttribute('src', 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0');
+      iframe.setAttribute('title', 'Cargonomics — Where Shipping Careers Begin');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border-radius:inherit;';
+
+      wrapper.style.position = 'relative';
+      wrapper.innerHTML = '';
+      wrapper.appendChild(iframe);
+
+      // Hide the label
+      var label = videoContainer.querySelector('.hero__video-label');
+      if (label) label.style.display = 'none';
     });
   }
 

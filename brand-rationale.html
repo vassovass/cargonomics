@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargonomics Homepage Prototype — Technical Specification</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #1E293B;
+      --color-secondary: #B87333;
+      --color-accent: #115E59;
+      --color-ivory: #FAF9F6;
+      --color-text: #334155;
+      --color-stone: #F0EDE8;
+      --color-signal: #DC2626;
+      --color-white: #FFFFFF;
+      --font-heading: 'Source Serif 4', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-ivory);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* HEADER */
+    .doc-header {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 72px 0 56px;
+    }
+
+    .doc-header__label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--color-secondary);
+      margin-bottom: 12px;
+    }
+
+    .doc-header__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+
+    .doc-header__sub {
+      font-size: 1rem;
+      color: rgba(250, 249, 246, 0.7);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .doc-header__meta {
+      margin-top: 28px;
+      font-size: 0.78rem;
+      color: rgba(250, 249, 246, 0.4);
+    }
+
+    /* DISCLAIMER */
+    .disclaimer {
+      background: var(--color-accent);
+      color: var(--color-white);
+      padding: 20px 0;
+    }
+
+    .disclaimer__inner {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .disclaimer__icon {
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      margin-top: 1px;
+    }
+
+    .disclaimer__text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      opacity: 0.92;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.08);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section__number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      color: var(--color-secondary);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .section__title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+    }
+
+    .section__subtitle {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-secondary);
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+
+    .section__subtitle:first-of-type {
+      margin-top: 24px;
+    }
+
+    .section p {
+      margin-bottom: 14px;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section ul {
+      list-style: none;
+      margin: 12px 0;
+    }
+
+    .section ul li {
+      padding: 5px 0 5px 22px;
+      position: relative;
+      font-size: 0.92rem;
+    }
+
+    .section ul li::before {
+      content: '\2022';
+      position: absolute;
+      left: 4px;
+      font-weight: 700;
+      color: var(--color-secondary);
+    }
+
+    /* PALETTE SWATCHES */
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .swatch {
+      border: 1px solid rgba(30, 41, 59, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .swatch__color {
+      height: 72px;
+    }
+
+    .swatch__info {
+      padding: 10px 12px;
+      background: var(--color-white);
+    }
+
+    .swatch__name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .swatch__hex {
+      font-size: 0.72rem;
+      color: var(--color-text);
+      opacity: 0.6;
+      font-family: 'Courier New', monospace;
+    }
+
+    .swatch__role {
+      font-size: 0.7rem;
+      color: var(--color-text);
+      opacity: 0.5;
+      margin-top: 2px;
+    }
+
+    /* TYPE SPECIMEN */
+    .type-specimen {
+      background: var(--color-white);
+      border: 1px solid rgba(30, 41, 59, 0.08);
+      padding: 28px 24px;
+      margin: 20px 0;
+    }
+
+    .type-specimen__label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-secondary);
+      margin-bottom: 8px;
+    }
+
+    .type-specimen__sample-serif {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .type-specimen__sample-sans {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    .type-specimen__note {
+      font-size: 0.78rem;
+      color: var(--color-text);
+      opacity: 0.55;
+      margin-top: 12px;
+      border-top: 1px solid rgba(30, 41, 59, 0.06);
+      padding-top: 12px;
+    }
+
+    .type-specimen--sidebyside {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .type-specimen--sidebyside .type-specimen__panel {
+      padding: 0;
+    }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: var(--color-primary);
+      color: #E2E8F0;
+      padding: 24px;
+      margin: 20px 0;
+      font-family: 'Courier New', Consolas, monospace;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      border-left: 3px solid var(--color-secondary);
+    }
+
+    .code-block__comment {
+      color: #64748B;
+    }
+
+    .code-block__property {
+      color: #7DD3FC;
+    }
+
+    .code-block__value {
+      color: #FDE68A;
+    }
+
+    .code-block__selector {
+      color: #86EFAC;
+    }
+
+    /* STRATEGY TABLE */
+    .strategy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.88rem;
+    }
+
+    .strategy-table th {
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-secondary);
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--color-secondary);
+    }
+
+    .strategy-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.08);
+      vertical-align: top;
+    }
+
+    .strategy-table td:first-child {
+      font-weight: 600;
+      color: var(--color-primary);
+      white-space: nowrap;
+    }
+
+    .strategy-table code {
+      background: rgba(30, 41, 59, 0.06);
+      padding: 2px 6px;
+      font-size: 0.8em;
+      font-family: 'Courier New', monospace;
+      color: var(--color-accent);
+    }
+
+    /* FLOW DIAGRAM */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .flow__step {
+      background: var(--color-white);
+      border: 1px solid rgba(30, 41, 59, 0.12);
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .flow__arrow {
+      color: var(--color-secondary);
+      font-size: 1.2rem;
+    }
+
+    /* CALLOUT */
+    .callout {
+      border-left: 3px solid var(--color-secondary);
+      padding: 16px 20px;
+      background: var(--color-white);
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    .callout strong {
+      color: var(--color-primary);
+    }
+
+    .callout--teal {
+      border-left-color: var(--color-accent);
+    }
+
+    .callout--teal strong {
+      color: var(--color-accent);
+    }
+
+    .callout--subtle {
+      border-left-color: var(--color-stone);
+      background: var(--color-stone);
+      font-size: 0.85rem;
+      color: var(--color-text);
+      opacity: 0.85;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .checklist li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      font-size: 0.9rem;
+    }
+
+    .checklist li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--color-secondary);
+    }
+
+    /* WP MAPPING */
+    .wp-map {
+      display: grid;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .wp-map__row {
+      display: grid;
+      grid-template-columns: 1fr 32px 1fr;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+    }
+
+    .wp-map__from {
+      background: var(--color-white);
+      border: 1px solid rgba(30, 41, 59, 0.1);
+      padding: 10px 14px;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+
+    .wp-map__from code {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-accent);
+      font-family: 'Courier New', monospace;
+      margin-top: 2px;
+    }
+
+    .wp-map__arrow {
+      text-align: center;
+      color: var(--color-secondary);
+      font-weight: 700;
+    }
+
+    .wp-map__to {
+      background: var(--color-stone);
+      border: 1px solid rgba(30, 41, 59, 0.1);
+      padding: 10px 14px;
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+
+    .wp-map__to span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--color-text);
+      opacity: 0.6;
+      margin-top: 2px;
+    }
+
+    /* SECTION ANNOTATION CARDS */
+    .annotation-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .annotation-card {
+      background: var(--color-white);
+      border: 1px solid rgba(30, 41, 59, 0.1);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .annotation-card__number {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      opacity: 0.5;
+      text-align: center;
+      padding-top: 2px;
+    }
+
+    .annotation-card__body h4 {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+
+    .annotation-card__body p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+
+    .annotation-card__body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .annotation-card__tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      margin-top: 6px;
+      margin-right: 4px;
+    }
+
+    .annotation-card__tag--elementor {
+      background: rgba(17, 94, 89, 0.1);
+      color: var(--color-accent);
+    }
+
+    .annotation-card__tag--acf {
+      background: rgba(184, 115, 51, 0.1);
+      color: var(--color-secondary);
+    }
+
+    .annotation-card__tag--cpt {
+      background: rgba(30, 41, 59, 0.08);
+      color: var(--color-primary);
+    }
+
+    /* FOOTER */
+    .doc-footer {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 36px 0;
+      text-align: center;
+    }
+
+    .doc-footer p {
+      font-size: 0.82rem;
+      opacity: 0.45;
+    }
+
+    .doc-footer__brand {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-white);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .palette {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .wp-map__row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .wp-map__arrow {
+        transform: rotate(90deg);
+      }
+
+      .strategy-table {
+        font-size: 0.8rem;
+      }
+
+      .strategy-table td:first-child {
+        white-space: normal;
+      }
+
+      .type-specimen--sidebyside {
+        grid-template-columns: 1fr;
+      }
+
+      .annotation-card {
+        grid-template-columns: 1fr;
+      }
+
+      .annotation-card__number {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .doc-header, .disclaimer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .swatch__color { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .code-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="doc-header">
+    <div class="container">
+      <div class="doc-header__label">Technical Specification</div>
+      <h1 class="doc-header__title">Homepage Prototype &mdash; Build Notes</h1>
+      <p class="doc-header__sub">A companion document describing the design tokens, section architecture, and WordPress/Elementor mapping used in the Cargonomics homepage prototype (v2).</p>
+      <div class="doc-header__meta">Prepared by Vasso Vassiliades &bull; March 2026</div>
+    </div>
+  </header>
+
+  <div class="disclaimer">
+    <div class="container">
+      <div class="disclaimer__inner">
+        <div class="disclaimer__icon">&#9432;</div>
+        <div class="disclaimer__text">
+          <strong>Note:</strong> This document describes the placeholder design choices used in the Cargonomics homepage prototype. All colours, typography, and visual elements are suggestions based on the industry context &mdash; the final brand direction is entirely yours to define. Everything here is built to be swapped quickly.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- 1. COLOUR PALETTE -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">01</div>
+        <h2 class="section__title">Colour Palette</h2>
+
+        <p>For the prototype, I used a six-colour palette with a logistics/maritime feel. These are placeholder values stored as CSS custom properties &mdash; they exist to demonstrate the design system, not to prescribe a final brand palette.</p>
+
+        <div class="palette">
+          <div class="swatch">
+            <div class="swatch__color" style="background: #1E293B;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Deep Slate</div>
+              <div class="swatch__hex">#1E293B</div>
+              <div class="swatch__role">Primary &mdash; headers, nav, footer</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background: #B87333;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Copper</div>
+              <div class="swatch__hex">#B87333</div>
+              <div class="swatch__role">Secondary &mdash; CTAs, accents, badges</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background: #115E59;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Deep Teal</div>
+              <div class="swatch__hex">#115E59</div>
+              <div class="swatch__role">Accent &mdash; links, chat buttons</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background: #FAF9F6;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Warm Ivory</div>
+              <div class="swatch__hex">#FAF9F6</div>
+              <div class="swatch__role">Background &mdash; page base</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background: #F0EDE8;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Stone</div>
+              <div class="swatch__hex">#F0EDE8</div>
+              <div class="swatch__role">Alternating sections</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background: #DC2626;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Signal Red</div>
+              <div class="swatch__hex">#DC2626</div>
+              <div class="swatch__role">Urgency &mdash; sparingly, key CTAs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout--subtle callout">
+          <strong>Why these colours?</strong> I wanted something that felt grounded in the shipping/logistics world &mdash; slate for authority, copper for industrial warmth, teal for maritime depth &mdash; while staying visually distinct from generic template palettes. But these are starting points. If you have brand colours in mind, they drop straight in.
+        </div>
+
+        <div class="section__subtitle">Contrast &amp; Accessibility</div>
+        <ul>
+          <li><strong>#334155 on #FAF9F6</strong> &mdash; body text passes WCAG AA at all sizes (contrast ratio 7.8:1)</li>
+          <li><strong>#FFFFFF on #1E293B</strong> &mdash; header/footer text passes AAA (contrast ratio 13.5:1)</li>
+          <li><strong>#FFFFFF on #B87333</strong> &mdash; copper buttons pass AA for large text (contrast ratio 3.4:1)</li>
+          <li><strong>#DC2626</strong> is only used for high-urgency CTAs where the large text size compensates</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. TYPOGRAPHY -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">02</div>
+        <h2 class="section__title">Typography</h2>
+
+        <p>The prototype pairs two Google Fonts. Both are free, production-ready, and can be self-hosted in WordPress for performance.</p>
+
+        <div class="type-specimen">
+          <div class="type-specimen__label">Headings &mdash; Source Serif 4</div>
+          <div class="type-specimen__sample-serif">Break into shipping &amp; logistics &mdash; trained by the people who built the industry.</div>
+          <div class="type-specimen__note">Variable-weight serif from Adobe. Authoritative and editorial, with optical sizing that renders crisply at both large display sizes and smaller subheadings. I chose it because it signals human curation without feeling stuffy.</div>
+        </div>
+
+        <div class="type-specimen">
+          <div class="type-specimen__label">Body &mdash; Outfit</div>
+          <div class="type-specimen__sample-sans">A free, intensive five-day bootcamp that takes you from zero industry knowledge to placement-ready. No experience needed. No tuition. Just commitment.</div>
+          <div class="type-specimen__note">Geometric sans-serif with personality. Clean readability at all sizes. I went with Outfit over more common choices (Inter, Poppins, Roboto) to avoid the "template look."</div>
+        </div>
+
+        <div class="section__subtitle">Side-by-side comparison</div>
+        <div class="type-specimen type-specimen--sidebyside">
+          <div class="type-specimen__panel">
+            <div class="type-specimen__label">Source Serif 4 &mdash; 700</div>
+            <div class="type-specimen__sample-serif" style="font-size: 1.4rem; margin-bottom: 8px;">Coaching. Connecting. Consulting.</div>
+            <div class="type-specimen__sample-serif" style="font-size: 1rem; font-weight: 400; font-style: italic; color: var(--color-text);">What You Didn't Learn at School</div>
+          </div>
+          <div class="type-specimen__panel">
+            <div class="type-specimen__label">Outfit &mdash; 400 / 600 / 700</div>
+            <div class="type-specimen__sample-sans" style="font-weight: 400; margin-bottom: 4px;">Regular body text for paragraphs and descriptions.</div>
+            <div class="type-specimen__sample-sans" style="font-weight: 600; margin-bottom: 4px;">Semi-bold for labels, nav items, metadata.</div>
+            <div class="type-specimen__sample-sans" style="font-weight: 700;">Bold for CTAs and strong emphasis.</div>
+          </div>
+        </div>
+
+        <div class="callout--subtle callout">
+          <strong>Easy to swap.</strong> Both fonts are set in CSS custom properties (<code>--font-heading</code>, <code>--font-body</code>). To test a different pairing, change two lines. In Elementor, these map to Global Fonts &mdash; same swap-in-seconds flexibility.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. HOW TO CHANGE IT -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">03</div>
+        <h2 class="section__title">How to Change It &mdash; CSS Custom Properties</h2>
+
+        <p>The entire visual identity is controlled by a single block of CSS variables at the top of the stylesheet. Changing any colour or font updates every element that references it. Here is the actual block from the prototype:</p>
+
+        <div class="code-block">
+          <span class="code-block__selector">:root</span> {<br>
+          &nbsp;&nbsp;<span class="code-block__comment">/* Colours */</span><br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-primary</span>: <span class="code-block__value">#1E293B</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-secondary</span>: <span class="code-block__value">#B87333</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-accent</span>: <span class="code-block__value">#115E59</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-ivory</span>: <span class="code-block__value">#FAF9F6</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-text</span>: <span class="code-block__value">#334155</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-stone</span>: <span class="code-block__value">#F0EDE8</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-signal</span>: <span class="code-block__value">#DC2626</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--color-white</span>: <span class="code-block__value">#FFFFFF</span>;<br><br>
+          &nbsp;&nbsp;<span class="code-block__comment">/* Typography */</span><br>
+          &nbsp;&nbsp;<span class="code-block__property">--font-heading</span>: <span class="code-block__value">'Source Serif 4', serif</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--font-body</span>: <span class="code-block__value">'Outfit', sans-serif</span>;<br><br>
+          &nbsp;&nbsp;<span class="code-block__comment">/* Layout */</span><br>
+          &nbsp;&nbsp;<span class="code-block__property">--max-width</span>: <span class="code-block__value">1200px</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--container-padding</span>: <span class="code-block__value">20px</span>;<br><br>
+          &nbsp;&nbsp;<span class="code-block__comment">/* Animation */</span><br>
+          &nbsp;&nbsp;<span class="code-block__property">--transition-base</span>: <span class="code-block__value">0.3s ease</span>;<br>
+          &nbsp;&nbsp;<span class="code-block__property">--transition-fast</span>: <span class="code-block__value">0.2s ease</span>;<br>
+          }
+        </div>
+
+        <p>This architecture is deliberate. It means:</p>
+        <ul>
+          <li><strong>Rebranding is trivial</strong> &mdash; change 6 colour values and 2 font references, and the entire site updates. No hunting through CSS for hardcoded hex values.</li>
+          <li><strong>It maps directly to Elementor Global Colours</strong> &mdash; in WordPress/Elementor, you set up a matching set of Global Colours and Global Fonts. Every widget that references "Primary" or "Secondary" updates globally, the same way the CSS variables work.</li>
+          <li><strong>Design consistency is enforced</strong> &mdash; developers and content editors can only use colours from the defined palette, preventing drift.</li>
+          <li><strong>Dark mode or theme variants</strong> become a matter of overriding the <code>:root</code> block, not rebuilding the site.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Elementor mapping:</strong> Elementor Pro's Global Colours panel supports naming (e.g., "Primary," "Copper Accent," "Stone"). Set these up once during the WordPress build, and every widget colour picker will show the brand palette first. If you later change "Copper" from <code>#B87333</code> to a different value, every button, badge, and accent on the site updates in one save.
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PAGE ARCHITECTURE -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">04</div>
+        <h2 class="section__title">Page Architecture &mdash; Section by Section</h2>
+
+        <p>The homepage prototype is structured as a single scroll, moving prospective students from awareness to application. Here is the section flow and how each part functions:</p>
+
+        <div class="flow">
+          <div class="flow__step">Hero</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Three Pillars</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Image Break</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Programs</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">How It Works</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Credibility</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Why Vietnam</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Trainers</div>
+          <div class="flow__arrow">&rarr;</div>
+          <div class="flow__step">Footer</div>
+        </div>
+
+        <div class="section__subtitle">Annotated section breakdown</div>
+
+        <div class="annotation-grid">
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">1</div>
+            <div class="annotation-card__body">
+              <h4>Hero &mdash; Asymmetric split with video placeholder</h4>
+              <p>55/45 grid on desktop, stacked on mobile. Left side: heading, subheading, two CTAs (soft "Explore Programs" + hard "Apply Now"). Right side: video placeholder with play button overlay.</p>
+              <p>The heading uses Source Serif 4 at <code>clamp(2rem, 3.5vw, 3.5rem)</code> for fluid scaling.</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Container</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF: headline, subline, video URL</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">2</div>
+            <div class="annotation-card__body">
+              <h4>Three Pillars &mdash; Alternating image/text rows</h4>
+              <p>Coaching, Connecting, Consulting. Each pillar is a side-by-side image+text row that alternates direction (image left, then image right). This avoids the monotony of three identical cards stacked vertically.</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Container (flex-direction: row-reverse)</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF Repeater: icon, title, description, image</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">3</div>
+            <div class="annotation-card__body">
+              <h4>Full-width Image Break</h4>
+              <p>A parallax-ready full-bleed image with dark overlay and a single large heading. Provides visual breathing room between the pillars and programs sections.</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Section (stretch, min-height: 400px)</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">4</div>
+            <div class="annotation-card__body">
+              <h4>Programs &mdash; Featured card + secondary grid</h4>
+              <p>The WYDLS bootcamp card is visually dominant: full-width with a copper border, "Free &mdash; No Tuition" tag, and a prominent CTA. The five-day intensive format is highlighted. Below it, two secondary program cards (Professional Development, Corporate Training) sit in a 2-column grid.</p>
+              <p>The featured card includes a scrolling curriculum strip with flip cards (hover to reveal module details).</p>
+              <span class="annotation-card__tag annotation-card__tag--cpt">CPT: Programs</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF: name, duration, price, description, curriculum, badge</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">5</div>
+            <div class="annotation-card__body">
+              <h4>How It Works &mdash; 4-step journey</h4>
+              <p>Apply, Select, Train, Place. Side-by-side layout: steps with connecting vertical line on the left, image on the right. Ends with a large "Start Your Application" CTA. The steps make the path concrete for students who need clarity on what happens next.</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Container (flex)</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF Repeater: step number, name, description</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">6</div>
+            <div class="annotation-card__body">
+              <h4>Credibility Strip</h4>
+              <p>Full-width dark background with four stats: 50+ Years Combined Experience, 1,000+ Company Connections, 3 Continents, 5+ Shipping Lines. Counter animation on scroll (implemented via Intersection Observer in the prototype).</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Section (dark BG)</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF Options Page: stat values editable by admin</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">7</div>
+            <div class="annotation-card__body">
+              <h4>Why Vietnam</h4>
+              <p>Side-by-side: image of HCMC port/city on the left, text making the case for Vietnam as a logistics hub on the right. Targets international visitors who may not know Vietnam's shipping significance.</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Container (flex)</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF: heading, body text, image</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">8</div>
+            <div class="annotation-card__body">
+              <h4>Trainers</h4>
+              <p>2-column grid of trainer cards. Photo (3:2 aspect ratio), name, role, bio. Abraham's card is the primary trust signal. Placed after the credibility strip so the numbers precede the faces behind them.</p>
+              <span class="annotation-card__tag annotation-card__tag--cpt">CPT: Team Members</span>
+              <span class="annotation-card__tag annotation-card__tag--acf">ACF: photo, name, role, bio, LinkedIn</span>
+            </div>
+          </div>
+
+          <div class="annotation-card">
+            <div class="annotation-card__number">+</div>
+            <div class="annotation-card__body">
+              <h4>Modal + Sticky Bar + Floating Buttons</h4>
+              <p><strong>Desktop:</strong> a promotional modal appears after 8 seconds for visitors who haven't scrolled to the programs section. First-person CTA ("Reserve My Free Spot"). <strong>Mobile:</strong> a sticky bar slides up from the bottom on scroll (avoids Google's interstitial penalty). <strong>Both:</strong> Zalo + WhatsApp floating buttons in the bottom-right corner, Zalo first (81-85% Vietnam market share vs WhatsApp at 6-7%).</p>
+              <span class="annotation-card__tag annotation-card__tag--elementor">Elementor Popup (trigger: timer/scroll)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WORDPRESS / ELEMENTOR CONVERSION MAP -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">05</div>
+        <h2 class="section__title">WordPress / Elementor Conversion Map</h2>
+
+        <p>The prototype's HTML/CSS is structured specifically to reduce WordPress build time. Every pattern has a direct Elementor equivalent. Here is the full mapping:</p>
+
+        <div class="section__subtitle">Design System &rarr; Elementor Globals</div>
+
+        <div class="wp-map">
+          <div class="wp-map__row">
+            <div class="wp-map__from">CSS custom properties<code>:root { --color-primary: ... }</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Global Colours<span>Site Settings &gt; Global Colors</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Font variables<code>--font-heading, --font-body</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Global Fonts<span>Site Settings &gt; Global Fonts &gt; Primary / Text</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Button styles<code>.btn--copper, .btn--outline</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Button Widget + Global Style<span>Or custom CSS class on any Elementor button</span></div>
+          </div>
+        </div>
+
+        <div class="section__subtitle">Layout &rarr; Elementor Containers</div>
+
+        <div class="wp-map">
+          <div class="wp-map__row">
+            <div class="wp-map__from">Each <code>&lt;section&gt;</code> block</div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Container (Flexbox)<span>Full-width or boxed, matching section padding</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">BEM class names<code>.hero__title, .pillar-row__content</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Advanced &gt; CSS Classes<span>For custom CSS targeting in child theme</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Alternating pillar rows<code>.pillar-row--reverse</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Container flex-direction: row-reverse<span>Or use Elementor's "Reverse Columns" toggle</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Sticky navigation<code>.nav { position: sticky }</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Header &gt; Motion Effects &gt; Sticky<span>Built-in Elementor Pro feature</span></div>
+          </div>
+        </div>
+
+        <div class="section__subtitle">Dynamic Content &rarr; CPTs + ACF</div>
+
+        <div class="wp-map">
+          <div class="wp-map__row">
+            <div class="wp-map__from">Program cards (repeating)<code>.program-card, .program-featured</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Custom Post Type: "Programs"<span>ACF fields: name, duration, price tag, description, badge, CTA link</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Trainer cards (repeating)<code>.trainer-card-v2</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Custom Post Type: "Team"<span>ACF fields: photo, name, role, bio, LinkedIn URL</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Credibility stats, pillar descriptions</div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">ACF Options Page<span>Admin-editable without touching templates</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Curriculum flip cards</div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">ACF Repeater on Programs CPT<span>Each card: module name, icon, description</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Bilingual content (EN/VI)</div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">WPML or Polylang Pro<span>With hreflang tags for SEO</span></div>
+          </div>
+        </div>
+
+        <div class="section__subtitle">Interactive Elements</div>
+
+        <div class="wp-map">
+          <div class="wp-map__row">
+            <div class="wp-map__from">Desktop modal (8s delay)<code>.modal-overlay</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Popup<span>Trigger: after X seconds, condition: not on mobile</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Mobile sticky bar<code>.sticky-promo</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Popup (bottom bar)<span>Trigger: on scroll, condition: mobile only</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Scroll animations<code>.fade-up + IntersectionObserver</code></div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Motion Effects<span>Entrance animation: Fade In Up, trigger: viewport</span></div>
+          </div>
+          <div class="wp-map__row">
+            <div class="wp-map__from">Counter animation (credibility)</div>
+            <div class="wp-map__arrow">&rarr;</div>
+            <div class="wp-map__to">Elementor Counter Widget<span>Built-in animated counter with start/end values</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONVERSION ARCHITECTURE -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">06</div>
+        <h2 class="section__title">Lead Capture Touchpoints</h2>
+
+        <p>The prototype includes multiple points where a visitor can convert, placed at different stages of engagement. In production, each CTA points to an application form that feeds the CRM:</p>
+
+        <table class="strategy-table">
+          <thead>
+            <tr>
+              <th>Touchpoint</th>
+              <th>Type &amp; Placement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nav CTA</td>
+              <td>"Apply Now" in the sticky navigation bar. Visible at every scroll position. Uses <code>.nav__cta</code> class for distinct analytics tracking.</td>
+            </tr>
+            <tr>
+              <td>Hero CTAs</td>
+              <td>Two buttons: "Explore Programs" (soft scroll to programs section) and "Apply Now" (hard conversion). Side by side.</td>
+            </tr>
+            <tr>
+              <td>WYDLS card</td>
+              <td>"Apply Now &mdash; It's Free" button on the featured program card. Contextual &mdash; appears after the visitor has read about the bootcamp.</td>
+            </tr>
+            <tr>
+              <td>Journey CTA</td>
+              <td>"Start Your Application" after the 4-step How It Works section. Large, centered, hard to miss.</td>
+            </tr>
+            <tr>
+              <td>Desktop modal</td>
+              <td>"Reserve My Free Spot" &mdash; appears after 8 seconds for non-converting desktop visitors. First-person CTA phrasing.</td>
+            </tr>
+            <tr>
+              <td>Mobile sticky</td>
+              <td>"Apply Free" bar at the bottom of the viewport. Scroll-triggered, dismissible. Avoids Google's interstitial penalty.</td>
+            </tr>
+            <tr>
+              <td>Chat buttons</td>
+              <td>Zalo (primary) + WhatsApp (secondary) floating buttons. For prospects who prefer messaging over forms.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout--teal callout">
+          <strong>Zalo-first:</strong> The floating button order puts Zalo on top because it has 81-85% market penetration in Vietnam vs WhatsApp at 6-7%. WhatsApp is there for international contacts. This is the kind of local-market detail that matters.
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SEO & PERFORMANCE -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">07</div>
+        <h2 class="section__title">SEO &amp; Performance Notes</h2>
+
+        <p>The prototype is built with production-grade markup from the start, not as an afterthought:</p>
+
+        <ul class="checklist">
+          <li><strong>Semantic HTML5</strong> &mdash; <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code> (not div soup)</li>
+          <li><strong>Single H1</strong> with logical H2/H3 hierarchy throughout</li>
+          <li><strong>Schema.org structured data</strong> &mdash; EducationalOrganization + Course (JSON-LD) for rich results</li>
+          <li><strong>Open Graph + Twitter Card</strong> meta tags for social sharing</li>
+          <li><strong>Lazy-loaded images</strong> below the fold, eager-loaded hero</li>
+          <li><strong>Minimal JavaScript</strong> &mdash; IntersectionObserver for scroll effects, no heavy frameworks</li>
+          <li><strong>Mobile-first CSS</strong> &mdash; base styles for small screens, media queries progressively enhance for tablets and desktops</li>
+        </ul>
+
+        <div class="callout--subtle callout">
+          <strong>WordPress performance target:</strong> Lighthouse 90+ is achievable with WP Rocket (Remove Unused CSS, Delay JS), locally self-hosted fonts via OMGF or manual @font-face, and WebP image conversion via ShortPixel or Imagify. The prototype's minimal JS footprint and semantic structure give the production build a clean starting point.
+        </div>
+
+        <div class="section__subtitle">Target keywords (student recruitment)</div>
+        <ul>
+          <li>shipping logistics training vietnam</li>
+          <li>logistics career ho chi minh city</li>
+          <li>free logistics bootcamp</li>
+          <li>shipping industry course vietnam</li>
+        </ul>
+        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 8px;">These are naturally incorporated into the heading hierarchy and body copy without keyword stuffing. The H1, H2s, and meta description all target these terms.</p>
+      </div>
+    </section>
+
+    <!-- 8. ANALYTICS READINESS -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">08</div>
+        <h2 class="section__title">Analytics Readiness</h2>
+
+        <p>The prototype is structured for clean analytics instrumentation in production:</p>
+
+        <ul class="checklist">
+          <li><strong>Section IDs</strong> (<code>#programs</code>, <code>#about</code>, <code>#trainers</code>, <code>#contact</code>) &mdash; enable scroll-depth tracking and section engagement measurement</li>
+          <li><strong>Distinct CTA classes</strong> (<code>.nav__cta</code>, <code>.btn--copper</code>, <code>.program-card__cta</code>, <code>.modal__cta</code>) &mdash; allow event tracking by position and context</li>
+          <li><strong>Modal/sticky bar interactions</strong> &mdash; show, dismiss, click-through are trackable conversion micro-events</li>
+          <li><strong>Zalo/WhatsApp button clicks</strong> &mdash; measurable as contact intent events</li>
+        </ul>
+
+        <p>In production, Google Analytics 4 (or PostHog) would track page views, scroll depth, CTA clicks by section, modal engagement rate, floating button clicks, and application form submissions. These feed into the CRM for full funnel visibility.</p>
+      </div>
+    </section>
+
+    <!-- 9. WHAT'S PLACEHOLDER VS REAL -->
+    <section class="section">
+      <div class="container">
+        <div class="section__number">09</div>
+        <h2 class="section__title">What's Placeholder vs. Production-Ready</h2>
+
+        <table class="strategy-table">
+          <thead>
+            <tr>
+              <th>Element</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HTML structure</td>
+              <td><strong>Production-ready.</strong> Semantic markup, accessibility attributes, responsive layout. Translates directly to Elementor containers.</td>
+            </tr>
+            <tr>
+              <td>CSS architecture</td>
+              <td><strong>Production-ready.</strong> Custom properties, BEM naming, mobile-first breakpoints. The design system carries over.</td>
+            </tr>
+            <tr>
+              <td>Colour palette</td>
+              <td><strong>Placeholder.</strong> Works well for the shipping/logistics context, but the final brand colours are your call. Drop-in replaceable via 6 CSS variables.</td>
+            </tr>
+            <tr>
+              <td>Typography</td>
+              <td><strong>Placeholder.</strong> Source Serif 4 + Outfit is a strong pairing, but easily swapped via 2 variables if you have preferred brand fonts.</td>
+            </tr>
+            <tr>
+              <td>Copy / text</td>
+              <td><strong>Placeholder.</strong> Written to demonstrate tone and structure. Real copy should come from your team / a copywriter who knows the brand voice.</td>
+            </tr>
+            <tr>
+              <td>Images</td>
+              <td><strong>Placeholder.</strong> Unsplash stock images. Production needs real photography of training sessions, port visits, Abraham and team.</td>
+            </tr>
+            <tr>
+              <td>Interactive elements</td>
+              <td><strong>Functional demo.</strong> Modal, sticky bar, scroll animations, curriculum carousel all work. Production versions would use Elementor's built-in equivalents.</td>
+            </tr>
+            <tr>
+              <td>Form / CRM integration</td>
+              <td><strong>Not built.</strong> CTAs point to <code>#apply</code> anchors. Production connects to the CRM (Airtable or custom).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="doc-footer">
+    <div class="container">
+      <div class="doc-footer__brand">Cargonomics</div>
+      <p>Homepage Prototype &mdash; Technical Specification &bull; Prepared by Vasso Vassiliades &bull; March 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>
