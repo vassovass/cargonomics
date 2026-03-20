@@ -354,7 +354,7 @@ button {
 .hero__video-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(30, 41, 59, 0.45);
+  background: rgba(30, 41, 59, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -365,7 +365,7 @@ button {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(30, 41, 59, 0.55);
+  background: rgba(30, 41, 59, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.85);
   display: flex;
   align-items: center;
