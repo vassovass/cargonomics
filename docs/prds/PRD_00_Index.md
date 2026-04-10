@@ -1,6 +1,6 @@
 # PRD Index: Cargonomics MVP Website
 
-> **Total PRDs:** 13 | **Proposed:** 13 | **In Progress:** 0 | **Complete:** 0
+> **Total PRDs:** 13 | **Proposed:** 11 | **In Progress:** 0 | **Complete:** 2
 > **Last Updated:** 2026-04-10
 > **MVP Deadline:** Tuesday April 14, 2026 EOD
 
@@ -47,8 +47,8 @@ Every PRD in this project MUST include:
 
 | PRD | Title | Type | Status | Dependencies | Blocks |
 |-----|-------|------|--------|--------------|--------|
-| 1 | Design System & Token Architecture | Architecture | :clipboard: Proposed | None | All |
-| 2 | Brand Token Activation & Font Fix | Refactor | :clipboard: Proposed | PRD 1 | PRDs 3-13 |
+| 1 | Design System & Token Architecture | Architecture | :white_check_mark: Complete | None | All |
+| 2 | Brand Token Activation & Font Fix | Refactor | :white_check_mark: Complete | PRD 1 | PRDs 3-13 |
 
 ## Sprint 2: Pages (PRDs 3-6 Parallel, PRD 7 Sequential)
 
@@ -82,7 +82,7 @@ Every PRD in this project MUST include:
 
 | Sprint | PRDs | Status |
 |--------|------|--------|
-| 1: Foundation | 1, 2 | Not started |
+| 1: Foundation | 1, 2 | Complete |
 | 2: Pages | 3, 4, 5, 6, 7 | Not started |
 | 3: Integration | 8, 9, 10, 11 | Not started |
 | 4: Ship | 12, 13 | Not started |
@@ -113,3 +113,4 @@ PRD 1 (Design System)
 | 2026-04-10 | Created PRD index with 13 PRDs across 4 sprints. MVP deadline: Tuesday April 14 EOD. |
 | 2026-04-10 | Created PRD_01_Design_System.md and PRD_02_Brand_Token_Activation.md with full outcome specs, research items, success criteria. |
 | 2026-04-10 | Created Sprint 2 PRD files: PRD_03_Homepage_Restructure.md, PRD_04_About_Page.md, PRD_05_Course_Page.md, PRD_06_Contact_Form_Page.md, PRD_07_Multi_Page_Navigation.md. |
+| 2026-04-10 | Sprint 1 complete. PRD 01 and PRD 02 delivered: design system docs, spacing/RGB/component tokens, data-section attributes on all 14 sections, Orbitron + Open Sans fonts, 27 hardcoded hex values replaced with CSS custom properties. Deployed to GitHub Pages. |
