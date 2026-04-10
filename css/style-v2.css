@@ -1580,7 +1580,7 @@ button {
   .hero {
     display: grid;
     grid-template-columns: 55% 45%;
-    min-height: 80vh;
+    min-height: 60vh;
     align-items: center;
   }
 
@@ -1602,7 +1602,7 @@ button {
   }
 
   .hero__headline {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
   }
 
   /* Pillars v2 — alternating rows side-by-side */
