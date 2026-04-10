@@ -22,7 +22,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style-v2.css">
@@ -66,9 +66,9 @@
 <body>
 
   <!-- NAV -->
-  <nav class="nav" id="nav">
+  <nav class="nav" id="nav" data-section="site-nav" data-elementor-widget="container">
     <div class="container">
-      <div class="nav__brand">
+      <div class="nav__brand" data-slot="logo" data-elementor-widget="image">
         <a href="#" class="nav__logo">Cargonomics</a>
         <span class="nav__tagline">Coaching &bull; Connecting &bull; Consulting</span>
       </div>
@@ -86,20 +86,20 @@
   </nav>
 
   <!-- HERO — Asymmetric split with video placeholder -->
-  <header class="hero" id="home">
+  <header class="hero" id="home" data-section="hero" data-elementor-widget="container">
     <div class="hero__content">
-      <h1 class="hero__headline fade-up">
+      <h1 class="hero__headline fade-up" data-slot="heading" data-elementor-widget="heading">
         Break into shipping &amp; logistics — trained by the people who built the industry.
       </h1>
-      <p class="hero__sub fade-up">
+      <p class="hero__sub fade-up" data-slot="body" data-elementor-widget="text-editor">
         Free, intensive bootcamps that take you from zero industry knowledge to placement-ready in five days. No experience needed. No tuition. Just commitment.
       </p>
-      <div class="hero__ctas fade-up">
+      <div class="hero__ctas fade-up" data-slot="cta" data-elementor-widget="button">
         <a href="#programs" class="btn btn--copper">Explore Programs</a>
         <a href="#apply" class="btn btn--outline">Apply Now</a>
       </div>
     </div>
-    <div class="hero__video" data-video-id="lVdYw_S6cV8">
+    <div class="hero__video" data-slot="media" data-elementor-widget="video" data-video-id="lVdYw_S6cV8">
       <div class="hero__video-wrapper">
         <img src="img/video-thumb.jpg" alt="Cargonomics — Where Shipping Careers Begin" loading="eager">
         <div class="hero__video-overlay">
@@ -115,9 +115,9 @@
   </header>
 
   <!-- THREE PILLARS — Alternating image+text rows -->
-  <section class="pillars-v2" id="about">
+  <section class="pillars-v2" id="about" data-section="pillars" data-elementor-widget="container">
     <div class="container">
-      <div class="pillars-v2__header fade-up">
+      <div class="pillars-v2__header fade-up" data-slot="heading" data-elementor-widget="heading">
         <p class="section-label">What We Do</p>
         <h2>Coach. Connect. Consult.</h2>
       </div>
@@ -161,16 +161,16 @@
   </section>
 
   <!-- FULL-WIDTH IMAGE BREAK -->
-  <div class="image-break">
+  <div class="image-break" data-section="image-break" data-elementor-widget="container">
     <div class="image-break__overlay">
       <h2 class="image-break__text">Where Shipping Careers Begin</h2>
     </div>
   </div>
 
   <!-- PROGRAMS — Featured full-width + 2 side-by-side -->
-  <section class="programs-v2" id="programs">
+  <section class="programs-v2" id="programs" data-section="programs" data-elementor-widget="container">
     <div class="container">
-      <div class="programs-v2__header fade-up">
+      <div class="programs-v2__header fade-up" data-slot="heading" data-elementor-widget="heading">
         <p class="section-label">Training Programs</p>
         <h2>Programs &amp; Courses</h2>
       </div>
@@ -390,9 +390,9 @@
   </section>
 
   <!-- HOW IT WORKS — Side-by-side with image -->
-  <section class="journey-v2" id="how-it-works">
+  <section class="journey-v2" id="how-it-works" data-section="journey" data-elementor-widget="container">
     <div class="container">
-      <div class="journey-v2__header fade-up">
+      <div class="journey-v2__header fade-up" data-slot="heading" data-elementor-widget="heading">
         <p class="section-label">Your Path</p>
         <h2>How It Works</h2>
       </div>
@@ -438,7 +438,7 @@
   </section>
 
   <!-- CREDIBILITY -->
-  <section class="credibility">
+  <section class="credibility" data-section="credibility" data-elementor-widget="container">
     <div class="container">
       <div class="credibility__grid">
         <div class="fade-up">
@@ -463,7 +463,7 @@
   </section>
 
   <!-- WHY VIETNAM -->
-  <section class="vietnam">
+  <section class="vietnam" data-section="vietnam" data-elementor-widget="container">
     <div class="container">
       <div class="vietnam__layout fade-up">
         <div class="vietnam__image">
@@ -479,9 +479,9 @@
   </section>
 
   <!-- TRAINERS — Larger card layout -->
-  <section class="trainers-v2" id="trainers">
+  <section class="trainers-v2" id="trainers" data-section="trainers" data-elementor-widget="container">
     <div class="container">
-      <div class="trainers-v2__header fade-up">
+      <div class="trainers-v2__header fade-up" data-slot="heading" data-elementor-widget="heading">
         <p class="section-label">Your Instructors</p>
         <h2>Learn from Industry Veterans</h2>
       </div>
@@ -511,9 +511,9 @@
   </section>
 
   <!-- CONFERENCE — Mosaic layout -->
-  <section class="conference-v2">
+  <section class="conference-v2" data-section="conference" data-elementor-widget="container">
     <div class="container">
-      <div class="conference-v2__header fade-up">
+      <div class="conference-v2__header fade-up" data-slot="heading" data-elementor-widget="heading">
         <h3 class="conference-v2__title">Cargonomics Lite Conference Series 2025</h3>
         <p class="conference-v2__subtitle">The Reverie Saigon &bull; 300+ attendees</p>
       </div>
@@ -532,9 +532,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer" id="contact">
+  <footer class="footer" id="contact" data-section="footer" data-elementor-widget="container">
     <div class="container">
-      <div class="footer__grid">
+      <div class="footer__grid" data-slot="footer-columns" data-elementor-widget="container">
         <div class="footer__col">
           <div class="footer__col-title">Cargonomics</div>
           <p>Shaping the future of shipping and logistics through training, recruitment, and industry connection.</p>
@@ -570,7 +570,7 @@
   </footer>
 
   <!-- FLOATING BUTTONS -->
-  <div class="floating-buttons">
+  <div class="floating-buttons" data-section="floating-buttons">
     <a href="#" class="floating-btn floating-btn--zalo" aria-label="Chat on Zalo">
       <span class="floating-btn__icon">Zalo</span>
       <span class="floating-btn__label">Chat on Zalo</span>
@@ -582,7 +582,7 @@
   </div>
 
   <!-- DESKTOP MODAL -->
-  <div class="modal-overlay" id="wydls-modal">
+  <div class="modal-overlay" id="wydls-modal" data-section="modal-wydls">
     <div class="modal">
       <button class="modal__close" aria-label="Close" id="modal-close">&times;</button>
       <div class="modal__free-banner">
@@ -603,7 +603,7 @@
   </div>
 
   <!-- MOBILE STICKY BAR -->
-  <div class="sticky-promo" id="sticky-promo">
+  <div class="sticky-promo" id="sticky-promo" data-section="sticky-promo">
     <div class="sticky-promo__text">
       <strong>Free Bootcamp</strong>
       5-day training + job placement. May 2026.

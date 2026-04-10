@@ -145,3 +145,70 @@ When Marilyn signs off on the HTML/CSS design, the tokens map one-to-one to Elem
 One Elementor theme, two "Site Styles" configurations (Cargonomics and Flexed). Future clients = additional Site Styles configurations. No theme duplication.
 
 WordPress migration is out of scope for the Tuesday April 14 MVP. This section is forward-looking only.
+
+## Spacing Tokens
+
+Base unit: 8px. All spacing values are brand-agnostic (same for both brands).
+
+| Token | Cargonomics | Flexed | Usage |
+|-------|------------|--------|-------|
+| `--space-2xs` | 4px | 4px | Tight margins, badge padding |
+| `--space-xs` | 8px | 8px | Small gaps, icon spacing |
+| `--space-sm` | 12px | 12px | Inner component gaps |
+| `--space-md` | 16px | 16px | Standard component padding |
+| `--space-lg` | 20px | 20px | Container padding (mobile) |
+| `--space-xl` | 24px | 24px | Card padding, sub-spacing |
+| `--space-2xl` | 32px | 32px | Container padding (tablet) |
+| `--space-3xl` | 48px | 48px | Section header margins |
+| `--section-padding-y` | 72px | 72px | Section vertical padding (mobile). 96px at 1024px+ via media query. |
+| `--section-padding-x` | 0px | 0px | Section horizontal padding |
+| `--container-max` | 1200px | 1200px | Maximum content width |
+| `--container-padding` | 20px | 20px | Container horizontal padding. 32px at 768px+. |
+
+## Component Tokens
+
+| Token | Cargonomics | Flexed | Usage |
+|-------|------------|--------|-------|
+| `--btn-bg` | `var(--color-secondary)` (Gold) | `var(--color-primary)` (Blue) | Button background |
+| `--btn-text` | `var(--color-primary)` (Navy) | `#FFFFFF` | Button text colour |
+| `--btn-hover-bg` | `#B8984F` | `var(--color-primary-dark)` | Button hover background |
+| `--btn-hover-text` | `var(--color-primary)` | `#FFFFFF` | Button hover text |
+| `--btn-border-radius` | 6px | 6px | Button corner radius |
+| `--btn-padding` | 12px 28px | 12px 28px | Button padding |
+| `--btn-font-weight` | 600 | 600 | Button font weight |
+| `--card-bg` | `var(--color-stone)` | `var(--color-stone)` | Card background |
+| `--card-border` | `1px solid rgba(var(--color-primary-rgb), 0.08)` | `1px solid rgba(var(--color-primary-rgb), 0.08)` | Card border |
+| `--card-border-radius` | 12px | 12px | Card corner radius |
+| `--card-shadow` | `0 2px 8px rgba(0,0,0,0.06)` | `0 2px 8px rgba(0,0,0,0.06)` | Card box shadow |
+| `--card-padding` | `var(--space-xl)` | `var(--space-xl)` | Card inner padding |
+| `--nav-bg` | `var(--color-primary)` | `var(--color-primary)` | Navigation background |
+| `--nav-text` | `var(--color-white)` | `var(--color-white)` | Navigation text colour |
+| `--nav-link-hover` | `var(--color-secondary)` (Gold) | `var(--color-secondary-light)` | Nav link hover colour |
+| `--footer-bg` | `var(--color-primary-dark)` | `var(--color-primary-dark)` | Footer background |
+| `--footer-text` | `var(--color-white)` | `var(--color-white)` | Footer text colour |
+| `--footer-link` | `rgba(255,255,255,0.7)` | `rgba(255,255,255,0.7)` | Footer link colour |
+| `--footer-link-hover` | `var(--color-secondary)` (Gold) | `#F0F4F8` (Off-white) | Footer link hover colour |
+| `--input-bg` | `var(--color-white)` | `var(--color-white)` | Form input background |
+| `--input-border` | `1px solid var(--color-accent-grey)` | `1px solid var(--color-accent-grey)` | Form input border |
+| `--input-border-radius` | 6px | 6px | Form input corner radius |
+| `--input-padding` | 10px 14px | 10px 14px | Form input padding |
+| `--input-focus-border` | `var(--color-accent)` | `var(--color-primary)` | Form input focus border |
+| `--color-accent-dark` | `#2E8AB0` | `#1F7080` | Darker accent for hover states |
+| `--transition-base` | `all 0.3s ease` | `all 0.3s ease` | Standard transition |
+| `--transition-fast` | `all 0.15s ease` | `all 0.15s ease` | Fast transition (hovers, toggles) |
+
+Key differences between brands: Cargonomics buttons use Gold (`var(--color-secondary)`) as the background with Navy text, while Flexed buttons use Blue (`var(--color-primary)`) with white text. Footer link hovers follow the same split: Gold for Cargonomics, off-white for Flexed.
+
+## RGB Variant Tokens
+
+These tokens provide RGB triplet versions of the core brand colours, enabling `rgba()` usage throughout `style-v2.css`. When the brand token file swaps (Cargonomics to Flexed or vice versa), all rgba-based overlays, borders, and shadows shift to the correct brand palette automatically. No manual rgba value changes needed.
+
+| Token | Cargonomics | Flexed |
+|-------|------------|--------|
+| `--color-primary-rgb` | 17, 41, 75 | 30, 96, 145 |
+| `--color-secondary-rgb` | 212, 180, 104 | 255, 255, 255 |
+| `--color-accent-rgb` | 58, 165, 214 | 42, 140, 159 |
+| `--color-ivory-rgb` | 250, 249, 246 | 255, 255, 255 |
+| `--color-white-rgb` | 255, 255, 255 | 255, 255, 255 |
+
+Usage in `style-v2.css`: `rgba(var(--color-primary-rgb), 0.5)` for a 50% transparent primary overlay. The `var()` resolves to the RGB triplet from whichever brand token file is loaded, so the same stylesheet line produces Navy at 50% for Cargonomics and Blue at 50% for Flexed.
