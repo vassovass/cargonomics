@@ -1,7 +1,7 @@
 # PRD Index: Cargonomics MVP Website
 
-> **Total PRDs:** 13 | **Proposed:** 11 | **In Progress:** 0 | **Complete:** 2
-> **Last Updated:** 2026-04-10
+> **Total PRDs:** 13 | **Proposed:** 6 | **In Progress:** 0 | **Complete:** 7
+> **Last Updated:** 2026-04-11
 > **MVP Deadline:** Tuesday April 14, 2026 EOD
 
 ---
@@ -54,11 +54,11 @@ Every PRD in this project MUST include:
 
 | PRD | Title | Type | Status | Dependencies | Blocks |
 |-----|-------|------|--------|--------------|--------|
-| 3 | Homepage Restructure | Feature | :clipboard: Proposed | PRD 2 | PRD 7 |
-| 4 | About Page | Feature | :clipboard: Proposed | PRD 2 | PRD 7 |
-| 5 | Course/Program Page | Feature | :clipboard: Proposed | PRD 2 | PRD 7 |
-| 6 | Contact & Application Form Page | Feature | :clipboard: Proposed | PRD 2 | PRDs 7, 8 |
-| 7 | Multi-Page Navigation | Feature | :clipboard: Proposed | PRDs 3-6 | PRD 12 |
+| 3 | Homepage Restructure | Feature | :white_check_mark: Complete | PRD 2 | PRD 7 |
+| 4 | About Page | Feature | :white_check_mark: Complete | PRD 2 | PRD 7 |
+| 5 | Course/Program Page | Feature | :white_check_mark: Complete | PRD 2 | PRD 7 |
+| 6 | Contact & Application Form Page | Feature | :white_check_mark: Complete | PRD 2 | PRDs 7, 8 |
+| 7 | Multi-Page Navigation | Feature | :white_check_mark: Complete | PRDs 3-6 | PRD 12 |
 
 ## Sprint 3: Integration (PRDs 8-10 Parallel, PRD 11 Sequential)
 
@@ -83,7 +83,7 @@ Every PRD in this project MUST include:
 | Sprint | PRDs | Status |
 |--------|------|--------|
 | 1: Foundation | 1, 2 | Complete |
-| 2: Pages | 3, 4, 5, 6, 7 | Not started |
+| 2: Pages | 3, 4, 5, 6, 7 | Complete |
 | 3: Integration | 8, 9, 10, 11 | Not started |
 | 4: Ship | 12, 13 | Not started |
 
@@ -114,3 +114,4 @@ PRD 1 (Design System)
 | 2026-04-10 | Created PRD_01_Design_System.md and PRD_02_Brand_Token_Activation.md with full outcome specs, research items, success criteria. |
 | 2026-04-10 | Created Sprint 2 PRD files: PRD_03_Homepage_Restructure.md, PRD_04_About_Page.md, PRD_05_Course_Page.md, PRD_06_Contact_Form_Page.md, PRD_07_Multi_Page_Navigation.md. |
 | 2026-04-10 | Sprint 1 complete. PRD 01 and PRD 02 delivered: design system docs, spacing/RGB/component tokens, data-section attributes on all 14 sections, Orbitron + Open Sans fonts, 27 hardcoded hex values replaced with CSS custom properties. Deployed to GitHub Pages. |
+| 2026-04-11 | Sprint 2 complete. PRDs 03-07 delivered: homepage restructured (conference + video removed, pillars reordered, social icons + inquiry buttons added), about.html created (company profile, three pillars, leadership), course.html created (WYDLS overview, 6-module curriculum grid, schedule, CTAs), contact.html created (application form with 7 visible + 11 hidden fields, inquiry form, contact info), multi-page navigation standardized across all 4 pages with active states, skip links, synced footer with SVG social icons. |
