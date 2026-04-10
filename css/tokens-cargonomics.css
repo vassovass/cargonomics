@@ -1,0 +1,77 @@
+/* ==========================================================================
+   CARGONOMICS — Brand Tokens
+   Source: Cargonomics Brand Identity R2 (01-research/cargonomics-brand-identity.pdf)
+   Extraction notes: 01-research/cargonomics-brand-notes-for-website.md (April 10, 2026)
+   Brand positioning per PDF:
+     Primary Navy ("Cargo")     = authority, confidence, stability, quiet strength, knowledge, trust
+     Primary Gold ("Prestige")  = prestige, success, sophistication, generosity
+   Secondary palette ("Tech / Human centric / Lime Green / Neutral System"):
+     Teal Blue, Orange, Lime Green, Grey
+   Loaded AFTER css/style-v2.css to override the default Deep Slate + Copper palette.
+   ========================================================================== */
+
+:root {
+  /* PRIMARY — Navy Blue + Gold (R2 page 14) */
+  --color-primary: #11294B;          /* Cargo — Navy Blue. PANTONE 2767 C, RGB 17-41-75. */
+  --color-primary-dark: #0A1A30;     /* Derived darker navy for hover states, footers. ~30% darker than base. Pending Marilyn confirmation against R2 tonal ramps p.16. */
+  --color-primary-light: #1D3A65;    /* Derived lighter navy for hover states on dark backgrounds. ~15% lighter than base. Pending tonal-ramp confirmation. */
+
+  --color-secondary: #D4B468;        /* Prestige — Gold. PANTONE 4023 C, RGB 212-180-104. Warm muted gold, not bright yellow. */
+  --color-secondary-dark: #B8984F;   /* Derived darker gold for hover states. Pending tonal-ramp confirmation. */
+  --color-secondary-light: #E2C780;  /* Derived lighter gold for subtle highlights. Pending tonal-ramp confirmation. */
+
+  /* SECONDARY — Tech / Human centric / Lime Green / Neutral System (R2 page 15) */
+  --color-accent-teal: #3AA5D6;      /* Tech (Teal Blue). PANTONE 8120 C, RGB 58-165-214. Sophistication, balance, youth, openness. */
+  --color-accent-orange: #F7B761;    /* Human centric (Orange). PANTONE T365 C, RGB 247-183-97. Energy, optimism, enthusiasm. Soft peach, not pumpkin. */
+  --color-accent-lime: #CCDD2C;      /* Lime Green. PANTONE 381 C, RGB 204-221-44. Sustainability, freshness, energy. */
+  --color-accent-grey: #D2D3D5;      /* Neutral System (Grey). PANTONE 427 C, RGB 210-211-213. NOTE: this is a LIGHT BACKGROUND grey per R2, not a body-text grey. Use --color-text below for text. */
+
+  /* MAP TO EXISTING style-v2.css VARIABLE NAMES
+     style-v2.css uses --color-primary / --color-secondary / --color-accent / --color-ivory / etc.
+     These overrides swap Deep Slate/Copper/Teal for Navy/Gold while keeping the rest of the rules intact. */
+  --color-accent: var(--color-accent-teal);  /* was #115E59 (maritime teal) */
+
+  /* Neutrals — kept close to existing values, may adjust after PDF visual review */
+  --color-ivory: #FAF9F6;            /* Background. Kept from existing mock; neutral cream. */
+  --color-stone: #F0EDE8;            /* Card backgrounds. Kept from existing mock. */
+  --color-text: #2C3E50;             /* Body text — slightly warmer than slate. Placeholder pending Marilyn confirm; R2 "grey" #D2D3D5 is a background grey, NOT a text grey (see open-questions.md Q24). */
+  --color-text-muted: #6C7A89;       /* Secondary text. Pending Marilyn confirm. */
+  --color-signal: #DC2626;           /* Urgent/error red. Kept from existing mock. */
+  --color-white: #FFFFFF;
+
+  /* TYPOGRAPHY — R2 brand guide pages 4, 11, 12.
+     Heading font is Orbitron because the logo itself is set in Orbitron (R2 page 4 explicitly labels it).
+     Body font: R2 offers Option 1 = Montserrat (page 11) and Option 2 = Open Sans (page 12).
+     Both are free Google Fonts. Open Sans selected as default for the MVP because it is more accessible
+     at small sizes and more neutral. Marilyn to confirm — open-questions.md Q22.
+     Both fonts to be loaded from Google Fonts in index.html. */
+  --font-heading: 'Orbitron', sans-serif;    /* Primary display font. Locked to match the logo. */
+  --font-body: 'Open Sans', sans-serif;      /* Body / long-form text. Default; Montserrat is the alt option. */
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+
+  /* LOGO */
+  --logo-url: url('../img/logo-cargonomics.svg');  /* Pending — Marilyn to send the final PNG/SVG logo (deliverables 1a) */
+  --logo-alt-text: 'Cargonomics';
+}
+
+/*
+ * RESOLVED THIS REVISION (April 10, 2026):
+ * - All six primary + secondary hex codes transcribed from R2 brand guide pages 14, 15.
+ * - Heading font confirmed as Orbitron (R2 p.4 explicit label under the logo).
+ * - Body font narrowed to Open Sans (default) or Montserrat (alt). Both Google Fonts.
+ * - Brand colours item (deliverables 1c) was already marked HAVE; this revision actually transcribes the values.
+ * - Font files question (deliverables 1b, open-questions Q10): RESOLVED — all fonts are free Google Fonts, no proprietary files needed.
+ *
+ * STILL PENDING FROM MARILYN (see 06-client-comms/marilyn-deliverables-checklist.md):
+ * - Final logo files (PNG landscape + SVG) — deliverables 1a, due Friday April 10
+ * - Body font choice between Open Sans and Montserrat — open-questions Q22
+ * - Tonal ramp hex values (R2 p.16 shows tints visually but no labels) — open-questions Q23
+ * - Body text grey choice (R2 grey is a background grey, not a text grey) — open-questions Q24
+ * - "Smarter Flow. Better Results." tagline confirmation (R2 p.20 signage mockup only) — open-questions Q25
+ *
+ * Source-of-truth references:
+ *   01-research/cargonomics-brand-notes-for-website.md  (extraction + drift analysis)
+ *   05-deliverables/website-prototype/cargonomics-site/docs/tokens.md  (spec doc)
+ *   01-research/cargonomics-brand-identity-pages/  (per-page JPGs of the R2 guide)
+ */
