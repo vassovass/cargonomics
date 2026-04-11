@@ -1,7 +1,7 @@
 # PRD 08: Form Backend & Submission Pipeline
 
 > **Order:** 8
-> **Status:** Proposed
+> **Status:** In Progress
 > **Type:** Feature
 > **Dependencies:** PRD 6 (Contact & Application Form Page)
 > **Blocks:** PRD 12 (Responsive & Accessibility)
@@ -50,7 +50,7 @@ The form must not reload the page on submission. A full-page reload loses the us
 
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
-| A-1 | **Serverless form backend receives submissions** | No data capture exists | Test submission appears in data store with all visible fields populated | Evaluate Google Apps Script, FormSubmit.co, Formspree, Basin against selection criteria |
+| A-1 | **Serverless form backend receives submissions** | No data capture exists | Test submission appears in data store with all visible fields populated | RESOLVED: Google Apps Script selected |
 | A-2 | **Data column names match Airtable CRM schema** | Future CRM migration requires zero re-mapping | Every column uses the snake_case key from `airtable-conventions.md` Section 2 | Verify chosen backend preserves column names from JSON payload |
 | A-3 | **CORS accepts GitHub Pages and future custom domain** | Form fails silently if CORS blocks the request | Submissions succeed from both `vassovass.github.io` and future `cargonomics.com.vn` | Test CORS headers during research phase |
 
@@ -59,6 +59,8 @@ The form must not reload the page on submission. A full-page reload loses the us
 - All hidden fields (UTM params, referrer, form source, timestamp) arrive as distinct columns
 - Free tier supports at least 50 submissions per month
 - Supports AJAX/fetch POST without page reload
+
+**Selected backend: Google Apps Script web app** writing to a Google Sheet shared with marilyn.leong@cargonomics.com.vn. The Apps Script doPost handler accepts JSON, writes to the sheet preserving column order from the payload, and returns JSON with CORS headers. No signup, no free-tier limit on submissions.
 
 **A-2 details (required column mapping):**
 
@@ -88,7 +90,7 @@ The form must not reload the page on submission. A full-page reload loses the us
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
 | B-1 | **No page reload on form submission** | Reload breaks scroll position and feels dated | Page URL unchanged, scroll preserved, form replaced by thank-you | None |
-| B-2 | **Thank-you confirmation on success** | No user feedback after submission | Thank-you message visible with scarcity language, Zalo/WhatsApp links | None |
+| B-2 | **Thank-you confirmation on success** | No user feedback after submission | Thank-you message visible with scarcity/exclusivity language aligned to client-brief.md copy voice. Include Zalo/WhatsApp contact links. | None |
 | B-3 | **Error message on failure with retry** | Silent failures lose applicants | Error message visible, form fields retain values, submit button re-enabled | None |
 | B-4 | **Timestamp on every submission** | Cannot sort or filter by submission time | `submitted_at` column populated with ISO 8601 datetime | Verify if backend auto-timestamps or if JS must provide it |
 
@@ -119,6 +121,7 @@ The form must not reload the page on submission. A full-page reload loses the us
 | `05-deliverables/website-prototype/cargonomics-site/js/form-submit.js` | CREATE | Standalone form submission handler with fetch, thank-you, error states |
 | `05-deliverables/website-prototype/cargonomics-site/contact.html` | MODIFY | Wire form to submission script, add thank-you/error DOM elements, add privacy notice |
 | `05-deliverables/website-prototype/cargonomics-site/index.html` | MODIFY | Wire homepage inquiry buttons to same backend with distinct `form_source` values |
+| `Google Apps Script (external)` | CREATE | doPost web app that receives JSON and writes to Google Sheet. Code documented in docs/gtm-setup.md or a separate reference. |
 
 ---
 
@@ -159,7 +162,7 @@ The form must not reload the page on submission. A full-page reload loses the us
 
 | # | Item | What to Investigate | Why It Matters |
 |---|------|---------------------|----------------|
-| R-1 | Google Apps Script as form backend | Can a Google Apps Script web app accept JSON POST from a cross-origin fetch on GitHub Pages? What CORS headers does it return? | Leading candidate because it writes directly to a Google Sheet Marilyn can access. CORS is the key risk. |
+| R-1 | ~~Google Apps Script as form backend~~ **RESOLVED** | ~~Can a Google Apps Script web app accept JSON POST from a cross-origin fetch on GitHub Pages? What CORS headers does it return?~~ Decision: Google Apps Script selected. Writes directly to Google Sheet. Handles CORS natively via doPost + ContentService. No submission limit (only execution quota: 90 min/day free tier, more than sufficient for MVP traffic). | Leading candidate because it writes directly to a Google Sheet Marilyn can access. CORS is the key risk. |
 | R-2 | FormSubmit.co hidden field support | Does FormSubmit.co pass through custom hidden fields as distinct columns, or does it flatten/strip them? | If hidden fields are stripped, FormSubmit.co is disqualified regardless of other advantages. |
 | R-3 | Free tier submission limits | Current free tier limits for Formspree, Basin, FormSubmit.co. Do limits reset monthly or are they lifetime? | MVP traffic is low, but May marketing push could spike submissions. Need headroom. |
 | R-4 | Spreadsheet column ordering | Does the chosen backend preserve column order from the JSON payload, or alphabetize? | Marilyn reads the spreadsheet manually. Logical column ordering matters for usability. |
@@ -274,3 +277,4 @@ The form must not reload the page on submission. A full-page reload loses the us
 |------|---------|--------|
 | 2026-04-10 | Initial | Created PRD (thin version, then full rewrite) |
 | 2026-04-10 | All | Rewritten to template v2 format with lettered outcome sections, research table, proactive items table, verification checklist |
+| 2026-04-11 | All | Session decisions applied: Google Apps Script backend selected, thank-you copy direction aligned to client-brief.md voice, status updated to In Progress |

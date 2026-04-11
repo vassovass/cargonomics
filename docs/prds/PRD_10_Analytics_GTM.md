@@ -1,7 +1,7 @@
 # PRD 10: Analytics & GTM Setup
 
 > **Order:** 10
-> **Status:** Proposed
+> **Status:** In Progress
 > **Type:** Feature
 > **Dependencies:** PRD 2 (Brand Token Activation & Font Fix)
 > **Blocks:** PRD 11 (UTM Tracking & Attribution), PRD 12 (Responsive & Accessibility)
@@ -50,13 +50,13 @@ This is also about demonstrating professional-grade delivery. Elias runs 11 proj
 
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
-| A-1 | **GTM container deployed on all 4 pages** | No tag management layer | GTM snippet in `<head>` and `<noscript>` after `<body>` on Home, About, Course, Contact | Verify current GTM snippet placement best practices |
+| A-1 | **GTM container deployed on all 4 pages** | No tag management layer | GTM snippet in `<head>` and `<noscript>` after `<body>` on Home, About, Course, Contact | RESOLVED: Real GTM container ID provided: GTM-NCG2LPNQ |
 | A-2 | **dataLayer initialized before GTM** | Custom events pushed before GTM loads could be lost | `window.dataLayer` is an array containing `page_type` on every page | None |
 | A-3 | **No hardcoded tracking scripts remain** | Legacy scripts from cloned prototype | Zero matches for `google-analytics.com`, `gtag/js`, `analytics.js`, `ga.js` in HTML | Audit all 4 HTML files for existing tracking code |
 
 **A-1 details:**
 - Container snippet is identical across all 4 pages
-- Container ID is a configurable value (easy to swap)
+- Container ID: `GTM-NCG2LPNQ` (production, provided by Vasso)
 - GTM snippet does not block page rendering
 
 **A-2 details:**
@@ -67,15 +67,15 @@ This is also about demonstrating professional-grade delivery. Elias runs 11 proj
 
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
-| B-1 | **GA4 pageview fires on every page load** | No traffic measurement | GA4 Configuration tag status = "Fired" in GTM Preview | Confirm GA4 property creation flow and Measurement ID format |
-| B-2 | **GA4 property owned by Cargonomics account** | Data loss if property is under Vasso's personal account | Both Vasso and Marilyn are property admins | Clarify if Cargonomics Google account exists or needs creation |
+| B-1 | **GA4 pageview fires on every page load** | No traffic measurement | GA4 Configuration tag status = "Fired" in GTM Preview | RESOLVED: GA4 is configured inside GTM (no separate GA4 snippet in HTML). GA4 Configuration tag fires via GTM. |
+| B-2 | **GA4 property owned by Cargonomics account** | Data loss if property is under Vasso's personal account | Both Vasso and Marilyn are property admins | RESOLVED: GA4 property configured inside GTM container GTM-NCG2LPNQ. Ownership TBD (Vasso to confirm Cargonomics Google account). |
 
 ### Section C: Event Tracking -- 2 Items
 
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
 | C-1 | **`form_submit` event fires on successful submission** | Cannot measure conversion rate | Event in dataLayer with `form_name` and `form_location` parameters | Coordinate with PRD 8 form success callback |
-| C-2 | **`cta_click` event fires on primary CTAs** | Cannot measure engagement with key buttons | Event in dataLayer with `cta_text`, `cta_location`, `cta_destination` | None |
+| C-2 | **`cta_click` event fires on primary CTAs** | Cannot measure engagement with key buttons | Event in dataLayer with `cta_text`, `cta_location`, `cta_destination`. Uses data-attribute framework (Section E) for automatic CTA tracking. | None |
 
 **C-1 details:**
 - Event triggers from form success callback (PRD 8), not a generic form listener
@@ -86,6 +86,37 @@ This is also about demonstrating professional-grade delivery. Elias runs 11 proj
 | # | Outcome | Problem Solved | Success Criteria | Research Needed |
 |---|---------|----------------|------------------|-----------------|
 | D-1 | **GTM setup reference document** | No record of what was configured | Document lists Container ID, Measurement ID, all tags/triggers/variables, WordPress migration notes | None |
+
+### Section E: CTA & Conversion Tracking Framework -- 3 Items
+
+| # | Outcome | Problem Solved | Success Criteria | Research Needed |
+|---|---------|----------------|------------------|-----------------|
+| E-1 | **Systematic data-attribute convention on all tracked elements** | No structured way to group and filter CTA interactions in GA4 | Every CTA has `data-track`, `data-cta-type`, `data-cta-location`, `data-cta-destination` attributes | Confirm Elementor Pro custom attribute support |
+| E-2 | **Auto-tracking via single GTM trigger** | Adding new CTAs requires manual GTM configuration | One GTM Click trigger on `[data-track="cta"]` catches all CTAs automatically | None |
+| E-3 | **Framework documented for future contributors** | No reference for how to add tracked CTAs | `docs/gtm-setup.md` includes CTA attribute reference table and examples | None |
+
+**E-1 details (attribute schema):**
+
+| Attribute | Purpose | Values |
+|-----------|---------|--------|
+| `data-track="cta"` | Marks element as tracked | Always `"cta"` for CTAs, `"form"` for forms |
+| `data-cta-type` | Action category (groups in GA4) | `apply`, `inquire`, `learn-more`, `contact`, `download`, `social` |
+| `data-cta-location` | Where on the page | `hero`, `nav`, `pillar-coach`, `pillar-connect`, `pillar-consult`, `footer`, `sidebar`, `sticky-bar` |
+| `data-cta-destination` | Where it leads | `contact-form`, `course-page`, `about-page`, `external`, `phone`, `email`, `whatsapp` |
+
+Example:
+`<a href="contact.html" class="btn btn--primary" data-track="cta" data-cta-type="apply" data-cta-location="hero" data-cta-destination="contact-form">Apply Now</a>`
+
+**E-2 details:**
+- `js/analytics.js` auto-binds a click listener on all `[data-track="cta"]` elements
+- On click: reads `data-cta-type`, `data-cta-location`, `data-cta-destination`, and element text
+- Pushes `cta_click` event to dataLayer with these parameters
+- New CTAs auto-track if they have the `data-track="cta"` attribute
+
+**E-3 details:**
+- WordPress/Elementor: add attributes via Advanced > Custom Attributes (Elementor Pro) or HTML widget
+- In GA4: create custom dimensions for `cta_type`, `cta_location`, `cta_destination` to enable grouped reporting
+- The framework reference in `docs/gtm-setup.md` includes: attribute table, allowed values, example markup, GTM trigger configuration, GA4 custom dimension setup
 
 ---
 
@@ -151,13 +182,14 @@ This is also about demonstrating professional-grade delivery. Elias runs 11 proj
 
 | # | Item | What to Investigate | Why It Matters |
 |---|------|---------------------|----------------|
-| R-1 | GA4 property creation flow | Confirm setup wizard, Measurement ID format, whether a Cargonomics Google account should host the property | Property must be owned by the client, not the consultant |
+| R-1 | GA4 property creation flow | RESOLVED: GA4 property configured inside GTM. Container ID: GTM-NCG2LPNQ. No separate GA4 snippet needed. | Property must be owned by the client, not the consultant |
 | R-2 | GA4 property ownership | Does a Cargonomics Google account exist, or must one be created? | Avoids data lock-in under Vasso's personal account |
 | R-3 | Enhanced Measurement features | Which events GA4 Enhanced Measurement captures automatically (scroll, outbound clicks, site search, video) | Avoids duplicate tracking of auto-captured events |
 | R-4 | Vietnam PDPD consent requirements | Does PDPD require a consent mechanism for analytics cookies, or is "legitimate interest" sufficient? | If consent is required, GTM must support Consent Mode with delayed tag firing |
 | R-5 | GA4 Consent Mode v2 | Is Consent Mode required or recommended for Vietnam traffic? | Google requires it for EU. May also apply to international applicants. |
 | R-6 | Existing tracking scripts in prototype | Audit cloned prototype for legacy GA or tracking scripts that must be removed | Leftover scripts cause duplicate tracking and console errors |
 | R-7 | GTM Preview and Tag Assistant | Confirm GTM Preview still uses Tag Assistant Chrome extension for debugging | Required for verification phase |
+| R-8 | Elementor Pro custom attributes | Does Elementor Pro support adding custom HTML data-attributes to elements? | Determines if CTA tracking framework survives WordPress migration without custom code |
 
 ---
 
@@ -265,3 +297,4 @@ This is also about demonstrating professional-grade delivery. Elias runs 11 proj
 |------|---------|--------|
 | 2026-04-10 | Initial | Created PRD (thin version, then full rewrite) |
 | 2026-04-10 | All | Rewritten to template v2 format with lettered outcome sections, research table, proactive items table, verification checklist |
+| 2026-04-11 | All | Session decisions: real GTM container GTM-NCG2LPNQ, GA4 inside GTM, new Section E for CTA tracking data-attribute framework, status updated to In Progress |

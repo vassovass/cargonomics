@@ -1,7 +1,7 @@
 # PRD 09: Image & Logo Integration
 
 > **Order:** 9
-> **Status:** Proposed
+> **Status:** In Progress
 > **Type:** Feature
 > **Dependencies:** PRD 2 (Brand Token Activation & Font Fix)
 > **Blocks:** PRD 12 (Responsive & Accessibility)
@@ -71,6 +71,30 @@ Beyond aesthetics, images are the heaviest assets on any web page. Unoptimized i
 | C-1 | **OG image for social sharing** | No preview when URL shared on Zalo/WhatsApp/Facebook | `og:image` meta tag on every page, 1200x630px branded image | None |
 | C-2 | **Meaningful alt text on every image** | Accessibility gap, screen readers get no context | Every `<img>` has descriptive alt (decorative images use `alt=""` with `role="presentation"`) | None |
 
+### Section D: Image Review Carousel -- 3 Items
+
+| # | Outcome | Problem Solved | Success Criteria | Research Needed |
+|---|---------|----------------|------------------|-----------------|
+| D-1 | **Click-to-cycle image review on all image slots** | Cannot compare multiple generated image options in-context | Clicking an image cycles to the next option, wrapping back to first after last | None |
+| D-2 | **Current image filename displayed as overlay** | Cannot identify which image to keep when reporting choices | Filename or ID shown on the image (e.g., "hero-2.png") | None |
+| D-3 | **Review mode is a removable layer** | Carousel logic must not ship to production permanently | `js/image-review.js` is a standalone file. Removing the script tag and data attributes returns images to static. | None |
+
+**D-1 details:**
+- Each `<img>` with multiple options gets a `data-images` attribute: `data-images='["img/hero-1.png","img/hero-2.png","img/hero-3.png"]'`
+- Clicking the image advances to the next `src` in the array
+- Cursor shows pointer on hover to indicate clickability
+- Works on mobile (tap to cycle)
+
+**D-2 details:**
+- Small overlay label in the bottom-right corner of the image showing the current filename
+- Semi-transparent dark background for readability
+- Updates when image cycles
+
+**D-3 details:**
+- `js/image-review.js` is loaded via `<script>` tag at end of body
+- All carousel behavior is initialized from that script reading `data-images` attributes
+- To finalize: remove `<script>` tag, remove `data-images` attributes, keep the chosen `src`
+
 ---
 
 ## What This PRD Does NOT Cover
@@ -92,6 +116,7 @@ Beyond aesthetics, images are the heaviest assets on any web page. Unoptimized i
 | `05-deliverables/website-prototype/cargonomics-site/about.html` | MODIFY | Replace stock images, add logo, OG meta, favicon |
 | `05-deliverables/website-prototype/cargonomics-site/course.html` | MODIFY | Replace stock images, add logo, OG meta, favicon |
 | `05-deliverables/website-prototype/cargonomics-site/contact.html` | MODIFY | Replace stock images, add logo, OG meta, favicon |
+| `05-deliverables/website-prototype/cargonomics-site/js/image-review.js` | CREATE | Temporary click-to-cycle carousel for image review. Reads data-images attributes, cycles src on click, shows filename overlay. |
 
 ---
 
@@ -135,7 +160,7 @@ Beyond aesthetics, images are the heaviest assets on any web page. Unoptimized i
 
 | # | Item | What to Investigate | Why It Matters |
 |---|------|---------------------|----------------|
-| R-1 | DepositPhotos picks from Marilyn | Check if deliverable 3a has been received in `06-client-comms/assets-from-marilyn/`. These take priority over generated images. | Using Marilyn's picks avoids a "that is not what I wanted" rejection. |
+| R-1 | DepositPhotos picks from Marilyn | RESOLVED: DepositPhotos picks not yet received (due Sunday April 12). Decision: generate all images via Nano Banana MCP now. Marilyn's picks can replace generated images later if preferred. | Using Marilyn's picks avoids a "that is not what I wanted" rejection. |
 | R-2 | Logo variant transparency | Open `RGB_Cargonomics - Blue n Gold.png` and verify transparent background. If opaque, check other variants. | A white rectangle behind the logo on the nav is an immediate visual defect. |
 | R-3 | Logo file dimensions | Check pixel dimensions of received PNGs. If very large (5000px+), resize for web. If very small, may pixelate. | Serving a 5MB logo in the nav is a critical performance issue. |
 | R-4 | Reversed/white logo variant | Check if any of the 10 variants is white or reversed for dark backgrounds. | Footer uses dark Navy background. Standard logo may lack contrast. |
@@ -253,3 +278,4 @@ Beyond aesthetics, images are the heaviest assets on any web page. Unoptimized i
 |------|---------|--------|
 | 2026-04-10 | Initial | Created PRD (thin version, then full rewrite) |
 | 2026-04-10 | All | Rewritten to template v2 format with lettered outcome sections, research table, proactive items table, verification checklist |
+| 2026-04-11 | All | Session decisions: image generation via Nano Banana (not waiting for DepositPhotos), new Section D added for click-to-cycle image review carousel, status updated to In Progress |
