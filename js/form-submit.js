@@ -10,7 +10,7 @@
   'use strict';
 
   // REPLACE THIS after deploying Google Apps Script
-  var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6AOARukN0nbULTzQ3u95Ams78SmqALhCZdxpEAWxvYCQ6UbI80t6dw1vniWBA2QBZIg/exec';
 
   function init() {
     // Application form

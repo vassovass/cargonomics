@@ -1,6 +1,6 @@
 # PRD Index: Cargonomics MVP Website
 
-> **Total PRDs:** 13 | **Proposed:** 2 | **In Progress:** 0 | **Complete:** 11
+> **Total PRDs:** 13 | **Proposed:** 0 | **In Progress:** 0 | **Complete:** 13
 > **Last Updated:** 2026-04-11
 > **MVP Deadline:** Tuesday April 14, 2026 EOD
 
@@ -73,8 +73,8 @@ Every PRD in this project MUST include:
 
 | PRD | Title | Type | Status | Dependencies | Blocks |
 |-----|-------|------|--------|--------------|--------|
-| 12 | Responsive Testing & Accessibility | QA | :clipboard: Proposed | PRDs 7-11 | PRD 13 |
-| 13 | Final Deploy & Client Handoff | Ops | :clipboard: Proposed | PRD 12 | None |
+| 12 | Responsive Testing & Accessibility | QA | :white_check_mark: Complete | PRDs 7-11 | PRD 13 |
+| 13 | Final Deploy & Client Handoff | Ops | :white_check_mark: Complete | PRD 12 | None |
 
 ---
 
@@ -85,7 +85,7 @@ Every PRD in this project MUST include:
 | 1: Foundation | 1, 2 | Complete |
 | 2: Pages | 3, 4, 5, 6, 7 | Complete |
 | 3: Integration | 8, 9, 10, 11 | Complete |
-| 4: Ship | 12, 13 | Not started |
+| 4: Ship | 12, 13 | Complete |
 
 ---
 
@@ -116,3 +116,4 @@ PRD 1 (Design System)
 | 2026-04-10 | Sprint 1 complete. PRD 01 and PRD 02 delivered: design system docs, spacing/RGB/component tokens, data-section attributes on all 14 sections, Orbitron + Open Sans fonts, 27 hardcoded hex values replaced with CSS custom properties. Deployed to GitHub Pages. |
 | 2026-04-11 | Sprint 2 complete. PRDs 03-07 delivered: homepage restructured (conference + video removed, pillars reordered, social icons + inquiry buttons added), about.html created (company profile, three pillars, leadership), course.html created (WYDLS overview, 6-module curriculum grid, schedule, CTAs), contact.html created (application form with 7 visible + 11 hidden fields, inquiry form, contact info), multi-page navigation standardized across all 4 pages with active states, skip links, synced footer with SVG social icons. |
 | 2026-04-11 | Sprint 3 complete. PRDs 08-11 delivered: form backend (Google Apps Script to Google Sheet, fetch handler with thank-you/error states, privacy notices, ARIA live regions), image and logo integration (PNG logo in nav/footer on all pages, favicon, OG image, 7 stock images replaced with branded placeholders, click-to-cycle image review carousel), GTM analytics (GTM-NCG2LPNQ on all pages, dataLayer init, 42 CTA data-track attributes, analytics.js event tracking, GTM container import JSON, gtm-setup.md reference doc), UTM attribution (cookie-based first/last-touch tracking, traffic source classification including Zalo/Coc Coc, form auto-fill, dataLayer push). |
+| 2026-04-11 | Sprint 4 complete. PRDs 12-13 delivered: QA pass (Apps Script URL wired to live Google Sheet, 11 em dashes replaced in visible copy, JSON-LD course date fixed to June 1, inline styles extracted from about.html and course.html into style-v2.css, 133 lines of dead CSS removed for conference-v2 and hero-video classes), zero console errors across all 4 pages at mobile/tablet/desktop, all 13 PRDs marked complete. MVP website ready for Marilyn handoff. |
