@@ -1168,15 +1168,18 @@ button {
 }
 
 .floating-btn {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   position: relative;
   transition: transform var(--transition-fast);
-  background: none;
+  background: var(--color-white);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  padding: 10px;
 }
 
 .floating-btn__icon {
@@ -1208,12 +1211,10 @@ button {
   opacity: 1;
 }
 
-.floating-btn--zalo {
-  background: none;
-}
-
 .floating-btn--wa {
   background: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 /* ==========================================================================
