@@ -1170,7 +1170,6 @@ button {
 .floating-btn {
   width: 52px;
   height: 52px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1178,15 +1177,13 @@ button {
   position: relative;
   transition: transform var(--transition-fast);
   background: none;
-  overflow: hidden;
 }
 
 .floating-btn__icon {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  border-radius: 50%;
+  object-fit: contain;
 }
 
 .floating-btn:hover {
