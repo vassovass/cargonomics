@@ -33,7 +33,6 @@
   <!-- Client brand tokens load AFTER style-v2.css so they override the default palette.
        Swap to css/tokens-flexed.css for Flexed. See docs/tokens.md. -->
   <link rel="stylesheet" href="css/tokens-cargonomics.css">
-  <link rel="stylesheet" href="css/v2-fixes.css">
 
   <!-- dataLayer initialization -->
   <script>
@@ -439,16 +438,16 @@
   <nav class="nav" id="nav" aria-label="Main navigation" data-section="site-nav" data-elementor-widget="container">
     <div class="container">
       <div class="nav__brand" data-slot="logo" data-elementor-widget="image">
-        <a href="index-v2.html" class="nav__logo">
+        <a href="hp-v1.html" class="nav__logo">
   <img src="img/logo-cargonomics.png" alt="Cargonomics" width="280" height="125" style="height: 50px; width: auto;">
 </a>
         <span class="nav__tagline">Coaching &bull; Connecting &bull; Consulting</span>
       </div>
       <ul class="nav__links" id="nav-links">
-        <li><a href="course-v2.html">Programs</a></li>
-        <li><a href="about-v2.html">About</a></li>
-        <li><a href="contact-v2.html" class="nav__link--active" aria-current="page">Contact</a></li>
-        <li><a href="contact-v2.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
+        <li><a href="course-v1.html">Programs</a></li>
+        <li><a href="about-v1.html">About</a></li>
+        <li><a href="contact-v1.html" class="nav__link--active" aria-current="page">Contact</a></li>
+        <li><a href="contact-v1.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
       </ul>
       <button class="nav__mobile-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -634,7 +633,6 @@
         <!-- Submit -->
         <button type="submit" class="form__submit" data-track="form" data-cta-type="apply" data-cta-location="application-form" data-cta-destination="form-submit">Submit Application</button>
         <p class="form__privacy">Your information is processed in accordance with our privacy policy and used only for application review and communication.</p>
-        <p class="form__social-proof">Join 1,000+ industry professionals in our network</p>
 
         <!-- Success / Error States -->
         <div class="form__success" id="app-form-success" hidden role="status" aria-live="polite">
@@ -651,7 +649,7 @@
   </section>
 
   <!-- INQUIRY FORM -->
-  <section class="form-section form-section--secondary form-section--inquiry-v2" data-section="inquiry-form" data-elementor-widget="container">
+  <section class="form-section form-section--secondary" data-section="inquiry-form" data-elementor-widget="container">
     <div class="container">
       <div class="form-section__header" data-slot="heading" data-elementor-widget="heading">
         <h2 class="form-section__title">General Inquiry</h2>
@@ -736,7 +734,6 @@
         <!-- Submit -->
         <button type="submit" class="form__submit" data-track="form" data-cta-type="inquire" data-cta-location="inquiry-form" data-cta-destination="form-submit">Send Inquiry</button>
         <p class="form__privacy">Your information is processed in accordance with our privacy policy and used only for inquiry response and communication.</p>
-        <p class="form__social-proof">Join 1,000+ industry professionals in our network</p>
 
         <!-- Success / Error States -->
         <div class="form__success" id="inq-form-success" hidden role="status" aria-live="polite">
@@ -794,15 +791,15 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Programs</div>
-          <a href="course-v2.html">WYDLS Bootcamp</a>
-          <a href="course-v2.html">Professional Development</a>
-          <a href="course-v2.html">Corporate Training</a>
+          <a href="course-v1.html">WYDLS Bootcamp</a>
+          <a href="course-v1.html">Professional Development</a>
+          <a href="course-v1.html">Corporate Training</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Company</div>
-          <a href="about-v2.html">About Us</a>
-          <a href="index-v2.html#trainers">Our Trainers</a>
-          <a href="contact-v2.html?source=events">Events</a>
+          <a href="about-v1.html">About Us</a>
+          <a href="hp-v1.html#trainers">Our Trainers</a>
+          <a href="#">Events</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Contact</div>
@@ -812,23 +809,24 @@
       </div>
       <div class="footer__bottom">
         <span>&copy; 2026 Cargonomics. All rights reserved.</span>
+          <span class="footer__version" style="opacity:0.5;font-size:0.75rem;margin-left:0.5rem;">v1</span>
         <div class="footer__social">
-          <span class="footer__social-placeholder" aria-label="Follow us on Zalo" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="zalo">
+          <a href="#" class="footer__social-link" aria-label="Follow us on Zalo" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="zalo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1" fill="none"/>
               <text x="12" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="currentColor">Z</text>
             </svg>
-          </span>
-          <span class="footer__social-placeholder" aria-label="Follow us on Facebook" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="external">
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Follow us on Facebook" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="external">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
             </svg>
-          </span>
-          <span class="footer__social-placeholder" aria-label="Follow us on LinkedIn" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="external">
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="external">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
-          </span>
+          </a>
         </div>
       </div>
     </div>
@@ -851,6 +849,7 @@
   <script src="js/analytics.js" defer></script>
   <script src="js/attribution.js" defer></script>
   <script src="js/form-submit.js" defer></script>
+  <script src="js/image-review.js" defer></script>
   <script>
     /* ==========================================================================
        CONTACT PAGE — Hidden field population, inquiry pre-select, nav toggle
