@@ -1174,20 +1174,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 700;
   text-decoration: none;
-  color: var(--color-white);
   position: relative;
   transition: transform var(--transition-fast);
+  background: none;
+  overflow: hidden;
 }
 
 .floating-btn__icon {
-  width: 28px;
-  height: 28px;
+  width: 100%;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .floating-btn:hover {
@@ -1213,11 +1212,15 @@ button {
 }
 
 .floating-btn--zalo {
-  background: var(--color-accent);
+  border-radius: 12px;
+}
+
+.floating-btn--zalo .floating-btn__icon {
+  border-radius: 12px;
 }
 
 .floating-btn--wa {
-  background: var(--color-secondary);
+  background: none;
 }
 
 /* ==========================================================================
