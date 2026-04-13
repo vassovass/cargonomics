@@ -1212,11 +1212,7 @@ button {
 }
 
 .floating-btn--zalo {
-  border-radius: 12px;
-}
-
-.floating-btn--zalo .floating-btn__icon {
-  border-radius: 12px;
+  background: none;
 }
 
 .floating-btn--wa {
