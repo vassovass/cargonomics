@@ -26,26 +26,19 @@
 }
 
 /* --- Fix 8: Leadership card equal heights --- */
+/* Works WITH the grid in style-v3.css, not against it */
 .leadership__grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xl, 32px);
+  align-items: stretch;
 }
 
 .leader-card {
-  flex: 1 1 calc(50% - var(--space-2xl, 32px));
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .leader-card__info {
   flex: 1;
-}
-
-@media (max-width: 767px) {
-  .leader-card {
-    flex: 1 1 100%;
-  }
 }
 
 /* --- Fix 13: Contact inquiry section differentiation --- */
@@ -65,21 +58,8 @@
 }
 
 /* --- Partner placeholder card styling --- */
-.trainer-placeholder-logo {
-  background: var(--color-primary, #11294B);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 4 / 3;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.trainer-placeholder-logo img {
-  width: 50%;
-  height: auto;
-  opacity: 0.3;
-}
+/* Now uses .leader-card__photo--placeholder from style-v3.css
+   with inline styles on the img. No custom class needed. */
 
 /* --- Footer social icons (non-clickable state) --- */
 .footer__social-placeholder {
