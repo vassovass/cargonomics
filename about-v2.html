@@ -29,11 +29,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style-v3.css">
+  <link rel="stylesheet" href="css/style-v2.css">
   <!-- Client brand tokens load AFTER style-v2.css so they override the default palette.
        Swap to css/tokens-flexed.css for Flexed. See docs/tokens.md. -->
   <link rel="stylesheet" href="css/tokens-cargonomics.css">
-  <link rel="stylesheet" href="css/v3-fixes.css">
+  <link rel="stylesheet" href="css/v2-fixes-v2.css">
 
   <!-- dataLayer initialization -->
   <script>
@@ -92,16 +92,16 @@
   <nav class="nav" id="nav" aria-label="Main navigation" data-section="site-nav" data-elementor-widget="container">
     <div class="container">
       <div class="nav__brand" data-slot="logo" data-elementor-widget="image">
-        <a href="index.html" class="nav__logo">
+        <a href="hp-v2.html" class="nav__logo">
   <img src="img/logo-cargonomics.png" alt="Cargonomics" width="280" height="125" style="height: 50px; width: auto;">
 </a>
         <span class="nav__tagline">Coaching &bull; Connecting &bull; Consulting</span>
       </div>
       <ul class="nav__links" id="nav-links">
-        <li><a href="course.html">Programs</a></li>
-        <li><a href="about.html" class="nav__link--active" aria-current="page">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="contact.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
+        <li><a href="course-v2.html">Programs</a></li>
+        <li><a href="about-v2.html" class="nav__link--active" aria-current="page">About</a></li>
+        <li><a href="contact-v2.html">Contact</a></li>
+        <li><a href="contact-v2.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
       </ul>
       <button class="nav__mobile-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -112,21 +112,18 @@
   <main id="main-content">
 
   <!-- COMPANY PROFILE -->
+  <!-- PLACEHOLDER: Company profile copy - Marilyn to review -->
   <section class="company-profile" id="about-hero" data-section="company-profile" data-elementor-widget="container">
     <div class="container">
       <div class="company-profile__layout-v2">
         <div class="company-profile__content">
           <h1 class="company-profile__heading" data-slot="heading" data-elementor-widget="heading">About Cargonomics</h1>
-          <p class="company-profile__tagline" data-slot="tagline" data-elementor-widget="heading" style="font-family: var(--font-heading); font-size: clamp(1rem, 2vw, 1.2rem); color: var(--color-secondary); margin-bottom: var(--space-lg); letter-spacing: 0.05em;">Coaching. Consulting. Connecting.</p>
           <div class="company-profile__body" data-slot="body" data-elementor-widget="text-editor">
-            <p>Cargonomics is where the shipping and logistics world comes to grow. We are a specialized partner for the industry, with a dedicated platform for Coaching, Consulting, and Connecting.</p>
-            <p>Driven by a team of dedicated professionals with over 50 years of combined experience, extensive international partnerships, and a strong local network, we help individuals and organizations navigate the complexities of global trade. Our solutions include expert-led training and courses, strategic consulting, recruitment and placement, business matching, and exclusive industry events.</p>
-            <p>Logistics is a global engine. Cargonomics provides the human element that keeps it running.</p>
+            <p>Cargonomics is a shipping and logistics training, consulting, and conferencing company based in Ho Chi Minh City, Vietnam. We exist to bridge the gap between academic logistics education and what the industry actually needs: professionals who can operate from day one.</p>
+            <p>Vietnam sits at the centre of one of the world's fastest-growing logistics corridors, yet universities continue to produce graduates who lack practical exposure to how shipping operations work. Cargonomics was created to solve that problem. Through intensive bootcamp training, industry mentoring, and direct placement with hiring companies, we take fresh graduates and career changers from zero industry knowledge to placement-ready in five days.</p>
+            <p>For companies, our training programme doubles as a vetting mechanism. Every graduate has been assessed across technical knowledge, communication, work ethic, and professional readiness. When a company hires from our cohort, they are not hiring a stranger with a degree. They are hiring someone who has already proven themselves in an intensive, real-world environment.</p>
           </div>
-          <div class="company-profile__mission" data-slot="mission" data-elementor-widget="text-editor" style="margin-top: var(--space-xl); padding: var(--space-lg); background: rgba(var(--color-primary-rgb), 0.04); border-left: 3px solid var(--color-secondary);">
-            <p style="font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.7; margin: 0;"><strong>Our mission:</strong> To build a progressive and empowering knowledge-based company, empowering the Vietnamese shipping and logistics community through expert coaching, strategic consulting, and elite networking, setting a new global standard for local excellence.</p>
-          </div>
-          <div class="company-profile__address" data-slot="address" data-elementor-widget="text-editor" style="margin-top: var(--space-lg);">
+          <div class="company-profile__address" data-slot="address" data-elementor-widget="text-editor">
             <strong>Visit us:</strong> 268 To Hien Thanh Street, Hoa Hung Ward, District 10, Ho Chi Minh City, Vietnam
           </div>
         </div>
@@ -214,9 +211,10 @@
   <!-- CTA -->
   <section class="about-cta" id="about-cta" data-section="about-cta" data-elementor-widget="container">
     <div class="container">
-      <h2 class="about-cta__heading" data-slot="heading" data-elementor-widget="heading">Skip the Gatekeepers. Start Your Career.</h2>
-      <p class="about-cta__body" data-slot="body" data-elementor-widget="text-editor">Our next Student Immersion cohort is forming now. 4 days of intensive training, a full-day port excursion, and direct placement into the industry. No tuition. Just commitment and ambition.</p>
-      <a href="course.html" class="btn btn--copper" data-slot="cta" data-elementor-widget="button" data-track="cta" data-cta-type="learn-more" data-cta-location="why-us" data-cta-destination="course-page">Explore the Programme</a>
+      <!-- PLACEHOLDER: CTA copy - Marilyn to review -->
+      <h2 class="about-cta__heading" data-slot="heading" data-elementor-widget="heading">Ready to Start Your Career in Shipping?</h2>
+      <p class="about-cta__body" data-slot="body" data-elementor-widget="text-editor">Our next bootcamp cohort is forming now. No experience needed. No tuition. Just commitment and the drive to build a career in one of the world's most essential industries.</p>
+      <a href="course-v2.html" class="btn btn--copper" data-slot="cta" data-elementor-widget="button" data-track="cta" data-cta-type="learn-more" data-cta-location="why-us" data-cta-destination="course-page">Explore the Programme</a>
     </div>
   </section>
 
@@ -234,15 +232,15 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Programs</div>
-          <a href="course.html">WYDLS Bootcamp</a>
-          <a href="course.html">Professional Development</a>
-          <a href="course.html">Corporate Training</a>
+          <a href="course-v2.html">WYDLS Bootcamp</a>
+          <a href="course-v2.html">Professional Development</a>
+          <a href="course-v2.html">Corporate Training</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Company</div>
-          <a href="about.html">About Us</a>
-          <a href="index.html#trainers">Our Trainers</a>
-          <a href="contact.html?source=events">Events</a>
+          <a href="about-v2.html">About Us</a>
+          <a href="hp-v2.html#trainers">Our Trainers</a>
+          <a href="contact-v2.html?source=events">Events</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Contact</div>
@@ -252,7 +250,7 @@
       </div>
       <div class="footer__bottom">
         <span>&copy; 2026 Cargonomics. All rights reserved.</span>
-          <span class="footer__version" style="opacity:0.5;font-size:0.75rem;margin-left:0.5rem;">v3</span>
+          <span class="footer__version" style="opacity:0.5;font-size:0.75rem;margin-left:0.5rem;">v2</span>
         <div class="footer__social">
           <span class="footer__social-placeholder" class="footer__social-link" aria-label="Follow us on Zalo" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="zalo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -288,8 +286,8 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/script.js"></script>
-  <script src="js/analytics.js" defer></script>
-  <script src="js/attribution.js" defer></script>
+  <script src="js/script-v2.js"></script>
+  <script src="js/analytics-v2.js" defer></script>
+  <script src="js/attribution-v2.js" defer></script>
 </body>
 </html>

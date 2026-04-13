@@ -29,11 +29,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style-v3.css">
+  <link rel="stylesheet" href="css/style-v2.css">
   <!-- Client brand tokens load AFTER style-v2.css so they override the default palette.
        Swap to css/tokens-flexed.css for Flexed. See docs/tokens.md. -->
   <link rel="stylesheet" href="css/tokens-cargonomics.css">
-  <link rel="stylesheet" href="css/v3-fixes.css">
+  <link rel="stylesheet" href="css/v2-fixes-v2.css">
 
   <!-- dataLayer initialization -->
   <script>
@@ -439,16 +439,16 @@
   <nav class="nav" id="nav" aria-label="Main navigation" data-section="site-nav" data-elementor-widget="container">
     <div class="container">
       <div class="nav__brand" data-slot="logo" data-elementor-widget="image">
-        <a href="index.html" class="nav__logo">
+        <a href="hp-v2.html" class="nav__logo">
   <img src="img/logo-cargonomics.png" alt="Cargonomics" width="280" height="125" style="height: 50px; width: auto;">
 </a>
         <span class="nav__tagline">Coaching &bull; Connecting &bull; Consulting</span>
       </div>
       <ul class="nav__links" id="nav-links">
-        <li><a href="course.html">Programs</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html" class="nav__link--active" aria-current="page">Contact</a></li>
-        <li><a href="contact.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
+        <li><a href="course-v2.html">Programs</a></li>
+        <li><a href="about-v2.html">About</a></li>
+        <li><a href="contact-v2.html" class="nav__link--active" aria-current="page">Contact</a></li>
+        <li><a href="contact-v2.html" class="nav__cta" data-track="cta" data-cta-type="apply" data-cta-location="nav" data-cta-destination="contact-form">Apply Now</a></li>
       </ul>
       <button class="nav__mobile-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -462,29 +462,13 @@
   <section class="contact-hero" id="contact-hero" data-section="contact-hero" data-elementor-widget="container">
     <div class="container">
       <h1 class="contact-hero__headline" data-slot="heading" data-elementor-widget="heading">
-        Skip the Gatekeepers. Start Your Career.
+        Start Your Career in Shipping
       </h1>
       <p class="contact-hero__intro" data-slot="body" data-elementor-widget="text-editor">
-        The Student Immersion Training Program is not a traditional workshop. It is a high-speed career accelerator. 4 days of intensive training, a full-day port excursion, and direct placement into the industry. Every application is reviewed individually. Only 30 to 40 places per cohort.
+        Every application is reviewed individually. We select students who show genuine commitment to building a career in shipping and logistics. Spots are limited and placement is competitive.
       </p>
       <div class="contact-hero__cohort" data-slot="cta" data-elementor-widget="text-editor">
-        Q2 2026 cohort starts <time datetime="2026-06-01">June 1, 2026</time>. Limited spots.
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY APPLY — Reinforcement before the form -->
-  <section class="form-section form-section--secondary" id="why-apply" data-section="why-apply-contact" data-elementor-widget="container">
-    <div class="container">
-      <div style="max-width: 640px; margin: 0 auto;">
-        <h2 style="font-family: var(--font-heading); font-weight: var(--font-weight-heading); color: var(--color-primary); font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: var(--space-lg);">Why Apply?</h2>
-        <ul style="list-style: none; padding: 0; margin: 0 0 var(--space-xl) 0; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); line-height: 1.7;">
-          <li style="padding: var(--space-sm) 0; border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);"><strong>Expert-Led Curriculum:</strong> Learn from veterans with over 50 years of combined experience in Vietnamese and international markets.</li>
-          <li style="padding: var(--space-sm) 0; border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);"><strong>Real-World Exposure:</strong> A full-day guided port excursion to see the mechanics of global trade in action.</li>
-          <li style="padding: var(--space-sm) 0; border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);"><strong>Cargonomics Certification:</strong> Graduate with a credential that signals to employers you are "day-one ready."</li>
-          <li style="padding: var(--space-sm) 0; border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);"><strong>Direct Placement:</strong> We bypass the gatekeepers and place top graduates directly into roles within our network.</li>
-          <li style="padding: var(--space-sm) 0;"><strong>Free:</strong> Fully sponsored for selected candidates. No tuition, no fees.</li>
-        </ul>
+        Limited spots available for the Q2 2026 cohort.
       </div>
     </div>
   </section>
@@ -493,7 +477,7 @@
   <section class="form-section form-section--primary" id="application" data-section="application-form" data-elementor-widget="container">
     <div class="container">
       <div class="form-section__header" data-slot="heading" data-elementor-widget="heading">
-        <h2 class="form-section__title">Student Immersion Program Application</h2>
+        <h2 class="form-section__title">Bootcamp Application</h2>
         <p class="form-section__subtitle">All fields marked with * are required.</p>
       </div>
 
@@ -557,7 +541,7 @@
           <legend class="form__legend">Qualification</legend>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-available">Are you available for the program dates? (June 1-4, 2026)</label>
+            <label class="form__label form__label--required" for="app-available">Are you available for the bootcamp dates? (June 1-5, 2026)</label>
             <select
               id="app-available"
               name="available_on_bootcamp_dates"
@@ -571,11 +555,11 @@
               <option value="No">No</option>
               <option value="Unsure">Unsure</option>
             </select>
-            <span class="form__hint" id="app-available-hint">The program runs for 4 consecutive days.</span>
+            <span class="form__hint" id="app-available-hint">The bootcamp runs for 5 consecutive days.</span>
           </div>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-full-week">Can you commit to all 4 days?</label>
+            <label class="form__label form__label--required" for="app-full-week">Can you commit to the full week?</label>
             <select
               id="app-full-week"
               name="full_week_available"
@@ -813,15 +797,15 @@
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Programs</div>
-          <a href="course.html">WYDLS Bootcamp</a>
-          <a href="course.html">Professional Development</a>
-          <a href="course.html">Corporate Training</a>
+          <a href="course-v2.html">WYDLS Bootcamp</a>
+          <a href="course-v2.html">Professional Development</a>
+          <a href="course-v2.html">Corporate Training</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Company</div>
-          <a href="about.html">About Us</a>
-          <a href="index.html#trainers">Our Trainers</a>
-          <a href="contact.html?source=events">Events</a>
+          <a href="about-v2.html">About Us</a>
+          <a href="hp-v2.html#trainers">Our Trainers</a>
+          <a href="contact-v2.html?source=events">Events</a>
         </div>
         <div class="footer__col">
           <div class="footer__col-title">Contact</div>
@@ -831,7 +815,7 @@
       </div>
       <div class="footer__bottom">
         <span>&copy; 2026 Cargonomics. All rights reserved.</span>
-          <span class="footer__version" style="opacity:0.5;font-size:0.75rem;margin-left:0.5rem;">v3</span>
+          <span class="footer__version" style="opacity:0.5;font-size:0.75rem;margin-left:0.5rem;">v2</span>
         <div class="footer__social">
           <span class="footer__social-placeholder" aria-label="Follow us on Zalo" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="zalo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -867,14 +851,14 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/script.js"></script>
-  <script src="js/analytics.js" defer></script>
-  <script src="js/attribution.js" defer></script>
-  <script src="js/form-submit.js" defer></script>
+  <script src="js/script-v2.js"></script>
+  <script src="js/analytics-v2.js" defer></script>
+  <script src="js/attribution-v2.js" defer></script>
+  <script src="js/form-submit-v2.js" defer></script>
   <script>
     /* ==========================================================================
        CONTACT PAGE — Hidden field population, inquiry pre-select, nav toggle
-       Form submission is handled by js/form-submit.js (PRD 8).
+       Form submission is handled by js/form-submit-v2.js (PRD 8).
        ========================================================================== */
 
     (function () {
