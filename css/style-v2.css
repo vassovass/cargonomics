@@ -1183,6 +1183,13 @@ button {
   transition: transform var(--transition-fast);
 }
 
+.floating-btn__icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
+}
+
 .floating-btn:hover {
   transform: scale(1.1);
 }
