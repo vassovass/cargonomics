@@ -1176,10 +1176,7 @@ button {
   text-decoration: none;
   position: relative;
   transition: transform var(--transition-fast);
-  background: var(--color-white);
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  padding: 10px;
+  background: none;
 }
 
 .floating-btn__icon {
@@ -1211,11 +1208,6 @@ button {
   opacity: 1;
 }
 
-.floating-btn--wa {
-  background: none;
-  box-shadow: none;
-  padding: 0;
-}
 
 /* ==========================================================================
    DESKTOP MODAL — WYDLS Promotion
