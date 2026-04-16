@@ -39,6 +39,14 @@
   --color-signal: #DC2626;           /* Urgent/error red. Kept from existing mock. */
   --color-white: #FFFFFF;
 
+  /* THIRD-PARTY BRAND COLOURS — intentional off-palette tokens.
+     These are the legally-protected brand colours of external services (WhatsApp, Zalo, etc.)
+     Using tokens rather than inline hex keeps the cascade clean and makes WordPress/Elementor
+     migration a one-edit swap (e.g., if Fluent Forms provides its own WhatsApp CTA styles). */
+  --color-whatsapp: #25D366;        /* WhatsApp brand green. Do not rebrand. */
+  --color-whatsapp-hover: #1DA851;  /* WhatsApp darker green for hover/active. */
+  --color-zalo: #0068FF;            /* Zalo brand blue. Do not rebrand. */
+
   /* TYPOGRAPHY — R2 brand guide pages 4, 11, 12.
      Heading font is Orbitron because the logo itself is set in Orbitron (R2 page 4 explicitly labels it).
      Body font: R2 offers Option 1 = Montserrat (page 11) and Option 2 = Open Sans (page 12).

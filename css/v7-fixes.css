@@ -69,3 +69,90 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ============================================================
+   PRD 22 v7 inline-style extraction (mobile audit closure)
+   Moves inline styles on common chrome (logo, footer version,
+   tagline, mission) to class-based rules so WordPress/Elementor
+   migration binds them to ACF fields without rewriting HTML.
+   ============================================================ */
+
+/* Logo sizing: was inline style="height: 50px; width: auto;" */
+.nav__logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* Footer logo sizing: was inline style="height: 40px; width: auto; margin-bottom: 1rem;" */
+.footer__logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Footer version badge: was inline style on <span> */
+.footer__version {
+  opacity: 0.5;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  font-family: var(--font-body);
+}
+
+/* Company-profile tagline (About page): was inline on <p> */
+.company-profile__tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-secondary);
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.05em;
+}
+
+/* Company-profile mission box (About page): was inline on <div> */
+.company-profile__mission {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: rgba(var(--color-primary-rgb), 0.04);
+  border-left: 3px solid var(--color-secondary);
+}
+
+.company-profile__mission p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.company-profile__mission strong {
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+/* Company-profile address note: was inline on <div> */
+.company-profile__address {
+  margin-top: var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* PRD 22: nav links must have at least 44x44px touch target on mobile for WCAG AA */
+.nav__links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* PRD 22: Trusted Partners tile uniformity at desktop (was variable based on text length).
+   Setting min-height prevents ragged grid heights across 4 columns. */
+.trusted-partners__tile {
+  min-height: 80px;
+}
+
+@media (min-width: 1024px) {
+  .trusted-partners__tile {
+    min-height: 96px;
+  }
+}
