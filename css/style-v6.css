@@ -2537,3 +2537,125 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =====================================================================
+   TRUSTED PARTNERS (v6, PRD 18 follow-through, D17/D18)
+   Social validation band used on homepage + course page.
+   Text-first now (logo-forward-compatible via data-partner-logo-src attr).
+   All values token-based, BEM-scoped, Elementor-migration-ready.
+   ===================================================================== */
+
+.trusted-partners {
+  padding: var(--section-padding-y) 0;
+  background: var(--color-ivory);
+}
+
+.trusted-partners__header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trusted-partners__header h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.trusted-partners__lede {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.trusted-partners__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.trusted-partners__tile {
+  background: var(--color-stone);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+  border-radius: 6px;
+  padding: var(--space-lg) var(--space-md);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.trusted-partners__tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--color-primary-rgb), 0.06);
+  border-color: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.4);
+}
+
+.trusted-partners__tile-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+/* "More" tile is styled as soft gold accent so it reads as "+ many more", not another partner */
+.trusted-partners__tile--more {
+  background: transparent;
+  border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
+}
+
+.trusted-partners__tile--more .trusted-partners__tile-name {
+  color: var(--color-secondary);
+  font-style: italic;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.trusted-partners__disclaimer {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-text);
+  opacity: 0.7;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Future logo mode: when data-partner-logo-src is populated, tiles can hide the name and show a logo img.
+   Opt-in by adding class .trusted-partners--logo-mode to the .trusted-partners wrapper. Not styled here;
+   wired via JS in a later PRD when real logos arrive (post partner confirmation). */
+
+/* Tablet: 3-column grid */
+@media (min-width: 768px) {
+  .trusted-partners__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .trusted-partners__header h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Desktop: 4-column grid */
+@media (min-width: 1024px) {
+  .trusted-partners__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .trusted-partners {
+    padding: 96px 0;
+  }
+}
+
