@@ -1,0 +1,71 @@
+/* ==========================================================================
+   V2 Fixes — Cargonomics Website
+   Loaded AFTER tokens-cargonomics.css. Contains only V2-specific overrides.
+   Source: visual-ux-audit-2026-04-11.md
+   ========================================================================== */
+
+/* --- Fix 7: About page 2-column company profile --- */
+.company-profile__layout-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl, 48px);
+  align-items: start;
+}
+
+@media (max-width: 767px) {
+  .company-profile__layout-v2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.company-profile__image-v2 img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* --- Fix 8: Leadership card equal heights --- */
+/* Works WITH the grid in style-v3.css, not against it */
+.leadership__grid {
+  align-items: stretch;
+}
+
+.leader-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.leader-card__info {
+  flex: 1;
+}
+
+/* --- Fix 13: Contact inquiry section differentiation --- */
+.form-section--inquiry-v2 {
+  background: #F0EDE8 !important;
+  border-top: 2px solid rgba(17, 41, 75, 0.08);
+}
+
+/* --- Fix 14: Social proof line near submit buttons --- */
+.form__social-proof {
+  text-align: center;
+  margin-top: var(--space-md, 16px);
+  font-family: var(--font-body, 'Open Sans', sans-serif);
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #6c757d);
+  font-style: italic;
+}
+
+/* --- Partner placeholder card styling --- */
+/* Now uses .leader-card__photo--placeholder from style-v3.css
+   with inline styles on the img. No custom class needed. */
+
+/* --- Footer social icons (non-clickable state) --- */
+.footer__social-placeholder {
+  opacity: 0.4;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

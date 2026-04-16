@@ -143,6 +143,73 @@ Note: the `.program-card`, `.program-card__name`, `.program-card__meta`, `.progr
 
 ---
 
+## trainer-card-partner-placeholder
+
+**Status.** archived
+**Removed on.** 2026-04-16
+**Removed by.** PRD 18 follow-through (Commit 1 of backlog-closure plan)
+**Reason.** The card presented a second trainer as "Senior Industry Advisor" with the Cargonomics logo at 30% opacity as a fake portrait and "Profile details coming soon" as the bio. Marilyn and Vasso both flagged this across multiple sessions as reading "broken" rather than "coming soon". Removing it leaves Elias as the single named trainer, which reads as "strong lead with team to come" instead of "broken profile".
+**Reinstate via.** Paste the HTML snapshot back into `.trainers-v2__grid` as a second `.trainer-card-v2` sibling to the Elias card. Replace the placeholder logo `img` with a real headshot. Replace the placeholder bio with real copy. Confirm the person's name, role, and ID before shipping.
+**Tokens used.** `--color-stone`, `--color-primary`, `--color-secondary` (via `.trainer-card-v2` and `.trainer-placeholder-logo` shared rules).
+**Elementor target.** Image + Text Box widget in a 2-column container. Bind photo, name, role, bio to ACF fields on a Trainer CPT for scalability.
+
+### HTML snapshot
+
+```html
+<div class="trainer-card-v2 fade-up">
+  <div class="trainer-card-v2__photo">
+    <div class="trainer-placeholder-logo">
+      <img src="img/logo-cargonomics-white.png" alt="Senior Industry Advisor" loading="lazy">
+    </div>
+  </div>
+  <div class="trainer-card-v2__info">
+    <h3 class="trainer-card-v2__name" id="advisor">Senior Industry Advisor</h3>
+    <div class="trainer-card-v2__role">Co-Founder &amp; Senior Trainer</div>
+    <p class="trainer-card-v2__bio">Profile details coming soon. Decades of industry experience with an extensive international network. Specialises in strategy and operational excellence across the shipping and logistics sector.</p>
+  </div>
+</div>
+```
+
+### Notes
+
+- The `.trainer-placeholder-logo` wrapper is specific to the placeholder treatment (30% opacity logo). On reinstate, replace the wrapper + inner `img` with a normal `<img>` headshot at full opacity.
+- Same card re-used on the About page (`leader-card-partner-placeholder` entry below) with a different BEM namespace. Reinstate both together so the About leadership section and homepage trainers stay in sync.
+
+---
+
+## leader-card-partner-placeholder
+
+**Status.** archived
+**Removed on.** 2026-04-16
+**Removed by.** PRD 18 follow-through (Commit 1 of backlog-closure plan)
+**Reason.** Same as `trainer-card-partner-placeholder`: the About page leadership section showed a second card for "Senior Industry Advisor" with the Cargonomics logo at 30% opacity as a fake portrait. Read as broken rather than coming-soon. Removed so About leadership presents as a confident single-founder-focus section.
+**Reinstate via.** Paste the HTML snapshot back into `.leadership__grid` as a second `.leader-card` sibling to the Elias card. Replace placeholder image, copy, name.
+**Tokens used.** Same as the trainer-card archive.
+**Elementor target.** Same Image + Text Box widget pattern. Shared Trainer CPT with the homepage trainers section, so one data entry populates both.
+
+### HTML snapshot
+
+```html
+<!-- Partner Trainer — placeholder, no details available -->
+<article class="leader-card fade-up" data-slot="leader-partner" data-elementor-widget="container">
+  <div class="leader-card__photo leader-card__photo--placeholder" data-slot="image" data-elementor-widget="image">
+    <img src="img/logo-cargonomics-white.png" alt="Senior Industry Advisor" loading="lazy" style="width: 50%; height: auto; object-fit: contain; opacity: 0.3;">
+  </div>
+  <div class="leader-card__info">
+    <h3 class="leader-card__name" id="about-advisor">Senior Industry Advisor</h3>
+    <div class="leader-card__role">Co-Founder &amp; Senior Trainer</div>
+    <p class="leader-card__bio">Profile details coming soon. Decades of industry experience with an extensive international network. Specialises in strategy and operational excellence across the shipping and logistics sector.</p>
+  </div>
+</article>
+```
+
+### Notes
+
+- Inline styles on the placeholder image (`opacity: 0.3`, `width: 50%`) were intentional to make the fake portrait fade into the background. On reinstate, drop these inline styles and use a real photo at full opacity.
+- Coordinate reinstate with `trainer-card-partner-placeholder` so both pages surface the same trainer consistently.
+
+---
+
 ## Changelog
 
 | Date | Change |
