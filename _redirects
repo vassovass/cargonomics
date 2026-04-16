@@ -9,6 +9,7 @@
 /about.html    /about    301
 /course.html   /course   301
 /contact.html  /contact  301
+/apply.html    /apply    301
 
 # www apex canonicalisation is handled at the Cloudflare zone level
 # (DNS + Redirect Rule), not here. Documented in
