@@ -51,9 +51,95 @@ Every archived entry must contain:
 
 ## Archived entries
 
-Entries are added here as components are archived. PRD 18 will populate the first two when it executes (`section-programs-card-professional-development` and `section-programs-card-corporate-training`).
+## section-programs-card-professional-development
 
-_No entries yet. This file is a scaffold awaiting the first archive addition._
+**Status.** archived
+**Removed on.** 2026-04-16
+**Removed by.** PRD 18 (Homepage Scope Reduction)
+**Reason.** Professional Development is a future offering with no live enrolment dates. Keeping it on the homepage diluted the WYDLS bootcamp as the single conversion goal of the MVP page. Removed per Marilyn's April 14 direction to focus the homepage exclusively on the June 1 bootcamp intake.
+**Reinstate via.** Paste the HTML snapshot below back into `index.html` inside a restored `.programs-v2__secondary` wrapper (see the other archived entry for the wrapper). Restore CSS snapshot in `css/style-v{N}.css`. Add corresponding footer link in the Programs column.
+**Tokens used.** `--color-white`, `--color-primary-rgb`, `--transition-base` (via `.program-card` shared rules — these stay live and do not need restoration), `--space-*` (via `.programs-v2__secondary` grid gap, see other archive entry).
+**Elementor target.** Card widget (heading + text-editor + button) inside a two-column container. Suggest binding title, meta bullets, description, and CTA button to ACF fields on a future Programme CPT so Marilyn can add more programmes without developer involvement.
+
+### HTML snapshot
+
+```html
+<div class="program-card fade-up">
+  <h3 class="program-card__name" id="professional-dev">Professional Development</h3>
+  <div class="program-card__meta">
+    <span>6 weeks</span>
+    <span>24 hours</span>
+    <span>Half-yearly</span>
+  </div>
+  <p class="program-card__desc">For mid-management professionals already in the industry. Advanced modules in management, finance, business development, and mentoring.</p>
+  <a href="contact" class="program-card__cta" data-track="cta" data-cta-type="inquire" data-cta-location="programs" data-cta-destination="contact-form">Enquire</a>
+</div>
+```
+
+### CSS snapshot (from css/style-v4.css)
+
+The `.program-card` class itself is shared with the featured WYDLS card and remains in the active stylesheet. Only the parent grid wrapper `.programs-v2__secondary` was scoped exclusively to these two cards; its CSS snapshot lives in the sibling entry `section-programs-card-corporate-training` below to avoid duplication.
+
+### Notes
+
+- This card had no image slot, just text and a CTA. When reinstated, consider adding a waitlist signup field (email input tied to a new Airtable table or Mailchimp list) so pent-up demand during the "paused" period becomes a measurable signal by the time the programme launches.
+- Analytics attributes (`data-track`, `data-cta-location="programs"`, `data-cta-destination="contact-form"`) were already wired. If reinstated with the same class, GTM triggers keep working with zero config.
+- No image dependency; no JSON-LD schema entry; no sitemap entry. Pure content block.
+
+---
+
+## section-programs-card-corporate-training
+
+**Status.** archived
+**Removed on.** 2026-04-16
+**Removed by.** PRD 18 (Homepage Scope Reduction)
+**Reason.** Same as the Professional Development entry: future offering with no live dates, dilutes the single conversion goal of the MVP homepage.
+**Reinstate via.** Paste the HTML snapshot below back into `index.html` inside a restored `.programs-v2__secondary` wrapper (grid CSS snapshot included below). Restore the footer Programs column link.
+**Tokens used.** Same as the Professional Development entry. The `.programs-v2__secondary` grid wrapper uses a hardcoded 20px gap which should be tokenised to `var(--space-lg)` or similar on reinstate; flagged as a cleanup opportunity.
+**Elementor target.** Second card in the same two-column container as the Professional Development widget. ACF binding same as the sibling entry.
+
+### HTML snapshot
+
+```html
+<div class="program-card fade-up">
+  <h3 class="program-card__name" id="corporate-training">Corporate Training</h3>
+  <div class="program-card__meta">
+    <span>1-3 days</span>
+    <span>Ad hoc</span>
+    <span>Tailored</span>
+  </div>
+  <p class="program-card__desc">Custom programs designed around your company's specific needs: skills development, knowledge transfer, and team capability building.</p>
+  <a href="contact" class="program-card__cta" data-track="cta" data-cta-type="inquire" data-cta-location="programs" data-cta-destination="contact-form">Request a Programme</a>
+</div>
+```
+
+### CSS snapshot (from css/style-v4.css)
+
+The `.programs-v2__secondary` wrapper is the only selector scoped exclusively to the pair of archived cards. On reinstatement, paste both rules back into the active stylesheet.
+
+```css
+/* Secondary programs — 2-col */
+.programs-v2__secondary {
+  display: grid;
+  gap: 20px;
+}
+
+/* Responsive variant at desktop breakpoint (around line 1544) */
+@media (min-width: 768px) {
+  .programs-v2__secondary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+```
+
+Note: the `.program-card`, `.program-card__name`, `.program-card__meta`, `.program-card__desc`, `.program-card__cta` rules are shared with the featured WYDLS card. They remain live in the active stylesheet and do not need restoration.
+
+### Notes
+
+- Hardcoded `gap: 20px` should be swapped for `var(--space-lg)` on reinstate. Token was `--space-md` or `--space-lg` depending on the final rhythm; inspect adjacent sections at reinstate time to pick.
+- Wrap element on reinstate: `<div class="programs-v2__secondary">{card1}{card2}</div>` between `.program-featured` and `.curriculum-v2` in `index.html`.
+- Corporate Training historically had a "Request a Programme" CTA rather than "Enquire", to signal that these are bespoke engagements. Preserve the copy distinction on reinstate.
+- Like the sibling entry, consider a waitlist signup on reinstate so the pre-launch period captures interest.
 
 ---
 
