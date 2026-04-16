@@ -672,12 +672,12 @@ button {
 
 .curriculum-v2__marquee::before {
   left: 0;
-  background: linear-gradient(to right, var(--color-white), transparent);
+  background: linear-gradient(to right, var(--color-stone) 10%, rgba(0, 0, 0, 0) 100%);
 }
 
 .curriculum-v2__marquee::after {
   right: 0;
-  background: linear-gradient(to left, var(--color-white), transparent);
+  background: linear-gradient(to left, var(--color-stone) 10%, rgba(0, 0, 0, 0) 100%);
 }
 
 /* Track — holds 2 copies of cards for seamless loop */
@@ -690,6 +690,12 @@ button {
 
 .curriculum-v2__marquee:hover .curriculum-v2__track {
   animation-play-state: paused;
+}
+
+/* Curriculum marquee CTA: link to the full module detail section on course.html */
+.curriculum-v2__cta {
+  margin-top: var(--space-lg, 24px);
+  text-align: center;
 }
 
 @keyframes marquee-scroll {
