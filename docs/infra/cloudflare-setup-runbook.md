@@ -112,7 +112,9 @@ Cross-reference this against the M365 Admin Center → Domains → DNS records v
 
 ## Part 5: Gate the staging URL
 
-**Recommended path: Option B (Worker Basic Auth).** Decided 2026-04-16 on the grounds of zero friction for Marilyn. Single shared credential, no email round-trip per review. Option A (Cloudflare Access) is the documented fallback if a larger reviewer group is added later; skip to it only if Marilyn asks for per-reviewer audit or if the shared credential leaks.
+**Recommended path: Pages Functions middleware with Basic Auth.** Decided 2026-04-16 on the grounds of zero friction for Marilyn. Single shared credential, one prompt per browser session (not per page), no email round-trip per review. Cloudflare Access is the documented fallback if a larger reviewer group is added later.
+
+**Important:** the original plan called for a standalone Cloudflare Worker bound to a route like `staging.<project>.pages.dev/*`. **That does not work.** Worker routes require a Cloudflare-hosted DNS zone; `*.pages.dev` is Cloudflare's shared zone, not customer-controlled. The correct path on Pages is a Functions middleware file (`functions/_middleware.js`) inside the repo. See Option B below.
 
 ### Option A: Cloudflare Access (fallback, wider reviewer group)
 
@@ -127,13 +129,36 @@ Cross-reference this against the M365 Admin Center → Domains → DNS records v
    - Session duration: 24 hours (less friction than default)
 6. Save. Visit the staging URL in an incognito window to confirm the email PIN login appears.
 
-### Option B: Worker Basic Auth (RECOMMENDED for this project)
+### Option B: Pages Functions middleware with Basic Auth (RECOMMENDED for this project)
 
-1. **Workers & Pages → Create → Workers**.
-2. Paste a minimal Basic Auth worker (example from Cloudflare's template library).
-3. Store the credentials as Worker secrets (`USERNAME`, `PASSWORD`), not in code.
-4. Add a route: `staging.<project>.pages.dev/*` → this worker.
-5. Test: `curl -I https://staging.<project>.pages.dev` should return 401.
+Runs on every request to the Pages project. Self-disables on production (env var gate) so only preview URLs get the prompt.
+
+1. Add `functions/_middleware.js` to the repo:
+
+   ```js
+   export const onRequest = async ({ request, env, next }) => {
+     if (!env.BASIC_PASS) return next();  // unset on production, skip gate
+     const auth = request.headers.get("Authorization");
+     const expected = "Basic " + btoa(`${env.BASIC_USER}:${env.BASIC_PASS}`);
+     if (auth !== expected) {
+       return new Response("Authentication required", {
+         status: 401,
+         headers: { "WWW-Authenticate": 'Basic realm="Cargonomics Staging"' },
+       });
+     }
+     return next();
+   };
+   ```
+
+2. Commit and push to `main`. Cloudflare Pages auto-detects `functions/` and wires the middleware on the next build.
+3. In Cloudflare dashboard: Pages project → **Settings → Environment variables**.
+4. Under **Preview** environment only: add encrypted vars `BASIC_USER` and `BASIC_PASS`. Leave the Production environment's vars unset.
+5. Test:
+   - `curl -I https://cargonomics-site.pages.dev/` → expect 200 (production, no auth).
+   - `curl -I https://<any-preview>.cargonomics-site.pages.dev/` → expect 401.
+   - `curl -I -u user:pass https://<any-preview>.cargonomics-site.pages.dev/` → expect 200.
+
+Browser UX: the user sees one Basic Auth prompt at the first request. Credentials are cached in the browser credential store for the session. No per-page re-prompt. Clearing browser data (or closing the browser, depending on OS / browser) clears the cached creds.
 
 Document the choice in PRD 16's Changelog. If both are tried, delete the one you're not using.
 
@@ -141,16 +166,22 @@ Document the choice in PRD 16's Changelog. If both are tried, delete the one you
 
 ## Part 6: Headers and crawl rules
 
-1. The repo now contains `_headers` (created during PRD 16) with global security headers.
-2. **Add a Transform Rule in Cloudflare dashboard** to append `X-Robots-Tag: noindex, nofollow` to any response from hostnames matching `*.pages.dev`. Steps:
-   - Rules → Transform Rules → Modify Response Header → Create rule.
-   - Name: `Noindex all Pages previews`.
-   - When incoming requests match: `Hostname ends with .pages.dev`.
-   - Modify response header: Set → `X-Robots-Tag` → `noindex, nofollow`.
-   - Deploy.
-3. Verify:
-   - `curl -I https://cargonomics.com.vn` → no `X-Robots-Tag` (production should index).
-   - `curl -I https://<any>.pages.dev` → `X-Robots-Tag: noindex, nofollow`.
+The repo's `_headers` file handles all the necessary edge headers.
+
+1. Hostname-scoped rule at the top of `_headers`:
+   ```
+   https://:project.pages.dev/*
+     X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+     Cache-Control: private, no-store
+   ```
+   This applies to every `*.pages.dev` request (production preview URL and all branch previews). The production custom domain (once attached) never matches this pattern.
+2. Global security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) apply to all hostnames.
+3. **Do NOT try to create a Transform Rule** for `X-Robots-Tag` on `*.pages.dev`. Transform Rules require a customer-controlled Cloudflare zone; `*.pages.dev` is Cloudflare's shared zone and is not customer-controlled. `_headers` is the correct path for Pages.
+
+Verify:
+- `curl -I https://cargonomics-site.pages.dev/` → includes `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`
+- `curl -I https://cargonomics.com.vn/` (once custom domain is attached) → no `X-Robots-Tag` header, production indexable
+- Combined with the Basic Auth middleware (Part 5), any request to `*.pages.dev` either returns 401 (unauthenticated) or 200 with the noindex header (authenticated)
 
 ---
 

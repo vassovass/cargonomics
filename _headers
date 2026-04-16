@@ -2,11 +2,8 @@
 # https://developers.cloudflare.com/pages/configuration/headers/
 #
 # Applies in path-match order, most specific first.
-# Cloudflare Pages _headers does not support hostname scoping. The staging
-# noindex rule is enforced via a Cloudflare Transform Rule scoped to
-# *.pages.dev (configured in the dashboard, see
-# docs/infra/cloudflare-setup-runbook.md Part 6). This file carries the
-# non-hostname-scoped rules only.
+# Hostname-scoped rules use full URL syntax (e.g. https://:project.pages.dev/*).
+# Path-only rules (/img/*) apply to all hostnames.
 
 # ----- Images: immutable, long-lived cache -----
 # Image filenames are content-stable (e.g., hero-home-1600.webp). Cache
@@ -27,6 +24,14 @@
 
 /
   Cache-Control: public, max-age=3600, must-revalidate
+
+# ----- Preview / staging: noindex for ALL crawlers (Google, AI bots, Bing, etc.) -----
+# Belt-and-braces on top of the Pages Functions Basic Auth middleware.
+# The 401 gate is primary; these headers catch anything that slips past auth.
+# Hostname scoped so the production custom domain never gets these headers.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Cache-Control: private, no-store
 
 # ----- Global security headers (apply to production + previews) -----
 /*
