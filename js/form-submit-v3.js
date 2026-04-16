@@ -12,29 +12,6 @@
   // REPLACE THIS after deploying Google Apps Script
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6AOARukN0nbULTzQ3u95Ams78SmqALhCZdxpEAWxvYCQ6UbI80t6dw1vniWBA2QBZIg/exec';
 
-  // Environment-aware form source tag, derived at submit time from the
-  // current hostname. Overrides any form-field value so staging and
-  // production submissions land in the same Sheet with distinct labels.
-  // Survives the WordPress migration unchanged.
-  //
-  // See PRD 16 (Dev/Live Environments on Cloudflare Pages) and
-  // docs/infra/deploy-workflow.md.
-  function deriveFormSource() {
-    var host = (window.location && window.location.hostname) || '';
-    host = host.toLowerCase();
-    if (host === 'cargonomics.com.vn' || host === 'www.cargonomics.com.vn') {
-      return 'production';
-    }
-    if (host.indexOf('.pages.dev') !== -1) {
-      return 'staging';
-    }
-    if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0' || host === '') {
-      return 'local';
-    }
-    // Fallback: return the hostname verbatim so the Sheet still tags it.
-    return host;
-  }
-
   function init() {
     // Application form
     var appForm = document.getElementById('application-form');
@@ -84,11 +61,6 @@
 
     // Add timestamp
     payload.submitted_at = new Date().toISOString();
-
-    // Environment-aware form_source, overriding any form-field value.
-    // Keeps production and staging submissions distinguishable in the
-    // same Google Sheet without a build-time env var.
-    payload.form_source_env = deriveFormSource();
 
     // Submit via fetch (no-cors required for Apps Script cross-origin)
     fetch(APPS_SCRIPT_URL, {

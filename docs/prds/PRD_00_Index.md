@@ -1,8 +1,8 @@
 # PRD Index: Cargonomics MVP Website
 
-> **Total PRDs:** 14 | **Proposed:** 0 | **In Progress:** 0 | **Complete:** 14
-> **Last Updated:** 2026-04-11
-> **MVP Deadline:** Tuesday April 14, 2026 EOD
+> **Total PRDs:** 21 | **Proposed:** 2 | **In Progress:** 4 | **Complete:** 14 | **Superseded:** 1
+> **Last Updated:** 2026-04-16
+> **MVP Deadline:** Tuesday April 14, 2026 EOD (initial MVP shipped April 11; April 14 batch extends scope for Wednesday follow-up)
 
 ---
 
@@ -28,7 +28,7 @@ Every PRD in this project MUST include:
 **Before starting work:**
 - [ ] Read all files in Agent Context section
 - [ ] Conduct research noted in "Research & Verification Needed"
-- [ ] Generate 5 proactive items based on current codebase state
+- [ ] Generate 3 core + 2 stretch proactive items based on current codebase state (standard locked 2026-04-14; applies from PRD 15 onwards)
 
 **During implementation:**
 - [ ] Follow BEM naming, use CSS custom properties (no hardcoded values)
@@ -76,11 +76,28 @@ Every PRD in this project MUST include:
 | 12 | Responsive Testing & Accessibility | QA | :white_check_mark: Complete | PRDs 7-11 | PRD 13 |
 | 13 | Final Deploy & Client Handoff | Ops | :white_check_mark: Complete | PRD 12 | None |
 
+## Sprint 5: Infrastructure + Content (PRDs 15/16/17 infra track; PRD 21 parallel content track)
+
+| PRD | Title | Type | Status | Dependencies | Blocks |
+|-----|-------|------|--------|--------------|--------|
+| 15 | DNS Cutover to Cloudflare | Ops / Infra | :construction: In Progress (docs shipped, zone creation pending Vasso + NS swap pending Marilyn's contact) | PRD 13 | PRDs 16, 17 |
+| 16 | Dev/Live Environments on Cloudflare Pages | Ops / Infra | :construction: In Progress (code + docs shipped, Cloudflare Pages project pending Vasso) | PRD 15 | None |
+| 17 | SEO Fundamentals | Feature / SEO | :construction: In Progress (clean URLs + sitemap + schema + gsc-setup shipped, GSC verification pending DNS cutover) | PRDs 15, 16 | None |
+| 21 | Client Image Replacements (April 15 Pack) | Content / Feature | :construction: In Progress (all 7 images shipped, 5 DepositPhotos licensing formalisation pending) | PRD 9 | None (unblocks PRD 20) |
+
 ## Post-MVP Enhancements
 
 | PRD | Title | Type | Status | Dependencies | Blocks |
 |-----|-------|------|--------|--------------|--------|
 | 14 | WhatsApp & Zalo Icon Integration | Feature | :white_check_mark: Complete | PRD 9 | None |
+| 18 | Homepage Scope Reduction | Refactor | :memo: Proposed | None | None |
+| 19 | Course Hero Visual Anchor | Feature | :ballot_box_with_check: Superseded by PRD 21 (B-1 landed student-immersion image in `course-overview`) | None | None |
+
+## Post-MVP Migration
+
+| PRD | Title | Type | Status | Dependencies | Blocks |
+|-----|-------|------|--------|--------------|--------|
+| 20 | WordPress Migration Plan | Ops / Migration | :memo: Proposed | PRDs 15, 16, 17 + client sign-off | None |
 
 ---
 
@@ -92,6 +109,9 @@ Every PRD in this project MUST include:
 | 2: Pages | 3, 4, 5, 6, 7 | Complete |
 | 3: Integration | 8, 9, 10, 11 | Complete |
 | 4: Ship | 12, 13 | Complete |
+| 5: Infrastructure + Content | 15, 16, 17, 21 | In Progress (code + docs shipped; external actions pending) |
+| Post-MVP Enhancements | 14, 18, 19 | 14 Complete; 18 Proposed; 19 Superseded by PRD 21 |
+| Post-MVP Migration | 20 | Proposed |
 
 ---
 
@@ -124,3 +144,10 @@ PRD 1 (Design System)
 | 2026-04-11 | Sprint 3 complete. PRDs 08-11 delivered: form backend (Google Apps Script to Google Sheet, fetch handler with thank-you/error states, privacy notices, ARIA live regions), image and logo integration (PNG logo in nav/footer on all pages, favicon, OG image, 7 stock images replaced with branded placeholders, click-to-cycle image review carousel), GTM analytics (GTM-NCG2LPNQ on all pages, dataLayer init, 42 CTA data-track attributes, analytics.js event tracking, GTM container import JSON, gtm-setup.md reference doc), UTM attribution (cookie-based first/last-touch tracking, traffic source classification including Zalo/Coc Coc, form auto-fill, dataLayer push). |
 | 2026-04-11 | Sprint 4 complete. PRDs 12-13 delivered: QA pass (Apps Script URL wired to live Google Sheet, 11 em dashes replaced in visible copy, JSON-LD course date fixed to June 1, inline styles extracted from about.html and course.html into style-v2.css, 133 lines of dead CSS removed for conference-v2 and hero-video classes), zero console errors across all 4 pages at mobile/tablet/desktop, all 13 PRDs marked complete. MVP website ready for Marilyn handoff. |
 | 2026-04-13 | PRD 14 created and completed: WhatsApp & Zalo official brand SVG icons added to floating buttons (all 4 pages) and contact page social block. Live deep links wired with pre-filled message (wa.me/84903033039, zalo.me/84903033039). |
+| 2026-04-14 | Process A foundation landed per approved April 14 plan: created `docs/deferred-items.md` and `docs/archived-components.md` scaffold. Added Tracker Discipline rule to `.claude/rules/website-conventions.md` and root `CLAUDE.md` Conventions section. Anti-duplication principle: `open-questions.md` for PEOPLE-blocked items, `deferred-items.md` for TIME and PRIORITY-blocked code and UX observations. |
+| 2026-04-14 | Process C landed: proactive items standard changed from 5 to 3 core + 2 optional stretch. Updated `.claude/rules/website-conventions.md`, `.claude/rules/prds.md`, `.claude/commands/create-prd.md`, and this index's Standard PRD Requirements checklist. Applies to all PRDs from PRD 15 onwards. PRDs 1-14 not retroactively updated. |
+| 2026-04-14 | PRDs 18 and 19 created in Proposed status. PRD 18 (Homepage Scope Reduction): remove Professional Development + Corporate Training cards from homepage + footer, archive markup to `docs/archived-components.md`. PRD 19 (Course Hero Visual Anchor): add visual element to `course.html` `.course-overview` hero to reduce text-heavy feel, stats card recommended as default placeholder. Both are MVP Today track per approved April 14 plan; PRD execution pending. |
+| 2026-04-14 | Sprint 5 (Infrastructure) created with PRDs 15, 16, 17. PRD 15 (DNS Cutover to Cloudflare): Cloudflare as DNS provider, domain stays at current registrar, DNS pack handed to Marilyn's contact for nameserver swap, M365 email preserved. PRD 16 (Dev/Live Environments on Cloudflare Pages): Cloudflare Pages replaces GitHub Pages for production, staging on branch preview URL with Cloudflare Access or Worker Basic Auth + `X-Robots-Tag: noindex`, 301 from old github.io URL. PRD 17 (SEO Fundamentals): production `robots.txt` and `sitemap.xml` created, staging lockout confirmed, per-page canonical/OG audit (already in place; verified), GSC verification. Config files shipped this session: `robots.txt`, `sitemap.xml`, `_headers`. Runbook at `docs/infra/cloudflare-setup-runbook.md`. DNS pack at `06-client-comms/dns-pack-2026-04-14.md`. Execution pending Cloudflare account action by Vasso + nameserver swap by Marilyn's contact. |
+| 2026-04-14 | PRD 20 (WordPress Migration Plan) created in Proposed status. AZDIGI as target managed WP host (Vietnam-local, <50ms from HCMC, ~$40-80/yr), Elementor Pro Advanced + ACF Pro, Fluent Forms with native Airtable integration replacing Google Apps Script, in-place cutover via Cloudflare DNS swap preserving apex URL authority. Execution scheduled after Marilyn signs off on static MVP design. |
+| 2026-04-16 | PRD 21 (Client Image Replacements) created from Marilyn's WhatsApp pack delivered 2026-04-15. Five DepositPhotos URLs for homepage + course sections, plus a Drive folder of conference photos for Connect + Consult. Added to Sprint 5 as parallel content track alongside infra PRDs 15-17. Unmentioned sections keep current images per Marilyn's explicit instruction. PRD 19 (Course Hero Visual Anchor) flagged as supersession candidate once PRD 21 B-1 lands. Transcript archived at `06-client-comms/whatsapp-image-pack-2026-04-15.md`. |
+| 2026-04-16 | Sprint 5 execution landed code + docs for PRDs 15, 16, 17, 21 and promoted site to v4. DNS pack refreshed (TTL-lowering preamble, autodiscover, contact block). Cloudflare runbook: Part 0 baseline capture, Worker Basic Auth promoted as recommended staging gate, autodiscover in verification, 4-step rollback ladder. `_redirects` created for `.html` -> clean URL 301s. `_headers` rewritten with immutable cache on `/img/*`, `/css/*`, `/js/*` + short-cache HTML + security headers. `form-submit.js` gained `deriveFormSource()` -> `form_source_env` column (production / staging / local). `docs/infra/deploy-workflow.md` and `docs/infra/gsc-setup.md` created. Clean URL scheme across all 4 pages (canonicals, og:url, sitemap, internal hrefs). `Course` schema enhanced (endDate, offers, inLanguage, educationalLevel). `Organization` schema enriched (logo, sameAs, foundingLocation). PRD 21: all 7 images optimised (JPEG fallback + 3 WebP srcset variants each, EXIF stripped), originals archived in `06-client-comms/assets-from-marilyn/2026-04-15-image-pack/`, `<picture>` elements swapped in `index.html` + `course.html` for hero, coach, connect, consult, program-featured, how-it-works, course-overview (new slot), curriculum-grid. Carousel `data-images` retired on replaced slots. Alt text rewritten. Version bump v3 -> v4: archived `hp-v3.html`, `about-v3.html`, `course-v3.html`, `contact-v3.html`, `js/*-v3.js`; promoted defaults to reference `css/style-v4.css` + `css/v4-fixes.css`. PRDs 15/16/17/21 status: In Progress (external actions pending). PRD 19 marked Superseded by PRD 21 B-1. Decisions log: Worker Basic Auth + clean URLs. Parent `.claude/rules/website-conventions.md` updated with Environments section. |

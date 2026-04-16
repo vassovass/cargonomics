@@ -1,0 +1,8 @@
+# Cargonomics production robots.txt
+# Staging environments override this via Cloudflare Pages _headers rules.
+# See docs/prds/PRD_17_SEO_Fundamentals.md
+
+User-agent: *
+Allow: /
+
+Sitemap: https://cargonomics.com.vn/sitemap.xml

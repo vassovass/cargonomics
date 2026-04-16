@@ -1,0 +1,36 @@
+# Cloudflare Pages custom headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+#
+# Applies in path-match order, most specific first.
+# Cloudflare Pages _headers does not support hostname scoping. The staging
+# noindex rule is enforced via a Cloudflare Transform Rule scoped to
+# *.pages.dev (configured in the dashboard, see
+# docs/infra/cloudflare-setup-runbook.md Part 6). This file carries the
+# non-hostname-scoped rules only.
+
+# ----- Images: immutable, long-lived cache -----
+# Image filenames are content-stable (e.g., hero-home-1600.webp). Cache
+# aggressively. Bust by renaming if ever needed.
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ----- CSS and JS: versioned filenames, long cache -----
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ----- HTML pages: short cache, let CDN revalidate -----
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# ----- Global security headers (apply to production + previews) -----
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
