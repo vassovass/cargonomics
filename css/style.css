@@ -1096,7 +1096,7 @@ button {
    Three variants share `.trainer-card-v3` base; modifiers swap the visual read.
    Variant A (--editorial) is the live default on index.html + course.html.
    Variants B (--network) and C (--split) render in styleguide.html for review.
-   Placeholder + coming-soon-badge rules live in css/v7-fixes.css.
+   Placeholder + coming-soon-badge rules live in css/fixes.css.
    ========================================================================== */
 
 .trainers-v3 {

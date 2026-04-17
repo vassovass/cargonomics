@@ -2,7 +2,7 @@
    FLEXED — Brand Tokens (co-working space, Cargonomics sister brand)
    Source: existing Flexed logo (blue + white). No new branding work per April 8 kickoff.
    Most values are PENDING — Marilyn has the logo file and will send it.
-   Loaded AFTER css/style-v2.css to override the default Deep Slate + Copper palette.
+   Loaded AFTER css/style.css to override the default Deep Slate + Copper palette.
    Flexed reuses the same HTML structure as Cargonomics but simpler, with its own content.
    ========================================================================== */
 
@@ -22,7 +22,7 @@
   --color-accent-grey: #8A8E94;
   --color-accent-lime: #A6CE39;      /* Placeholder — may not apply to Flexed */
 
-  /* MAP TO EXISTING style-v2.css VARIABLE NAMES */
+  /* MAP TO EXISTING style.css VARIABLE NAMES */
   --color-accent: var(--color-primary);  /* Flexed uses its primary blue as the accent to keep the palette simple */
 
   /* Neutrals */

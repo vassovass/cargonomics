@@ -7,7 +7,7 @@
      Primary Gold ("Prestige")  = prestige, success, sophistication, generosity
    Secondary palette ("Tech / Human centric / Lime Green / Neutral System"):
      Teal Blue, Orange, Lime Green, Grey
-   Loaded AFTER css/style-v2.css to override the default Deep Slate + Copper palette.
+   Loaded AFTER css/style.css to override the default Deep Slate + Copper palette.
    ========================================================================== */
 
 :root {
@@ -26,8 +26,8 @@
   --color-accent-lime: #CCDD2C;      /* Lime Green. PANTONE 381 C, RGB 204-221-44. Sustainability, freshness, energy. */
   --color-accent-grey: #D2D3D5;      /* Neutral System (Grey). PANTONE 427 C, RGB 210-211-213. NOTE: this is a LIGHT BACKGROUND grey per R2, not a body-text grey. Use --color-text below for text. */
 
-  /* MAP TO EXISTING style-v2.css VARIABLE NAMES
-     style-v2.css uses --color-primary / --color-secondary / --color-accent / --color-ivory / etc.
+  /* MAP TO EXISTING style.css VARIABLE NAMES
+     style.css uses --color-primary / --color-secondary / --color-accent / --color-ivory / etc.
      These overrides swap Deep Slate/Copper/Teal for Navy/Gold while keeping the rest of the rules intact. */
   --color-accent: var(--color-accent-teal);  /* was #115E59 (maritime teal) */
 
@@ -58,8 +58,8 @@
   --font-weight-heading: 700;
   --font-weight-body: 400;
 
-  /* RGB VARIANTS — needed for rgba() usage in style-v2.css.
-     When style-v2.css uses rgba(var(--color-primary-rgb), 0.5), the token swap
+  /* RGB VARIANTS — needed for rgba() usage in style.css.
+     When style.css uses rgba(var(--color-primary-rgb), 0.5), the token swap
      ensures overlays, borders, and shadows shift to the correct brand palette. */
   --color-primary-rgb: 17, 41, 75;       /* Navy Blue */
   --color-secondary-rgb: 212, 180, 104;  /* Gold */
@@ -86,7 +86,7 @@
   /* COMPONENT — Buttons */
   --btn-bg: var(--color-secondary);
   --btn-color: var(--color-white);
-  --btn-hover-bg: #B8984F;              /* Matches --color-secondary-dark. Used in style-v2.css :hover rules. */
+  --btn-hover-bg: #B8984F;              /* Matches --color-secondary-dark. Used in style.css :hover rules. */
   --btn-radius: 0;
   --btn-padding-y: 14px;
   --btn-padding-x: 32px;

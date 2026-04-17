@@ -26,7 +26,7 @@
 }
 
 /* --- Fix 8: Leadership card equal heights --- */
-/* Works WITH the grid in style-v3.css, not against it */
+/* Works WITH the grid in style.css, not against it */
 .leadership__grid {
   align-items: stretch;
 }
@@ -58,7 +58,7 @@
 }
 
 /* --- Partner placeholder card styling --- */
-/* Now uses .leader-card__photo--placeholder from style-v3.css
+/* Now uses .leader-card__photo--placeholder from style.css
    with inline styles on the img. No custom class needed. */
 
 /* --- Footer social icons (non-clickable state) --- */
