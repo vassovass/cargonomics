@@ -258,7 +258,7 @@
   </header>
 
   <div class="sg-notice">
-    <strong>Internal only.</strong> This page is <code>noindex, nofollow</code> and is not linked from public nav, site sitemap, or the footer. Reach it via direct URL: <code>/styleguide</code> or <code>/styleguide.html</code>. Complementary to <code>docs/archived-components.md</code>, which holds <em>removed</em> components; this page holds <em>current</em> components.
+    <strong>Internal only.</strong> This page is <code>noindex, nofollow</code> and is not linked from public nav, site sitemap, or the footer. Reach it via direct URL: <code>/styleguide</code> or <code>/styleguide.html</code>. Complementary to <code>docs/archived-components.md</code>, which holds <em>removed</em> components; this page holds <em>current</em> components. Deprecated components are kept in-page with a <code>.sg-deprecated-badge</code> at the top of their section until they migrate to <code>docs/archived-components.md</code> once the replacement is stable. The trainer card v2 (below) is the first example of this pattern. Each component's "Technical details" panel (click to expand) carries a <strong>Used on</strong> row naming the live pages where it renders, and must be updated in the same commit whenever a component is added, removed, or moved on a live page. Full rule in <code>.claude/rules/website-conventions.md</code> "Styleguide Usage Log".
   </div>
 
   <nav class="sg-toc" aria-label="Styleguide table of contents">
@@ -271,7 +271,10 @@
       <li><a href="#sg-about-pillar">About pillar card</a></li>
       <li><a href="#sg-trusted-partners">Trusted Partners marquee</a></li>
       <li><a href="#sg-program-featured">Program featured card</a></li>
-      <li><a href="#sg-trainer-card">Trainer card</a></li>
+      <li><a href="#sg-trainer-card">Trainer card v2 (deprecated)</a></li>
+      <li><a href="#sg-trainer-card-v3-editorial">Trainer card v3, A: Editorial (live default)</a></li>
+      <li><a href="#sg-trainer-card-v3-network">Trainer card v3, B: Network</a></li>
+      <li><a href="#sg-trainer-card-v3-split">Trainer card v3, C: Split</a></li>
       <li><a href="#sg-curriculum-grid">Curriculum grid card</a></li>
     </ol>
   </nav>
@@ -281,12 +284,16 @@
        ============================================================= -->
   <section class="sg-section" id="sg-colors">
     <h2 data-number="01">Colour Tokens</h2>
-    <p class="sg-desc">All colours come from <code>css/tokens-cargonomics.css</code>. The primary and secondary palettes are locked; the accent palette and neutrals are pending tonal-ramp confirmation from Marilyn (open-questions Q23, Q24).</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">All colours come from <code>css/tokens-cargonomics.css</code>. The primary and secondary palettes are locked; the accent palette and neutrals are pending tonal-ramp confirmation from Marilyn (open-questions Q23, Q24).</p>
 
-    <dl class="sg-meta">
-      <dt>Source:</dt><dd>css/tokens-cargonomics.css</dd>
-      <dt>Elementor target:</dt><dd>Variables Manager (global colours)</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>All pages (global tokens, loaded via <code>tokens-cargonomics.css</code>)</dd>
+        <dt>Source:</dt><dd>css/tokens-cargonomics.css</dd>
+        <dt>Elementor target:</dt><dd>Variables Manager (global colours)</dd>
+      </dl>
+    </details>
 
     <div class="sg-swatch-grid">
       <div class="sg-swatch">
@@ -329,13 +336,17 @@
        ============================================================= -->
   <section class="sg-section" id="sg-typography">
     <h2 data-number="02">Typography</h2>
-    <p class="sg-desc">Two Google Fonts, loaded from Google Fonts CDN on every page. Heading face is Orbitron because the logo is set in Orbitron (R2 brand guide p.4). Body face is Open Sans (Montserrat is the alt option per Q22, not yet selected).</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Two Google Fonts, loaded from Google Fonts CDN on every page. Heading face is Orbitron because the logo is set in Orbitron (R2 brand guide p.4). Body face is Open Sans (Montserrat is the alt option per Q22, not yet selected).</p>
 
-    <dl class="sg-meta">
-      <dt>--font-heading:</dt><dd>'Orbitron', sans-serif</dd>
-      <dt>--font-body:</dt><dd>'Open Sans', sans-serif</dd>
-      <dt>Elementor target:</dt><dd>Variables Manager (global fonts)</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>All pages (global typography, Google Fonts loaded in each page head)</dd>
+        <dt>--font-heading:</dt><dd>'Orbitron', sans-serif</dd>
+        <dt>--font-body:</dt><dd>'Open Sans', sans-serif</dd>
+        <dt>Elementor target:</dt><dd>Variables Manager (global fonts)</dd>
+      </dl>
+    </details>
 
     <div class="sg-render">
       <div class="sg-type-sample" style="font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; color: var(--color-primary);">
@@ -361,11 +372,15 @@
        ============================================================= -->
   <section class="sg-section" id="sg-spacing">
     <h2 data-number="03">Spacing Scale</h2>
-    <p class="sg-desc">8px base. Used for all padding, margin, and gap values across the site. No hardcoded pixel values elsewhere.</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">8px base. Used for all padding, margin, and gap values across the site. No hardcoded pixel values elsewhere.</p>
 
-    <dl class="sg-meta">
-      <dt>Source:</dt><dd>css/tokens-cargonomics.css (spacing section)</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>All pages (applied via --space-* tokens in every section)</dd>
+        <dt>Source:</dt><dd>css/tokens-cargonomics.css (spacing section)</dd>
+      </dl>
+    </details>
 
     <div class="sg-render">
       <div class="sg-spacing-grid">
@@ -385,13 +400,17 @@
        ============================================================= -->
   <section class="sg-section" id="sg-buttons">
     <h2 data-number="04">Buttons</h2>
-    <p class="sg-desc">Four canonical button styles. The gold <code>.btn--copper</code> is the primary CTA (Apply, submit). <code>.btn--outline</code> is secondary. <code>.btn--outline-sm</code> is for inline or less-prominent CTAs (pillar row Inquire, curriculum marquee "See full module details").</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Four canonical button styles. The gold <code>.btn--copper</code> is the primary CTA (Apply, submit). <code>.btn--outline</code> is secondary. <code>.btn--outline-sm</code> is for inline or less-prominent CTAs (pillar row Inquire, curriculum marquee "See full module details").</p>
 
-    <dl class="sg-meta">
-      <dt>Classes:</dt><dd>.btn.btn--copper, .btn.btn--outline, .btn.btn--outline-sm, .btn.btn--large</dd>
-      <dt>Tokens:</dt><dd>--color-secondary (fill), --color-primary (outline), --btn-hover-bg, --transition-fast</dd>
-      <dt>Elementor target:</dt><dd>Button widget</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>All pages (hero CTAs, section CTAs, form submit, nav). <code>btn--copper</code>: hero Apply + form submit + sticky-apply + pillar CTAs. <code>btn--outline</code>: hero secondary + nav. <code>btn--outline-sm</code>: pillar Inquire + curriculum "See full module details".</dd>
+        <dt>Classes:</dt><dd>.btn.btn--copper, .btn.btn--outline, .btn.btn--outline-sm, .btn.btn--large</dd>
+        <dt>Tokens:</dt><dd>--color-secondary (fill), --color-primary (outline), --btn-hover-bg, --transition-fast</dd>
+        <dt>Elementor target:</dt><dd>Button widget</dd>
+      </dl>
+    </details>
 
     <div class="sg-render">
       <a href="#" class="btn btn--copper" onclick="return false">Apply Now</a>
@@ -413,16 +432,20 @@
        ============================================================= -->
   <section class="sg-section" id="sg-pillar-row">
     <h2 data-number="05">Pillar row (homepage)</h2>
-    <p class="sg-desc">Homepage Coach/Connect/Consult section. Alternating image-left / image-right layout. Each row is a self-contained `.pillar-row` block.</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Homepage Coach/Connect/Consult section. Alternating image-left / image-right layout. Each row is a self-contained `.pillar-row` block.</p>
 
-    <dl class="sg-meta">
-      <dt>Class:</dt><dd>.pillar-row, .pillar-row--reverse, .pillar-row__image, .pillar-row__content, .pillar-row__number, .pillar-row__name, .pillar-row__inquire</dd>
-      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --font-heading, --font-body, --space-*</dd>
-      <dt>Images:</dt><dd>coach-pillar, connect-conference, consult-conference (1200x800, 3:2, WebP+JPEG via &lt;picture&gt;)</dd>
-      <dt>Elementor target:</dt><dd>Container widget with Image + Heading + Text Editor + Button inside</dd>
-      <dt>data-section:</dt><dd>pillars</dd>
-      <dt>data-slot:</dt><dd>(on image) pillar-image</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>index.html #pillars (3 rows: Coach, Connect, Consult)</dd>
+        <dt>Class:</dt><dd>.pillar-row, .pillar-row--reverse, .pillar-row__image, .pillar-row__content, .pillar-row__number, .pillar-row__name, .pillar-row__inquire</dd>
+        <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --font-heading, --font-body, --space-*</dd>
+        <dt>Images:</dt><dd>coach-pillar, connect-conference, consult-conference (1200x800, 3:2, WebP+JPEG via &lt;picture&gt;)</dd>
+        <dt>Elementor target:</dt><dd>Container widget with Image + Heading + Text Editor + Button inside</dd>
+        <dt>data-section:</dt><dd>pillars</dd>
+        <dt>data-slot:</dt><dd>(on image) pillar-image</dd>
+      </dl>
+    </details>
 
     <div class="sg-render">
       <div class="pillar-row fade-up">
@@ -459,15 +482,19 @@
        ============================================================= -->
   <section class="sg-section" id="sg-about-pillar">
     <h2 data-number="06">About pillar card</h2>
-    <p class="sg-desc">Stacked image-top card used in a 3-column grid on the About page. Image header, number, title, trimmed body copy.</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Stacked image-top card used in a 3-column grid on the About page. Image header, number, title, trimmed body copy.</p>
 
-    <dl class="sg-meta">
-      <dt>Class:</dt><dd>.about-pillar-card, .about-pillar-card__image, .about-pillar-card__number, .about-pillar-card__title, .about-pillar-card__body</dd>
-      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --card-padding, --transition-base</dd>
-      <dt>Images:</dt><dd>Shared with pillar-row: coach-pillar, connect-conference, consult-conference</dd>
-      <dt>Elementor target:</dt><dd>Card widget (Image + Heading + Text Editor)</dd>
-      <dt>data-slot:</dt><dd>pillar-coaching / pillar-connecting / pillar-consulting</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>about.html (Coaching / Connecting / Consulting 3-card grid)</dd>
+        <dt>Class:</dt><dd>.about-pillar-card, .about-pillar-card__image, .about-pillar-card__number, .about-pillar-card__title, .about-pillar-card__body</dd>
+        <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --card-padding, --transition-base</dd>
+        <dt>Images:</dt><dd>Shared with pillar-row: coach-pillar, connect-conference, consult-conference</dd>
+        <dt>Elementor target:</dt><dd>Card widget (Image + Heading + Text Editor)</dd>
+        <dt>data-slot:</dt><dd>pillar-coaching / pillar-connecting / pillar-consulting</dd>
+      </dl>
+    </details>
 
     <div class="sg-render" style="max-width: 400px;">
       <article class="about-pillar-card">
@@ -489,19 +516,23 @@
        ============================================================= -->
   <section class="sg-section" id="sg-trusted-partners">
     <h2 data-number="07">Trusted Partners marquee</h2>
-    <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. Each partner rendered as a typographically-distinct fake wordmark so it reads as a real logo. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code>; the grayscale-default + colour-on-hover pattern is the industry-standard (Bain / Stripe / Figma / ITS Logistics) and accommodates any real partner brand colour. Earlier grid version and v2 dark-navy treatment both archived in docs/archived-components.md.</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. Each partner rendered as a typographically-distinct fake wordmark so it reads as a real logo. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code>; the grayscale-default + colour-on-hover pattern is the industry-standard (Bain / Stripe / Figma / ITS Logistics) and accommodates any real partner brand colour. Earlier grid version and v2 dark-navy treatment both archived in docs/archived-components.md.</p>
 
-    <dl class="sg-meta">
-      <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__logo-img (real-logo swap), .trusted-partners__sep</dd>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>index.html (after pillar rows) and course.html (between why-apply and curriculum-grid)</dd>
+        <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__logo-img (real-logo swap), .trusted-partners__sep</dd>
       <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile)</dd>
       <dt>Variants (via data-logo-style attribute):</dt><dd>bold-italic, geometric-spaced, light-lowercase, italic-caps, serif-feel, rounded-bold, condensed-caps, muted-italic</dd>
       <dt>Tokens:</dt><dd>--color-ivory (bg), --color-primary (logo text), --color-secondary (separator + gold accents), --font-heading, --font-body, --space-xl, --space-2xl</dd>
       <dt>Animation:</dt><dd>@keyframes trusted-partners-scroll (translateX 0 -> -50%, 60s mobile / 80s desktop, linear infinite, pause on hover). Respects prefers-reduced-motion: reduce (animation disabled, manual scroll as fallback with scrollbar hidden).</dd>
       <dt>Edge fade:</dt><dd>mask-image linear-gradient on .trusted-partners__marquee, 10% transparent -> 90% black -> transparent</dd>
       <dt>Real-logo swap:</dt><dd>Replace <code>&lt;span class="trusted-partners__logo"&gt;</code> with <code>&lt;img class="trusted-partners__logo-img" src="..." alt="..."&gt;</code>. Default filter grayscale(1) + opacity 0.55 visually normalises all brand colours; hover restores grayscale(0) + opacity 1 so the real colour reasserts on interaction. No other markup change required.</dd>
-      <dt>Elementor target:</dt><dd>Slider / Carousel widget with ACF repeater field "partners" each with name + logo_image subfields. data-partner-logo-src attribute maps to the repeater logo_image field.</dd>
-      <dt>data-slot:</dt><dd>partners-marquee on container, partner on each item</dd>
-    </dl>
+        <dt>Elementor target:</dt><dd>Slider / Carousel widget with ACF repeater field "partners" each with name + logo_image subfields. data-partner-logo-src attribute maps to the repeater logo_image field.</dd>
+        <dt>data-slot:</dt><dd>partners-marquee on container, partner on each item</dd>
+      </dl>
+    </details>
 
     <div class="sg-render" style="padding: 0; overflow: hidden;">
       <!-- Live render: uses production CSS. Duplication kept short for the styleguide but marquee logic identical. -->
@@ -575,13 +606,17 @@
        ============================================================= -->
   <section class="sg-section" id="sg-program-featured">
     <h2 data-number="08">Program featured card (homepage)</h2>
-    <p class="sg-desc">Oversized flagship card in the homepage Programs section. Image left, content right on desktop.</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Oversized flagship card in the homepage Programs section. Image left, content right on desktop.</p>
 
-    <dl class="sg-meta">
-      <dt>Class:</dt><dd>.program-featured, .program-featured__image, .program-featured__content, .program-card__badge, .program-card__free-tag, .program-card__name, .program-card__meta, .program-card__desc, .program-card__cta</dd>
-      <dt>Image:</dt><dd>student-immersion.jpg (1600x900, 16:9)</dd>
-      <dt>Elementor target:</dt><dd>Featured Card widget (Image + Badges + Heading + Meta list + Description + Button)</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>index.html #programs (single flagship card above sub-programs grid)</dd>
+        <dt>Class:</dt><dd>.program-featured, .program-featured__image, .program-featured__content, .program-card__badge, .program-card__free-tag, .program-card__name, .program-card__meta, .program-card__desc, .program-card__cta</dd>
+        <dt>Image:</dt><dd>student-immersion.jpg (1600x900, 16:9)</dd>
+        <dt>Elementor target:</dt><dd>Featured Card widget (Image + Badges + Heading + Meta list + Description + Button)</dd>
+      </dl>
+    </details>
 
     <div class="sg-render">
       <div class="program-featured">
@@ -604,16 +639,26 @@
        TRAINER CARD
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card">
-    <h2 data-number="09">Trainer card (and placeholder variant)</h2>
-    <p class="sg-desc">Image-top biography card used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract). The <code>--placeholder</code> modifier reserves a slot for an unconfirmed trainer with a gold "Coming soon" badge, dashed border, and muted bio treatment so it reads as intentional.</p>
+    <h2 data-number="09">Trainer card v2 (deprecated)</h2>
 
-    <dl class="sg-meta">
-      <dt>Class:</dt><dd>.trainer-card-v2, .trainer-card-v2__photo, .trainer-card-v2__info, .trainer-card-v2__name, .trainer-card-v2__role, .trainer-card-v2__bio</dd>
-      <dt>Modifier:</dt><dd>.trainer-card-v2--placeholder (+ .leader-card--placeholder on About) adds gold dashed border + gold-tinted background + badge</dd>
-      <dt>Badge:</dt><dd>.trainer-card-v2__coming-soon-badge (+ .leader-card__coming-soon-badge) absolute-positioned top-right of photo area</dd>
-      <dt>Sibling:</dt><dd>.leader-card (About leadership), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__bio</dd>
-      <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes. Placeholder state via ACF toggle field "is_placeholder" that conditionally applies --placeholder modifier.</dd>
-    </dl>
+    <div class="sg-deprecated-badge" role="note">
+      <strong>Deprecated.</strong> Superseded by <a href="#sg-trainer-card-v3-editorial">trainer card v3</a> on 2026-04-17. Kept here for reference while v3 beds in. Will migrate to <code>docs/archived-components.md</code> once v3 is stable through one cohort cycle. Note: the sibling <code>.leader-card</code> on <code>about.html</code> still uses this visual contract and is scheduled for a separate v3 alignment pass.
+    </div>
+
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Image-top biography card previously used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract). The <code>--placeholder</code> modifier reserves a slot for an unconfirmed trainer with a gold "Coming soon" badge, dashed border, and muted bio treatment so it reads as intentional.</p>
+
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>No live pages (deprecated 2026-04-17). Sibling <code>.leader-card</code> still renders on about.html #leadership pending separate v3 alignment.</dd>
+        <dt>Status:</dt><dd>Deprecated 2026-04-17. Replaced by <code>.trainer-card-v3--editorial</code> on <code>index.html</code> and <code>course.html</code>.</dd>
+        <dt>Class:</dt><dd>.trainer-card-v2, .trainer-card-v2__photo, .trainer-card-v2__info, .trainer-card-v2__name, .trainer-card-v2__role, .trainer-card-v2__bio</dd>
+        <dt>Modifier:</dt><dd>.trainer-card-v2--placeholder (+ .leader-card--placeholder on About) adds gold dashed border + gold-tinted background + badge</dd>
+        <dt>Badge:</dt><dd>.trainer-card-v2__coming-soon-badge (+ .leader-card__coming-soon-badge) absolute-positioned top-right of photo area</dd>
+        <dt>Sibling:</dt><dd>.leader-card (About leadership), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__bio</dd>
+        <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes. Placeholder state via ACF toggle field "is_placeholder" that conditionally applies --placeholder modifier.</dd>
+      </dl>
+    </details>
 
     <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Regular trainer card:</p>
     <div class="sg-render" style="max-width: 400px;">
@@ -648,16 +693,219 @@
   </section>
 
   <!-- =============================================================
+       TRAINER CARD v3 — A: EDITORIAL (LIVE DEFAULT)
+       ============================================================= -->
+  <section class="sg-section" id="sg-trainer-card-v3-editorial">
+    <h2 data-number="09a">Trainer card v3, A: Editorial (live default)</h2>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Full-bleed editorial portrait with a translucent navy ribbon carrying credential chips (years, carrier names, cohort count). Decorative teal shipping-route SVG traces sit at low opacity behind the portrait to echo the hero's ship + world + tech visual read. This variant is the live default on <code>index.html</code> and <code>course.html</code>. Fallback imagery uses <code>img/elias.jpg</code> with <code>object-position: 50% 15%</code> until portrait-format photography lands.</p>
+
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>index.html #trainers and course.html #course-instructors (activated 2026-04-17)</dd>
+        <dt>Status:</dt><dd>Live default on <code>index.html</code> and <code>course.html</code> as of 2026-04-17.</dd>
+        <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--editorial, .trainer-card-v3__media, .trainer-card-v3__route (SVG), .trainer-card-v3__photo, .trainer-card-v3__ribbon, .trainer-card-v3__chip, .trainer-card-v3__info, .trainer-card-v3__name, .trainer-card-v3__role, .trainer-card-v3__bio</dd>
+        <dt>Modifier:</dt><dd>.trainer-card-v3--placeholder reserves a slot for an unconfirmed trainer (dashed gold border, navy logo panel, gold "Coming soon" badge).</dd>
+        <dt>Chip modifier:</dt><dd>.trainer-card-v3__chip--accent swaps the chip to solid gold with navy text for the lead credential.</dd>
+        <dt>Badge:</dt><dd>.trainer-card-v3__coming-soon-badge absolute-positioned top-right of media area.</dd>
+        <dt>Tokens:</dt><dd>--color-primary (navy), --color-secondary (gold), --color-accent-rgb (teal, for route traces), --color-stone (section background), --font-heading (Orbitron), --card-radius (0, sharp).</dd>
+        <dt>Elementor target:</dt><dd>Team Member widget with a Repeater for credential chips. ACF field group: portrait (Image), name (Text), role (Text), bio (Textarea), credentials (Repeater with one Text field), is_placeholder (True/False). Conditional display swaps in the placeholder treatment when is_placeholder is true.</dd>
+      </dl>
+    </details>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Regular trainer card (v3 editorial):</p>
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="trainer-card-v3 trainer-card-v3--editorial" data-slot="trainer" data-elementor-widget="container">
+        <div class="trainer-card-v3__media" data-slot="image" data-elementor-widget="image">
+          <svg class="trainer-card-v3__route" viewBox="0 0 400 500" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+            <path d="M -20 120 Q 100 60 220 140 T 420 120" />
+            <path d="M -20 280 Q 120 340 240 260 T 420 300" />
+            <path d="M -20 420 Q 140 360 260 440 T 420 420" />
+            <circle cx="60" cy="100" r="3" />
+            <circle cx="340" cy="180" r="3" />
+            <circle cx="120" cy="320" r="3" />
+            <circle cx="300" cy="440" r="3" />
+          </svg>
+          <img class="trainer-card-v3__photo" src="img/elias.jpg" alt="Abraham Y. Elias, Co-Founder and Lead Trainer" loading="lazy">
+          <div class="trainer-card-v3__ribbon" aria-label="Credentials">
+            <span class="trainer-card-v3__chip trainer-card-v3__chip--accent">25+ yrs</span>
+            <span class="trainer-card-v3__chip">APL</span>
+            <span class="trainer-card-v3__chip">CMA CGM</span>
+            <span class="trainer-card-v3__chip">ZIM</span>
+            <span class="trainer-card-v3__chip">40+ cohorts</span>
+          </div>
+        </div>
+        <div class="trainer-card-v3__info">
+          <h3 class="trainer-card-v3__name" data-slot="name">Abraham Y. Elias</h3>
+          <div class="trainer-card-v3__role" data-slot="role">Co-Founder &amp; Lead Trainer</div>
+          <p class="trainer-card-v3__bio" data-slot="bio">25+ years in global shipping and logistics. Former senior leadership at major international carriers across Southeast Asia.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (v3 editorial, --placeholder modifier):</p>
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="trainer-card-v3 trainer-card-v3--editorial trainer-card-v3--placeholder">
+        <div class="trainer-card-v3__media">
+          <div class="trainer-placeholder-logo-v3">
+            <img src="img/logo-cargonomics-white.png" alt="" loading="lazy">
+          </div>
+          <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
+        </div>
+        <div class="trainer-card-v3__info">
+          <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
+          <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
+          <p class="trainer-card-v3__bio">To be announced ahead of the June 1 cohort. A second senior veteran joins Elias with decades of industry experience and an extensive international network.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       TRAINER CARD v3 — B: NETWORK
+       ============================================================= -->
+  <section class="sg-section" id="sg-trainer-card-v3-network">
+    <h2 data-number="09b">Trainer card v3, B: Network</h2>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Portrait with a decorative network motif layered over it: 5 nodes connected by curved shipping-route lines in teal, pulsing gently (3.5s cycle, staggered per node). Implies the trainer's network is the real asset being taught. Mix-blend luminosity on the portrait integrates the image with the navy media panel. On screens under 768px the network opacity reduces to avoid visual noise. Animation stops when <code>prefers-reduced-motion</code> is set.</p>
+
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>No live pages (styleguide-only). Swap-ready: change <code>.trainer-card-v3--editorial</code> to <code>.trainer-card-v3--network</code> on index.html #trainers and course.html #course-instructors.</dd>
+        <dt>Status:</dt><dd>Styleguide-only. Not live. Available via single-class swap on <code>index.html</code> / <code>course.html</code>.</dd>
+        <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--network, .trainer-card-v3__media, .trainer-card-v3__network (SVG), .trainer-card-v3__node, .trainer-card-v3__photo, .trainer-card-v3__info, .trainer-card-v3__name, .trainer-card-v3__role, .trainer-card-v3__teaches</dd>
+        <dt>Node modifiers:</dt><dd>.trainer-card-v3__node--2 through --5 carry staggered <code>animation-delay</code> (0.5s steps).</dd>
+        <dt>Animation:</dt><dd>@keyframes v3-node-pulse (opacity 0.4 to 1 and back, scale 1 to 1.3, 3.5s ease-in-out infinite). Respects <code>prefers-reduced-motion</code>.</dd>
+        <dt>Tokens:</dt><dd>--color-primary, --color-accent-rgb (teal, node and line stroke), --color-accent-teal.</dd>
+        <dt>Elementor target:</dt><dd>Team Member widget. The SVG network layer is a reusable Template injected above the portrait. ACF fields: portrait, name, role, teaches (short one-liner).</dd>
+      </dl>
+    </details>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Regular trainer card (v3 network):</p>
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="trainer-card-v3 trainer-card-v3--network">
+        <div class="trainer-card-v3__media">
+          <img class="trainer-card-v3__photo" src="img/elias.jpg" alt="Abraham Y. Elias, Co-Founder and Lead Trainer" loading="lazy">
+          <svg class="trainer-card-v3__network" viewBox="0 0 400 520" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+            <path d="M 60 80 Q 200 40 340 120" />
+            <path d="M 340 120 Q 380 260 300 380" />
+            <path d="M 60 80 Q 40 260 140 420" />
+            <path d="M 140 420 Q 240 440 300 380" />
+            <circle class="trainer-card-v3__node" cx="60" cy="80" />
+            <circle class="trainer-card-v3__node trainer-card-v3__node--2" cx="340" cy="120" />
+            <circle class="trainer-card-v3__node trainer-card-v3__node--3" cx="140" cy="420" />
+            <circle class="trainer-card-v3__node trainer-card-v3__node--4" cx="300" cy="380" />
+            <circle class="trainer-card-v3__node trainer-card-v3__node--5" cx="200" cy="240" />
+          </svg>
+        </div>
+        <div class="trainer-card-v3__info">
+          <h3 class="trainer-card-v3__name">Abraham Y. Elias</h3>
+          <div class="trainer-card-v3__role">Co-Founder &amp; Lead Trainer</div>
+          <p class="trainer-card-v3__teaches">Teaches: carrier strategy, port and terminal operations, Southeast Asia trade lanes.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (v3 network, --placeholder modifier):</p>
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="trainer-card-v3 trainer-card-v3--network trainer-card-v3--placeholder">
+        <div class="trainer-card-v3__media">
+          <div class="trainer-placeholder-logo-v3">
+            <img src="img/logo-cargonomics-white.png" alt="" loading="lazy">
+          </div>
+          <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
+        </div>
+        <div class="trainer-card-v3__info">
+          <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
+          <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
+          <p class="trainer-card-v3__teaches">Will teach: strategy and operational excellence across the region, networks to be announced.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       TRAINER CARD v3 — C: SPLIT
+       ============================================================= -->
+  <section class="sg-section" id="sg-trainer-card-v3-split">
+    <h2 data-number="09c">Trainer card v3, C: Split</h2>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Two-panel card. Portrait on the left (45%), info panel on the right (55%). Default info shows name, role, one-liner. On hover (desktop) or <code>:focus-within</code> (keyboard, mobile tap), the panel swaps to a three-bullet "what I'll teach you" list. No JS needed. <code>tabindex="0"</code> on the card container plus a visible focus outline handle keyboard and mobile interaction. Stacks vertically on screens under 768px.</p>
+
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>No live pages (styleguide-only). Swap-ready: change <code>.trainer-card-v3--editorial</code> to <code>.trainer-card-v3--split</code> on index.html #trainers and course.html #course-instructors.</dd>
+        <dt>Status:</dt><dd>Styleguide-only. Not live. Available via single-class swap on <code>index.html</code> / <code>course.html</code>.</dd>
+        <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--split, .trainer-card-v3__media, .trainer-card-v3__photo, .trainer-card-v3__info, .trainer-card-v3__face, .trainer-card-v3__face--default, .trainer-card-v3__face--reveal</dd>
+        <dt>Interaction:</dt><dd>Pure CSS. <code>:hover</code> and <code>:focus-within</code> swap opacity on the two faces. Card carries <code>tabindex="0"</code> to be keyboard-focusable. Focus outline uses <code>--color-secondary</code>.</dd>
+        <dt>Accessibility note:</dt><dd>Hover-on-touch is an anti-pattern in general, so <code>:focus-within</code> is the primary trigger and hover is additive. First tap focuses and reveals, tap outside blurs and hides. Do not replace this with JS unless the pure-CSS behaviour breaks in a target browser.</dd>
+        <dt>Tokens:</dt><dd>--color-primary, --color-secondary (focus outline, bullet markers), --color-white, --transition-base.</dd>
+        <dt>Elementor target:</dt><dd>Team Member widget with a Repeater for the reveal bullets. ACF fields: portrait, name, role, tagline (one-liner), teaches (Repeater with 3 Text fields).</dd>
+      </dl>
+    </details>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Regular trainer card (v3 split):</p>
+    <div class="sg-render" style="max-width: 520px;">
+      <article class="trainer-card-v3 trainer-card-v3--split" tabindex="0">
+        <div class="trainer-card-v3__media">
+          <img class="trainer-card-v3__photo" src="img/elias.jpg" alt="Abraham Y. Elias, Co-Founder and Lead Trainer" loading="lazy">
+        </div>
+        <div class="trainer-card-v3__info">
+          <div class="trainer-card-v3__face trainer-card-v3__face--default">
+            <h3 class="trainer-card-v3__name">Abraham Y. Elias</h3>
+            <div class="trainer-card-v3__role">Co-Founder &amp; Lead Trainer</div>
+            <p class="trainer-card-v3__tagline">25+ years in global shipping and logistics.</p>
+          </div>
+          <ul class="trainer-card-v3__face trainer-card-v3__face--reveal">
+            <li>Carrier strategy at scale</li>
+            <li>Port and terminal operations</li>
+            <li>Southeast Asia trade lanes</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <p class="sg-desc" style="margin-top: var(--space-sm); font-size: 0.8rem; color: var(--color-text-muted);">Hover the card, or Tab to it and press Enter, to reveal the three-bullet reveal face.</p>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (v3 split, --placeholder modifier):</p>
+    <div class="sg-render" style="max-width: 520px;">
+      <article class="trainer-card-v3 trainer-card-v3--split trainer-card-v3--placeholder" tabindex="0">
+        <div class="trainer-card-v3__media">
+          <div class="trainer-placeholder-logo-v3">
+            <img src="img/logo-cargonomics-white.png" alt="" loading="lazy">
+          </div>
+          <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
+        </div>
+        <div class="trainer-card-v3__info">
+          <div class="trainer-card-v3__face trainer-card-v3__face--default">
+            <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
+            <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
+            <p class="trainer-card-v3__tagline">Announced ahead of the June 1 cohort.</p>
+          </div>
+          <ul class="trainer-card-v3__face trainer-card-v3__face--reveal">
+            <li>Operational excellence at scale</li>
+            <li>Regional strategy and network</li>
+            <li>Senior mentorship for cohort leads</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
        CURRICULUM GRID CARD
        ============================================================= -->
   <section class="sg-section" id="sg-curriculum-grid">
     <h2 data-number="10">Curriculum grid card (course page)</h2>
-    <p class="sg-desc">Used on the course page "Why apply" section. Numbered, title, description. Highlight variant carries a gold left border (`.curriculum-grid__card--highlight`).</p>
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Used on the course page "Why apply" section. Numbered, title, description. Highlight variant carries a gold left border (`.curriculum-grid__card--highlight`).</p>
 
-    <dl class="sg-meta">
-      <dt>Class:</dt><dd>.curriculum-grid__card, .curriculum-grid__card-number, .curriculum-grid__card-title, .curriculum-grid__card-desc, .curriculum-grid__card--highlight (modifier)</dd>
-      <dt>Elementor target:</dt><dd>Icon Box widget or Text + Heading + Text Editor in a Container</dd>
-    </dl>
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>course.html #why-apply (4-card grid)</dd>
+        <dt>Class:</dt><dd>.curriculum-grid__card, .curriculum-grid__card-number, .curriculum-grid__card-title, .curriculum-grid__card-desc, .curriculum-grid__card--highlight (modifier)</dd>
+        <dt>Elementor target:</dt><dd>Icon Box widget or Text + Heading + Text Editor in a Container</dd>
+      </dl>
+    </details>
 
     <div class="sg-render" style="max-width: 400px;">
       <article class="curriculum-grid__card">

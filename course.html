@@ -448,12 +448,54 @@
     </div>
   </section>
 
-  <!-- INSTRUCTORS - Hidden until partner trainer profiles land. Remove `hidden` attribute to re-enable. -->
-  <section class="course-placeholder" id="course-instructors" data-section="course-instructors" data-elementor-widget="container" hidden>
+  <!-- INSTRUCTORS - Activated 2026-04-17 with trainer card v3 (editorial variant). Mirrors homepage #trainers section. -->
+  <section class="trainers-v3" id="course-instructors" data-section="course-instructors" data-elementor-widget="container">
     <div class="container">
-      <p class="section-label">Your Trainers</p>
-      <h2>Meet the Instructors</h2>
-      <p style="font-family: var(--font-body); color: var(--color-text-muted);">Instructor profiles will be published ahead of the Q2 2026 cohort.</p>
+      <div class="trainers-v3__header fade-up" data-slot="heading" data-elementor-widget="heading">
+        <p class="section-label">Your Instructors</p>
+        <h2>Learn from Industry Veterans</h2>
+      </div>
+      <div class="trainers-v3__grid">
+        <article class="trainer-card-v3 trainer-card-v3--editorial fade-up" data-slot="trainer" data-elementor-widget="container">
+          <div class="trainer-card-v3__media" data-slot="image" data-elementor-widget="image">
+            <svg class="trainer-card-v3__route" viewBox="0 0 400 500" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+              <path d="M -20 120 Q 100 60 220 140 T 420 120" />
+              <path d="M -20 280 Q 120 340 240 260 T 420 300" />
+              <path d="M -20 420 Q 140 360 260 440 T 420 420" />
+              <circle cx="60" cy="100" r="3" />
+              <circle cx="340" cy="180" r="3" />
+              <circle cx="120" cy="320" r="3" />
+              <circle cx="300" cy="440" r="3" />
+            </svg>
+            <img class="trainer-card-v3__photo" src="img/elias.jpg" alt="Abraham Y. Elias, Co-Founder and Lead Trainer" loading="lazy">
+            <div class="trainer-card-v3__ribbon" aria-label="Credentials">
+              <span class="trainer-card-v3__chip trainer-card-v3__chip--accent">25+ yrs</span>
+              <span class="trainer-card-v3__chip">APL</span>
+              <span class="trainer-card-v3__chip">CMA CGM</span>
+              <span class="trainer-card-v3__chip">ZIM</span>
+              <span class="trainer-card-v3__chip">40+ cohorts</span>
+            </div>
+          </div>
+          <div class="trainer-card-v3__info">
+            <h3 class="trainer-card-v3__name" id="elias" data-slot="name">Abraham Y. Elias</h3>
+            <div class="trainer-card-v3__role" data-slot="role">Co-Founder &amp; Lead Trainer</div>
+            <p class="trainer-card-v3__bio" data-slot="bio">25+ years in global shipping and logistics. Former senior leadership at major international carriers across Southeast Asia.</p>
+          </div>
+        </article>
+        <article class="trainer-card-v3 trainer-card-v3--editorial trainer-card-v3--placeholder fade-up" data-slot="trainer" data-elementor-widget="container">
+          <div class="trainer-card-v3__media">
+            <div class="trainer-placeholder-logo-v3">
+              <img src="img/logo-cargonomics-white.png" alt="" loading="lazy">
+            </div>
+            <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
+          </div>
+          <div class="trainer-card-v3__info">
+            <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
+            <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
+            <p class="trainer-card-v3__bio">To be announced ahead of the June 1 cohort. A second senior veteran joins Elias with decades of industry experience and an extensive international network, specialising in strategy and operational excellence.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 

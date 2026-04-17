@@ -225,3 +225,174 @@
   color: var(--color-text-muted);
   font-style: italic;
 }
+
+/* ==========================================================================
+   TRAINER CARD v3 — Placeholder + coming-soon badge
+   Mirrors the v2 pattern (dashed gold border, navy logo panel, gold badge).
+   Each variant sets its own aspect ratio on `.trainer-card-v3__media`,
+   the placeholder uses the same rules regardless of variant modifier.
+   ========================================================================== */
+
+.trainer-card-v3--placeholder {
+  position: relative;
+  border: 1px dashed rgba(var(--color-secondary-rgb), 0.55);
+  background: rgba(var(--color-secondary-rgb), 0.05);
+}
+
+.trainer-card-v3--placeholder .trainer-card-v3__media {
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+}
+
+.trainer-placeholder-logo-v3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.trainer-placeholder-logo-v3 img {
+  width: 45%;
+  max-width: 140px;
+  height: auto;
+  opacity: 0.25;
+  object-fit: contain;
+}
+
+.trainer-card-v3__coming-soon-badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  z-index: 3;
+  line-height: 1;
+}
+
+.trainer-card-v3--placeholder .trainer-card-v3__bio,
+.trainer-card-v3--placeholder .trainer-card-v3__teaches,
+.trainer-card-v3--placeholder .trainer-card-v3__tagline {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   STYLEGUIDE — Deprecated component badge (new pattern, 2026-04-17)
+   Marks a styleguide section as deprecated but still rendered in-page.
+   Used for components replaced but not yet archived (one-cohort grace).
+   Once the replacement is stable, the deprecated entry migrates to
+   docs/archived-components.md and this badge is removed.
+   ========================================================================== */
+
+.sg-deprecated-badge {
+  display: block;
+  background: rgba(var(--color-secondary-rgb), 0.12);
+  border-left: 3px solid var(--color-secondary);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  margin: 0 0 var(--space-lg);
+}
+
+.sg-deprecated-badge strong {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-right: 8px;
+}
+
+.sg-deprecated-badge a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   STYLEGUIDE — Collapsible technical details (new pattern, 2026-04-17)
+   Each sg-section wraps its explainer paragraph + <dl class="sg-meta"> in a
+   native <details class="sg-details"> block, default collapsed, so the page
+   reads as a visual catalogue for non-technical reviewers (Marilyn, Elias)
+   while still exposing class names, tokens, and Elementor targets on demand.
+   ========================================================================== */
+
+.sg-details {
+  background: rgba(var(--color-primary-rgb), 0.03);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+  padding: 0 16px;
+  margin: 0 0 var(--space-lg);
+}
+
+.sg-details[open] {
+  padding: 0 16px 16px;
+  background: rgba(var(--color-primary-rgb), 0.04);
+}
+
+.sg-details > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 0;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-details > summary::-webkit-details-marker { display: none; }
+
+.sg-details > summary::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sg-details[open] > summary::before {
+  content: "\2212"; /* minus sign */
+}
+
+.sg-details > summary:hover {
+  color: var(--color-secondary);
+}
+
+.sg-details > summary:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+.sg-details > .sg-desc,
+.sg-details > .sg-meta {
+  margin-top: var(--space-sm);
+}
+
+.sg-details > .sg-desc:first-of-type {
+  margin-top: 0;
+}
+

@@ -1092,6 +1092,314 @@ button {
 }
 
 /* ==========================================================================
+   TRAINERS v3 — Forward-thinking instructor showcase
+   Three variants share `.trainer-card-v3` base; modifiers swap the visual read.
+   Variant A (--editorial) is the live default on index.html + course.html.
+   Variants B (--network) and C (--split) render in styleguide.html for review.
+   Placeholder + coming-soon-badge rules live in css/v7-fixes.css.
+   ========================================================================== */
+
+.trainers-v3 {
+  padding: 72px 0;
+  background: var(--color-stone);
+}
+
+.trainers-v3__header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.trainers-v3__header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  margin-top: 8px;
+}
+
+.trainers-v3__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .trainers-v3__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Shared card base
+   -------------------------------------------------------------------------- */
+
+.trainer-card-v3 {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.1);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trainer-card-v3:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(var(--color-primary-rgb), 0.12);
+}
+
+.trainer-card-v3__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-primary);
+}
+
+.trainer-card-v3__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  transition: transform 0.5s ease;
+}
+
+.trainer-card-v3:hover .trainer-card-v3__photo {
+  transform: scale(1.03);
+}
+
+.trainer-card-v3__info {
+  padding: 24px;
+}
+
+.trainer-card-v3__name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  margin: 0 0 4px;
+}
+
+.trainer-card-v3__role {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.trainer-card-v3__bio,
+.trainer-card-v3__teaches,
+.trainer-card-v3__tagline {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Variant A — Editorial portrait + credential ribbon (LIVE DEFAULT)
+   -------------------------------------------------------------------------- */
+
+.trainer-card-v3--editorial .trainer-card-v3__media {
+  aspect-ratio: 4 / 5;
+}
+
+.trainer-card-v3--editorial .trainer-card-v3__route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  stroke: rgba(var(--color-accent-rgb), 0.35);
+  fill: none;
+  stroke-width: 1.25;
+}
+
+.trainer-card-v3--editorial .trainer-card-v3__photo {
+  position: relative;
+  z-index: 0;
+}
+
+.trainer-card-v3__ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: linear-gradient(
+    to top,
+    rgba(var(--color-primary-rgb), 0.92) 0%,
+    rgba(var(--color-primary-rgb), 0.72) 60%,
+    rgba(var(--color-primary-rgb), 0) 100%
+  );
+  z-index: 2;
+}
+
+.trainer-card-v3__chip {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 4px 8px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.trainer-card-v3__chip--accent {
+  background: rgba(var(--color-secondary-rgb), 0.85);
+  border-color: rgba(var(--color-secondary-rgb), 0.95);
+  color: var(--color-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Variant B — Network / node-line motif
+   -------------------------------------------------------------------------- */
+
+.trainer-card-v3--network .trainer-card-v3__media {
+  aspect-ratio: 3 / 4;
+  background: var(--color-primary);
+}
+
+.trainer-card-v3--network .trainer-card-v3__photo {
+  position: relative;
+  z-index: 0;
+  mix-blend-mode: luminosity;
+  opacity: 0.92;
+}
+
+.trainer-card-v3--network .trainer-card-v3__network {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  stroke: rgba(var(--color-accent-rgb), 0.55);
+  fill: none;
+  stroke-width: 1;
+}
+
+.trainer-card-v3__node {
+  fill: var(--color-accent-teal);
+  r: 4;
+  animation: v3-node-pulse 3.5s ease-in-out infinite;
+}
+
+.trainer-card-v3__node--2 { animation-delay: 0.5s; }
+.trainer-card-v3__node--3 { animation-delay: 1s; }
+.trainer-card-v3__node--4 { animation-delay: 1.5s; }
+.trainer-card-v3__node--5 { animation-delay: 2s; }
+
+@keyframes v3-node-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-card-v3__node { animation: none; opacity: 0.8; }
+}
+
+@media (max-width: 767px) {
+  .trainer-card-v3--network .trainer-card-v3__network {
+    opacity: 0.55;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Variant C — Split-panel with hover / focus reveal
+   -------------------------------------------------------------------------- */
+
+.trainer-card-v3--split {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .trainer-card-v3--split {
+    grid-template-columns: 45% 55%;
+  }
+}
+
+.trainer-card-v3--split .trainer-card-v3__media {
+  aspect-ratio: 1 / 1;
+}
+
+@media (min-width: 768px) {
+  .trainer-card-v3--split .trainer-card-v3__media {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+.trainer-card-v3--split .trainer-card-v3__info {
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.trainer-card-v3__face {
+  position: absolute;
+  inset: 24px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.trainer-card-v3__face--reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trainer-card-v3__face--reveal li {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  padding: 8px 0 8px 20px;
+  position: relative;
+  border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);
+}
+
+.trainer-card-v3__face--reveal li:last-child {
+  border-bottom: none;
+}
+
+.trainer-card-v3__face--reveal li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 10px;
+  height: 2px;
+  background: var(--color-secondary);
+}
+
+.trainer-card-v3--split:hover .trainer-card-v3__face--default,
+.trainer-card-v3--split:focus-within .trainer-card-v3__face--default {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.trainer-card-v3--split:hover .trainer-card-v3__face--reveal,
+.trainer-card-v3--split:focus-within .trainer-card-v3__face--reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trainer-card-v3--split:focus-within {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
    FOOTER
    ========================================================================== */
 
