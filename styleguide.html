@@ -489,15 +489,16 @@
        ============================================================= -->
   <section class="sg-section" id="sg-trusted-partners">
     <h2 data-number="07">Trusted Partners marquee</h2>
-    <p class="sg-desc">Social-validation band redesigned 2026-04-16 as a premium dark-navy auto-scrolling marquee. Each partner rendered as a typographically-distinct fake wordmark (different font weight, case, letter-spacing, italic) so it reads as a real logo without importing any brand assets. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code> with zero CSS rewrite. Earlier grid tile version archived in docs/archived-components.md id=section-trusted-partners-grid-v1.</p>
+    <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. Each partner rendered as a typographically-distinct fake wordmark so it reads as a real logo. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code>; the grayscale-default + colour-on-hover pattern is the industry-standard (Bain / Stripe / Figma / ITS Logistics) and accommodates any real partner brand colour. Earlier grid version and v2 dark-navy treatment both archived in docs/archived-components.md.</p>
 
     <dl class="sg-meta">
-      <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__sep, .trusted-partners__disclaimer</dd>
+      <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__logo-img (real-logo swap), .trusted-partners__sep</dd>
       <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile)</dd>
       <dt>Variants (via data-logo-style attribute):</dt><dd>bold-italic, geometric-spaced, light-lowercase, italic-caps, serif-feel, rounded-bold, condensed-caps, muted-italic</dd>
-      <dt>Tokens:</dt><dd>--color-primary (bg), --color-secondary (accents), --color-white (heading), --color-secondary-rgb (separator alpha), --font-heading, --font-body, --space-xl, --space-2xl</dd>
+      <dt>Tokens:</dt><dd>--color-ivory (bg), --color-primary (logo text), --color-secondary (separator + gold accents), --font-heading, --font-body, --space-xl, --space-2xl</dd>
       <dt>Animation:</dt><dd>@keyframes trusted-partners-scroll (translateX 0 -> -50%, 60s mobile / 80s desktop, linear infinite, pause on hover). Respects prefers-reduced-motion: reduce (animation disabled, manual scroll as fallback with scrollbar hidden).</dd>
       <dt>Edge fade:</dt><dd>mask-image linear-gradient on .trusted-partners__marquee, 10% transparent -> 90% black -> transparent</dd>
+      <dt>Real-logo swap:</dt><dd>Replace <code>&lt;span class="trusted-partners__logo"&gt;</code> with <code>&lt;img class="trusted-partners__logo-img" src="..." alt="..."&gt;</code>. Default filter grayscale(1) + opacity 0.55 visually normalises all brand colours; hover restores grayscale(0) + opacity 1 so the real colour reasserts on interaction. No other markup change required.</dd>
       <dt>Elementor target:</dt><dd>Slider / Carousel widget with ACF repeater field "partners" each with name + logo_image subfields. data-partner-logo-src attribute maps to the repeater logo_image field.</dd>
       <dt>data-slot:</dt><dd>partners-marquee on container, partner on each item</dd>
     </dl>

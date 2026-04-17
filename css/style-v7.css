@@ -901,6 +901,28 @@ button {
   color: var(--color-white);
 }
 
+/* New header block (2026-04-16): gives the stats orientation + context.
+   Readers need a "why" before they can decode "50+ / 1,000+ / 300+".
+   Section label (gold eyebrow) + headline (white, editorial). */
+.credibility__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.credibility__header .section-label {
+  color: var(--color-secondary);
+}
+
+.credibility__heading {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  color: var(--color-white);
+  margin-top: var(--space-sm);
+  line-height: 1.3;
+}
+
 .credibility__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2539,23 +2561,24 @@ button {
 }
 
 /* =====================================================================
-   TRUSTED PARTNERS v2 (2026-04-16, premium marquee redesign)
-   Dark navy section with typographically-distinct fake wordmarks that
-   scroll horizontally in an infinite loop. Pauses on hover. Fades at
-   edges. Respects prefers-reduced-motion. Pure CSS, zero JS.
-   Previous grid version archived in docs/archived-components.md id=
-   section-trusted-partners-grid-v1.
+   TRUSTED PARTNERS v3 (2026-04-16, light treatment)
+   Light-background marquee with navy typography. Solves the adjacency
+   problem (stats + partners were both navy). Accommodates real multi-
+   colour partner logos via grayscale-by-default + colour-on-hover once
+   <span class="trusted-partners__logo"> is swapped for <img>. Pure CSS
+   motion with prefers-reduced-motion fallback. v2 dark navy treatment
+   archived in docs/archived-components.md.
    ===================================================================== */
 
 .trusted-partners {
   padding: var(--section-padding-y) 0;
-  background: var(--color-primary);
-  color: var(--color-white);
+  background: var(--color-ivory);
+  color: var(--color-primary);
   overflow: hidden;
   position: relative;
 }
 
-/* Subtle gold top-bottom rules to frame the dark band */
+/* Subtle gold top-bottom rules to frame the band */
 .trusted-partners::before,
 .trusted-partners::after {
   content: '';
@@ -2563,7 +2586,7 @@ button {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(var(--color-secondary-rgb, 212, 180, 104), 0.35), transparent);
+  background: linear-gradient(to right, transparent, rgba(var(--color-secondary-rgb, 212, 180, 104), 0.4), transparent);
 }
 
 .trusted-partners::before { top: 0; }
@@ -2585,7 +2608,7 @@ button {
   font-family: var(--font-heading);
   font-weight: var(--font-weight-heading);
   font-size: 1.8rem;
-  color: var(--color-white);
+  color: var(--color-primary);
   margin-top: var(--space-sm);
   margin-bottom: var(--space-md);
 }
@@ -2593,7 +2616,7 @@ button {
 .trusted-partners__lede {
   font-family: var(--font-body);
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text);
   line-height: 1.6;
 }
 
@@ -2670,35 +2693,39 @@ button {
 
 .trusted-partners__item:hover {
   transform: translateY(-2px);
-  filter: brightness(1.15);
 }
 
 /* Separator */
 .trusted-partners__sep {
   color: var(--color-secondary);
-  opacity: 0.4;
+  opacity: 0.55;
   font-size: 0.8rem;
   flex: 0 0 auto;
   transform: translateY(-1px);
 }
 
 /* ---------- Fake wordmark: base ---------- */
+/* Light-treatment: navy text at reduced opacity; on hover, full-colour
+   navy. Pattern mirrors the grayscale-default + colour-on-hover used on
+   real logos once they land (see .trusted-partners__logo-img below). */
 
 .trusted-partners__logo {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--color-secondary);
+  color: var(--color-primary);
+  opacity: 0.55;
   letter-spacing: 0;
   line-height: 1;
   white-space: nowrap;
   display: inline-block;
   position: relative;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .trusted-partners__item:hover .trusted-partners__logo {
-  color: var(--color-white);
+  opacity: 1;
+  color: var(--color-primary);
 }
 
 /* ---------- Fake wordmark: typographic variants ----------
@@ -2763,37 +2790,50 @@ button {
   font-weight: 400;
   font-style: italic;
   font-size: 1rem;
-  color: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.6);
+  color: var(--color-secondary);
+  opacity: 0.9;
   letter-spacing: 0.04em;
 }
 
-/* ---------- Disclaimer below marquee ---------- */
+.trusted-partners__item:hover .trusted-partners__logo[data-logo-style="muted-italic"] {
+  opacity: 1;
+  color: var(--color-secondary);
+}
+
+/* ---------- Disclaimer below marquee (retained class in case it's
+   reinstated later; currently unused on live pages) ---------- */
 
 .trusted-partners__disclaimer {
   text-align: center;
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--color-text-muted);
   max-width: 640px;
   margin: 0 auto;
   line-height: 1.5;
   font-style: italic;
 }
 
-/* ---------- Future logo-image mode ---------- */
+/* ---------- Logo-image mode (activates automatically when <span> is
+   swapped for <img> inside .trusted-partners__item). Light-treatment
+   grayscale-default + colour-on-hover matches the industry-standard
+   premium partner wall pattern (Bain / Stripe / Figma / ITS Logistics).
+   Works regardless of real partner brand colour - accommodates Maersk
+   red, CMA CGM blue, MSC yellow, Hapag-Lloyd orange all in one coherent
+   row. ---------- */
 
 .trusted-partners__logo-img {
   height: 40px;
   width: auto;
   max-width: 140px;
   object-fit: contain;
-  filter: grayscale(1) brightness(2);
-  opacity: 0.85;
+  filter: grayscale(1);
+  opacity: 0.55;
   transition: filter 0.25s ease, opacity 0.25s ease;
 }
 
 .trusted-partners__item:hover .trusted-partners__logo-img {
-  filter: grayscale(0) brightness(1);
+  filter: grayscale(0);
   opacity: 1;
 }
 
