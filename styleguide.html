@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styleguide (internal) | Cargonomics</title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="description" content="Internal styleguide: live render of every component used across the Cargonomics site with class names, tokens, and Elementor migration targets. Not for public viewing.">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Open+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Live stylesheets: same as the production pages -->
+  <link rel="stylesheet" href="css/style-v7.css">
+  <link rel="stylesheet" href="css/tokens-cargonomics.css">
+  <link rel="stylesheet" href="css/v7-fixes.css">
+
+  <style>
+    /* Styleguide chrome only - NEVER imported into live CSS.
+       All rules scoped under .sg- or [data-sg] to avoid cascade bleed. */
+
+    .sg-body {
+      background: var(--color-ivory);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    .sg-header {
+      background: var(--color-primary);
+      color: var(--color-white);
+      padding: 48px 24px 24px;
+      border-bottom: 4px solid var(--color-secondary);
+    }
+
+    .sg-header h1 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .sg-header p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .sg-toc {
+      background: var(--color-stone);
+      padding: 24px;
+      border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .sg-toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+    }
+
+    .sg-toc a {
+      color: var(--color-primary);
+      text-decoration: none;
+      padding: 4px 8px;
+      background: rgba(var(--color-primary-rgb), 0.04);
+      border-radius: 3px;
+    }
+
+    .sg-toc a:hover {
+      background: var(--color-secondary);
+      color: var(--color-white);
+    }
+
+    .sg-section {
+      padding: 48px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.08);
+    }
+
+    .sg-section > h2 {
+      font-family: var(--font-heading);
+      color: var(--color-primary);
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .sg-section > h2::before {
+      content: attr(data-number);
+      color: var(--color-secondary);
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .sg-section > .sg-desc {
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      margin: 0 0 16px;
+      max-width: 720px;
+    }
+
+    .sg-meta {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      background: rgba(var(--color-primary-rgb), 0.03);
+      padding: 12px 16px;
+      border-left: 3px solid var(--color-secondary);
+      margin: 0 0 20px;
+      max-width: 720px;
+    }
+
+    .sg-meta dt {
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .sg-meta dd {
+      margin: 0;
+      word-break: break-all;
+    }
+
+    .sg-render {
+      background: var(--color-white);
+      border: 1px dashed rgba(var(--color-primary-rgb), 0.15);
+      padding: 24px;
+      border-radius: 4px;
+      margin: 0 0 16px;
+    }
+
+    .sg-render--dark {
+      background: var(--color-primary);
+    }
+
+    .sg-snippet {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      padding: 14px 16px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre;
+      max-width: 100%;
+    }
+
+    .sg-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 0 0 16px;
+    }
+
+    .sg-swatch {
+      background: var(--color-white);
+      border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+    }
+
+    .sg-swatch-color {
+      height: 48px;
+    }
+
+    .sg-swatch-meta {
+      padding: 6px 10px;
+      background: rgba(var(--color-primary-rgb), 0.02);
+    }
+
+    .sg-swatch-var {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .sg-swatch-hex {
+      color: var(--color-text-muted);
+    }
+
+    .sg-type-sample {
+      padding: 12px 16px;
+      background: rgba(var(--color-primary-rgb), 0.02);
+      margin-bottom: 8px;
+      border-radius: 3px;
+    }
+
+    .sg-type-sample .sg-type-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      display: block;
+      margin-top: 4px;
+    }
+
+    .sg-spacing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-end;
+      margin: 0 0 16px;
+    }
+
+    .sg-spacing-item {
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+    }
+
+    .sg-spacing-bar {
+      background: var(--color-secondary);
+      display: block;
+      margin: 0 auto 4px;
+    }
+
+    .sg-notice {
+      background: rgba(247, 183, 97, 0.12);
+      border-left: 3px solid var(--color-accent-orange);
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      margin: 0 0 24px;
+      max-width: 720px;
+      border-radius: 3px;
+    }
+
+    .sg-notice strong {
+      color: var(--color-accent-orange);
+    }
+  </style>
+</head>
+
+<body class="sg-body">
+
+  <header class="sg-header">
+    <h1>Cargonomics Internal Styleguide</h1>
+    <p>Live render of every reusable component on the site. Each entry lists its BEM class, tokens used, data-slot/data-elementor-widget attributes (WordPress migration targets), and a copy-pasteable HTML snippet. Uses the same `style-v7.css`, `tokens-cargonomics.css`, and `v7-fixes.css` as production, so a regression here implies a regression on the live site.</p>
+  </header>
+
+  <div class="sg-notice">
+    <strong>Internal only.</strong> This page is <code>noindex, nofollow</code> and is not linked from public nav, site sitemap, or the footer. Reach it via direct URL: <code>/styleguide</code> or <code>/styleguide.html</code>. Complementary to <code>docs/archived-components.md</code>, which holds <em>removed</em> components; this page holds <em>current</em> components.
+  </div>
+
+  <nav class="sg-toc" aria-label="Styleguide table of contents">
+    <ol>
+      <li><a href="#sg-colors">Colours</a></li>
+      <li><a href="#sg-typography">Typography</a></li>
+      <li><a href="#sg-spacing">Spacing</a></li>
+      <li><a href="#sg-buttons">Buttons</a></li>
+      <li><a href="#sg-pillar-row">Pillar row (homepage)</a></li>
+      <li><a href="#sg-about-pillar">About pillar card</a></li>
+      <li><a href="#sg-trusted-partners">Trusted Partners tile</a></li>
+      <li><a href="#sg-program-featured">Program featured card</a></li>
+      <li><a href="#sg-trainer-card">Trainer card</a></li>
+      <li><a href="#sg-curriculum-grid">Curriculum grid card</a></li>
+    </ol>
+  </nav>
+
+  <!-- =============================================================
+       COLOURS
+       ============================================================= -->
+  <section class="sg-section" id="sg-colors">
+    <h2 data-number="01">Colour Tokens</h2>
+    <p class="sg-desc">All colours come from <code>css/tokens-cargonomics.css</code>. The primary and secondary palettes are locked; the accent palette and neutrals are pending tonal-ramp confirmation from Marilyn (open-questions Q23, Q24).</p>
+
+    <dl class="sg-meta">
+      <dt>Source:</dt><dd>css/tokens-cargonomics.css</dd>
+      <dt>Elementor target:</dt><dd>Variables Manager (global colours)</dd>
+    </dl>
+
+    <div class="sg-swatch-grid">
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-primary);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-primary</div><div class="sg-swatch-hex">#11294B Navy</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-secondary);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-secondary</div><div class="sg-swatch-hex">#D4B468 Gold</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-accent-teal);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-accent-teal</div><div class="sg-swatch-hex">#3AA5D6</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-accent-orange);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-accent-orange</div><div class="sg-swatch-hex">#F7B761</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-accent-lime);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-accent-lime</div><div class="sg-swatch-hex">#CCDD2C</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-ivory);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-ivory</div><div class="sg-swatch-hex">#FAF9F6 page bg</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-stone);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-stone</div><div class="sg-swatch-hex">#F0EDE8 card bg</div></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="sg-swatch-color" style="background: var(--color-whatsapp); border: 1px solid rgba(0,0,0,0.05);"></div>
+        <div class="sg-swatch-meta"><div class="sg-swatch-var">--color-whatsapp</div><div class="sg-swatch-hex">#25D366 3rd party</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       TYPOGRAPHY
+       ============================================================= -->
+  <section class="sg-section" id="sg-typography">
+    <h2 data-number="02">Typography</h2>
+    <p class="sg-desc">Two Google Fonts, loaded from Google Fonts CDN on every page. Heading face is Orbitron because the logo is set in Orbitron (R2 brand guide p.4). Body face is Open Sans (Montserrat is the alt option per Q22, not yet selected).</p>
+
+    <dl class="sg-meta">
+      <dt>--font-heading:</dt><dd>'Orbitron', sans-serif</dd>
+      <dt>--font-body:</dt><dd>'Open Sans', sans-serif</dd>
+      <dt>Elementor target:</dt><dd>Variables Manager (global fonts)</dd>
+    </dl>
+
+    <div class="sg-render">
+      <div class="sg-type-sample" style="font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; color: var(--color-primary);">
+        Heading 1 example<span class="sg-type-label">H1 / Orbitron 700 / 2.4rem</span>
+      </div>
+      <div class="sg-type-sample" style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--color-primary);">
+        Heading 2 example<span class="sg-type-label">H2 / Orbitron 700 / 1.8rem</span>
+      </div>
+      <div class="sg-type-sample" style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--color-primary);">
+        Heading 3 example<span class="sg-type-label">H3 / Orbitron 700 / 1.3rem</span>
+      </div>
+      <div class="sg-type-sample" style="font-family: var(--font-body); font-size: 1rem; color: var(--color-text); line-height: 1.6;">
+        Body copy example. Open Sans is readable at small sizes and neutral in tone. Used for all running prose, form labels, card descriptions.<span class="sg-type-label">Body / Open Sans 400 / 1rem / line 1.6</span>
+      </div>
+      <div class="sg-type-sample" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-secondary);">
+        Section label<span class="sg-type-label">Section label / Orbitron 700 / 0.75rem / 0.2em tracking / gold</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       SPACING
+       ============================================================= -->
+  <section class="sg-section" id="sg-spacing">
+    <h2 data-number="03">Spacing Scale</h2>
+    <p class="sg-desc">8px base. Used for all padding, margin, and gap values across the site. No hardcoded pixel values elsewhere.</p>
+
+    <dl class="sg-meta">
+      <dt>Source:</dt><dd>css/tokens-cargonomics.css (spacing section)</dd>
+    </dl>
+
+    <div class="sg-render">
+      <div class="sg-spacing-grid">
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-xs, 8px); height: 40px;"></span>--space-xs</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-sm, 12px); height: 40px;"></span>--space-sm</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-md, 16px); height: 40px;"></span>--space-md</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-lg, 24px); height: 40px;"></span>--space-lg</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-xl, 32px); height: 40px;"></span>--space-xl</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-2xl, 48px); height: 40px;"></span>--space-2xl</div>
+        <div class="sg-spacing-item"><span class="sg-spacing-bar" style="width: var(--space-3xl, 64px); height: 40px;"></span>--space-3xl</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       BUTTONS
+       ============================================================= -->
+  <section class="sg-section" id="sg-buttons">
+    <h2 data-number="04">Buttons</h2>
+    <p class="sg-desc">Four canonical button styles. The gold <code>.btn--copper</code> is the primary CTA (Apply, submit). <code>.btn--outline</code> is secondary. <code>.btn--outline-sm</code> is for inline or less-prominent CTAs (pillar row Inquire, curriculum marquee "See full module details").</p>
+
+    <dl class="sg-meta">
+      <dt>Classes:</dt><dd>.btn.btn--copper, .btn.btn--outline, .btn.btn--outline-sm, .btn.btn--large</dd>
+      <dt>Tokens:</dt><dd>--color-secondary (fill), --color-primary (outline), --btn-hover-bg, --transition-fast</dd>
+      <dt>Elementor target:</dt><dd>Button widget</dd>
+    </dl>
+
+    <div class="sg-render">
+      <a href="#" class="btn btn--copper" onclick="return false">Apply Now</a>
+      &nbsp;
+      <a href="#" class="btn btn--outline" onclick="return false">Learn more</a>
+      &nbsp;
+      <a href="#" class="btn--outline-sm" onclick="return false">Inquire</a>
+      <br><br>
+      <a href="#" class="btn btn--copper btn--large" onclick="return false">Large primary</a>
+    </div>
+
+    <pre class="sg-snippet">&lt;a href="apply" class="btn btn--copper" data-track="cta" data-cta-type="apply"&gt;Apply Now&lt;/a&gt;
+&lt;a href="course" class="btn btn--outline"&gt;Learn more&lt;/a&gt;
+&lt;a href="contact" class="btn--outline-sm"&gt;Inquire&lt;/a&gt;</pre>
+  </section>
+
+  <!-- =============================================================
+       PILLAR ROW (HOMEPAGE)
+       ============================================================= -->
+  <section class="sg-section" id="sg-pillar-row">
+    <h2 data-number="05">Pillar row (homepage)</h2>
+    <p class="sg-desc">Homepage Coach/Connect/Consult section. Alternating image-left / image-right layout. Each row is a self-contained `.pillar-row` block.</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.pillar-row, .pillar-row--reverse, .pillar-row__image, .pillar-row__content, .pillar-row__number, .pillar-row__name, .pillar-row__inquire</dd>
+      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --font-heading, --font-body, --space-*</dd>
+      <dt>Images:</dt><dd>coach-pillar, connect-conference, consult-conference (1200x800, 3:2, WebP+JPEG via &lt;picture&gt;)</dd>
+      <dt>Elementor target:</dt><dd>Container widget with Image + Heading + Text Editor + Button inside</dd>
+      <dt>data-section:</dt><dd>pillars</dd>
+      <dt>data-slot:</dt><dd>(on image) pillar-image</dd>
+    </dl>
+
+    <div class="sg-render">
+      <div class="pillar-row fade-up">
+        <div class="pillar-row__image">
+          <picture>
+            <source type="image/webp" srcset="img/coach-pillar-800.webp 800w" sizes="50vw">
+            <img src="img/coach-pillar.jpg" alt="Coach pillar example" width="800" height="533" loading="lazy">
+          </picture>
+        </div>
+        <div class="pillar-row__content">
+          <div class="pillar-row__number">01</div>
+          <h3 class="pillar-row__name">Coach</h3>
+          <p>Industry-led training from shipping fundamentals to advanced operations. Assessments, certifications, and direct placement.</p>
+          <a href="#" onclick="return false" class="btn--outline-sm">Inquire</a>
+        </div>
+      </div>
+    </div>
+
+    <pre class="sg-snippet">&lt;div class="pillar-row fade-up"&gt;
+  &lt;div class="pillar-row__image"&gt;
+    &lt;picture&gt;&lt;source ...&gt;&lt;img src="img/coach-pillar.jpg" alt="..." /&gt;&lt;/picture&gt;
+  &lt;/div&gt;
+  &lt;div class="pillar-row__content"&gt;
+    &lt;div class="pillar-row__number"&gt;01&lt;/div&gt;
+    &lt;h3 class="pillar-row__name"&gt;Coach&lt;/h3&gt;
+    &lt;p&gt;...&lt;/p&gt;
+    &lt;a href="contact?source=inquiry_coaching" class="btn--outline-sm pillar-row__inquire"&gt;Inquire&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  </section>
+
+  <!-- =============================================================
+       ABOUT PILLAR CARD
+       ============================================================= -->
+  <section class="sg-section" id="sg-about-pillar">
+    <h2 data-number="06">About pillar card</h2>
+    <p class="sg-desc">Stacked image-top card used in a 3-column grid on the About page. Image header, number, title, trimmed body copy.</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.about-pillar-card, .about-pillar-card__image, .about-pillar-card__number, .about-pillar-card__title, .about-pillar-card__body</dd>
+      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --card-padding, --transition-base</dd>
+      <dt>Images:</dt><dd>Shared with pillar-row: coach-pillar, connect-conference, consult-conference</dd>
+      <dt>Elementor target:</dt><dd>Card widget (Image + Heading + Text Editor)</dd>
+      <dt>data-slot:</dt><dd>pillar-coaching / pillar-connecting / pillar-consulting</dd>
+    </dl>
+
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="about-pillar-card">
+        <div class="about-pillar-card__image">
+          <picture>
+            <source type="image/webp" srcset="img/coach-pillar-800.webp" sizes="400px">
+            <img src="img/coach-pillar.jpg" alt="About pillar example" width="800" height="533" loading="lazy">
+          </picture>
+        </div>
+        <div class="about-pillar-card__number">01 / Coaching</div>
+        <h3 class="about-pillar-card__title">Train. Assess. Place.</h3>
+        <p class="about-pillar-card__body">Flagship bootcamps take fresh graduates through intensive, hands-on training delivered by industry veterans.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       TRUSTED PARTNERS TILE
+       ============================================================= -->
+  <section class="sg-section" id="sg-trusted-partners">
+    <h2 data-number="07">Trusted Partners tile</h2>
+    <p class="sg-desc">Social-validation band. Responsive grid: 2-col mobile, 3-col tablet, 4-col desktop. Each tile carries a `data-partner-name` and a logo-forward `data-partner-logo-src` attribute (empty until real logos land). Uniform min-height for grid alignment.</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.trusted-partners__tile, .trusted-partners__tile-name, .trusted-partners__tile--more (accent variant)</dd>
+      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --space-lg</dd>
+      <dt>Elementor target:</dt><dd>ACF repeater field "partners" with name + logo_image subfields</dd>
+      <dt>data-slot:</dt><dd>partner</dd>
+      <dt>data-partner-logo-src:</dt><dd>Empty string now; populate to swap text-tile to logo-image later</dd>
+    </dl>
+
+    <div class="sg-render">
+      <div class="trusted-partners__grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="trusted-partners__tile" data-partner-name="Maersk"><span class="trusted-partners__tile-name">Maersk</span></div>
+        <div class="trusted-partners__tile" data-partner-name="ZIM"><span class="trusted-partners__tile-name">ZIM</span></div>
+        <div class="trusted-partners__tile" data-partner-name="CMA CGM / APL"><span class="trusted-partners__tile-name">CMA CGM / APL</span></div>
+        <div class="trusted-partners__tile trusted-partners__tile--more"><span class="trusted-partners__tile-name">+ 1,000 more</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       PROGRAM FEATURED CARD
+       ============================================================= -->
+  <section class="sg-section" id="sg-program-featured">
+    <h2 data-number="08">Program featured card (homepage)</h2>
+    <p class="sg-desc">Oversized flagship card in the homepage Programs section. Image left, content right on desktop.</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.program-featured, .program-featured__image, .program-featured__content, .program-card__badge, .program-card__free-tag, .program-card__name, .program-card__meta, .program-card__desc, .program-card__cta</dd>
+      <dt>Image:</dt><dd>student-immersion.jpg (1600x900, 16:9)</dd>
+      <dt>Elementor target:</dt><dd>Featured Card widget (Image + Badges + Heading + Meta list + Description + Button)</dd>
+    </dl>
+
+    <div class="sg-render">
+      <div class="program-featured">
+        <div class="program-featured__image">
+          <img src="img/student-immersion.jpg" alt="Program featured example" loading="lazy">
+        </div>
+        <div class="program-featured__content">
+          <span class="program-card__badge">Applications Open</span>
+          <span class="program-card__free-tag">Free: No Tuition</span>
+          <h3 class="program-card__name">Student Immersion Training Program</h3>
+          <div class="program-card__meta"><span>4 days intensive</span><span>3 classroom + 1 port</span><span>30&ndash;40 seats</span></div>
+          <p class="program-card__desc">From campus to career in 4 days. Expert-led curriculum, a full-day port excursion, Cargonomics certification.</p>
+          <a href="#" onclick="return false" class="program-card__cta">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       TRAINER CARD
+       ============================================================= -->
+  <section class="sg-section" id="sg-trainer-card">
+    <h2 data-number="09">Trainer card</h2>
+    <p class="sg-desc">Image-top biography card used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract).</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.trainer-card-v2, .trainer-card-v2__photo, .trainer-card-v2__info, .trainer-card-v2__name, .trainer-card-v2__role, .trainer-card-v2__bio</dd>
+      <dt>Sibling:</dt><dd>.leader-card (About leadership), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__bio</dd>
+      <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes.</dd>
+    </dl>
+
+    <div class="sg-render" style="max-width: 400px;">
+      <div class="trainer-card-v2">
+        <div class="trainer-card-v2__photo">
+          <img src="img/elias.jpg" alt="Trainer card example" loading="lazy">
+        </div>
+        <div class="trainer-card-v2__info">
+          <h3 class="trainer-card-v2__name">Abraham Y. Elias</h3>
+          <div class="trainer-card-v2__role">Co-Founder &amp; Lead Trainer</div>
+          <p class="trainer-card-v2__bio">25+ years in global shipping and logistics. Former senior leadership at major international carriers across Southeast Asia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       CURRICULUM GRID CARD
+       ============================================================= -->
+  <section class="sg-section" id="sg-curriculum-grid">
+    <h2 data-number="10">Curriculum grid card (course page)</h2>
+    <p class="sg-desc">Used on the course page "Why apply" section. Numbered, title, description. Highlight variant carries a gold left border (`.curriculum-grid__card--highlight`).</p>
+
+    <dl class="sg-meta">
+      <dt>Class:</dt><dd>.curriculum-grid__card, .curriculum-grid__card-number, .curriculum-grid__card-title, .curriculum-grid__card-desc, .curriculum-grid__card--highlight (modifier)</dd>
+      <dt>Elementor target:</dt><dd>Icon Box widget or Text + Heading + Text Editor in a Container</dd>
+    </dl>
+
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="curriculum-grid__card">
+        <div class="curriculum-grid__card-number">01</div>
+        <h3 class="curriculum-grid__card-title">Expert-Led Curriculum</h3>
+        <p class="curriculum-grid__card-desc">Learn from veterans with over 50 years of combined experience in the Vietnamese and international shipping markets.</p>
+      </article>
+    </div>
+
+    <div class="sg-render" style="max-width: 400px;">
+      <article class="curriculum-grid__card curriculum-grid__card--highlight">
+        <div class="curriculum-grid__card-number">02</div>
+        <h3 class="curriculum-grid__card-title">Direct Placement (highlight variant)</h3>
+        <p class="curriculum-grid__card-desc">Top graduates are placed directly with hiring companies. Gold-accented card draws the eye to this key benefit.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       FOOTER — minimal, links back to TOC
+       ============================================================= -->
+  <section class="sg-section" style="background: var(--color-primary); color: var(--color-white); text-align: center; border-bottom: none;">
+    <p style="font-family: var(--font-body); font-size: 0.9rem; opacity: 0.7; margin: 0;">
+      Cargonomics internal styleguide. Keep current as components ship. Rename and archive to <code>docs/archived-components.md</code> when a component is removed from the live site.
+    </p>
+  </section>
+
+</body>
+</html>
