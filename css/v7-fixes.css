@@ -156,3 +156,72 @@
     min-height: 96px;
   }
 }
+
+/* ============================================================
+   v7 placeholder cards (reinstated 2026-04-16 per Vasso)
+   Second trainer / second leader cards carry a visible "Coming
+   soon" badge so they read as intentional pre-announcements
+   rather than missing data. Applies to both .trainer-card-v2
+   and .leader-card via shared modifier + badge class names.
+   ============================================================ */
+
+.trainer-card-v2--placeholder,
+.leader-card--placeholder {
+  position: relative;
+}
+
+/* Subtle gold-dashed outline on the placeholder card so it reads
+   as a distinct "reserved slot" rather than a normal profile card
+   with a missing photo. Layers over existing card chrome. */
+.trainer-card-v2--placeholder,
+.leader-card--placeholder {
+  border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
+  background: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.04);
+}
+
+.trainer-card-v2__coming-soon-badge,
+.leader-card__coming-soon-badge {
+  position: absolute;
+  top: var(--space-md, 16px);
+  right: var(--space-md, 16px);
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+  z-index: 2;
+  box-shadow: 0 2px 6px rgba(var(--color-primary-rgb), 0.15);
+}
+
+/* Placeholder photo treatment: logo centered at reduced size + opacity.
+   Same visual cue as the archived version but with a proper badge so
+   it reads as intentional. */
+.trainer-card-v2--placeholder .trainer-placeholder-logo,
+.leader-card--placeholder .leader-card__photo--placeholder {
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 240px;
+}
+
+.trainer-card-v2--placeholder .trainer-placeholder-logo img,
+.leader-card--placeholder .leader-card__photo--placeholder img {
+  width: 45%;
+  max-width: 140px;
+  height: auto;
+  opacity: 0.25;
+  object-fit: contain;
+}
+
+/* Body copy slightly muted so the card is clearly pre-announcement */
+.trainer-card-v2--placeholder .trainer-card-v2__bio,
+.leader-card--placeholder .leader-card__bio {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
