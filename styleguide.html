@@ -269,7 +269,7 @@
       <li><a href="#sg-buttons">Buttons</a></li>
       <li><a href="#sg-pillar-row">Pillar row (homepage)</a></li>
       <li><a href="#sg-about-pillar">About pillar card</a></li>
-      <li><a href="#sg-trusted-partners">Trusted Partners tile</a></li>
+      <li><a href="#sg-trusted-partners">Trusted Partners marquee</a></li>
       <li><a href="#sg-program-featured">Program featured card</a></li>
       <li><a href="#sg-trainer-card">Trainer card</a></li>
       <li><a href="#sg-curriculum-grid">Curriculum grid card</a></li>
@@ -488,25 +488,85 @@
        TRUSTED PARTNERS TILE
        ============================================================= -->
   <section class="sg-section" id="sg-trusted-partners">
-    <h2 data-number="07">Trusted Partners tile</h2>
-    <p class="sg-desc">Social-validation band. Responsive grid: 2-col mobile, 3-col tablet, 4-col desktop. Each tile carries a `data-partner-name` and a logo-forward `data-partner-logo-src` attribute (empty until real logos land). Uniform min-height for grid alignment.</p>
+    <h2 data-number="07">Trusted Partners marquee</h2>
+    <p class="sg-desc">Social-validation band redesigned 2026-04-16 as a premium dark-navy auto-scrolling marquee. Each partner rendered as a typographically-distinct fake wordmark (different font weight, case, letter-spacing, italic) so it reads as a real logo without importing any brand assets. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code> with zero CSS rewrite. Earlier grid tile version archived in docs/archived-components.md id=section-trusted-partners-grid-v1.</p>
 
     <dl class="sg-meta">
-      <dt>Class:</dt><dd>.trusted-partners__tile, .trusted-partners__tile-name, .trusted-partners__tile--more (accent variant)</dd>
-      <dt>Tokens:</dt><dd>--color-stone, --color-primary, --color-secondary, --space-lg</dd>
-      <dt>Elementor target:</dt><dd>ACF repeater field "partners" with name + logo_image subfields</dd>
-      <dt>data-slot:</dt><dd>partner</dd>
-      <dt>data-partner-logo-src:</dt><dd>Empty string now; populate to swap text-tile to logo-image later</dd>
+      <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__sep, .trusted-partners__disclaimer</dd>
+      <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile)</dd>
+      <dt>Variants (via data-logo-style attribute):</dt><dd>bold-italic, geometric-spaced, light-lowercase, italic-caps, serif-feel, rounded-bold, condensed-caps, muted-italic</dd>
+      <dt>Tokens:</dt><dd>--color-primary (bg), --color-secondary (accents), --color-white (heading), --color-secondary-rgb (separator alpha), --font-heading, --font-body, --space-xl, --space-2xl</dd>
+      <dt>Animation:</dt><dd>@keyframes trusted-partners-scroll (translateX 0 -> -50%, 60s mobile / 80s desktop, linear infinite, pause on hover). Respects prefers-reduced-motion: reduce (animation disabled, manual scroll as fallback with scrollbar hidden).</dd>
+      <dt>Edge fade:</dt><dd>mask-image linear-gradient on .trusted-partners__marquee, 10% transparent -> 90% black -> transparent</dd>
+      <dt>Elementor target:</dt><dd>Slider / Carousel widget with ACF repeater field "partners" each with name + logo_image subfields. data-partner-logo-src attribute maps to the repeater logo_image field.</dd>
+      <dt>data-slot:</dt><dd>partners-marquee on container, partner on each item</dd>
     </dl>
 
-    <div class="sg-render">
-      <div class="trusted-partners__grid" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="trusted-partners__tile" data-partner-name="Maersk"><span class="trusted-partners__tile-name">Maersk</span></div>
-        <div class="trusted-partners__tile" data-partner-name="ZIM"><span class="trusted-partners__tile-name">ZIM</span></div>
-        <div class="trusted-partners__tile" data-partner-name="CMA CGM / APL"><span class="trusted-partners__tile-name">CMA CGM / APL</span></div>
-        <div class="trusted-partners__tile trusted-partners__tile--more"><span class="trusted-partners__tile-name">+ 1,000 more</span></div>
-      </div>
+    <div class="sg-render" style="padding: 0; overflow: hidden;">
+      <!-- Live render: uses production CSS. Duplication kept short for the styleguide but marquee logic identical. -->
+      <section class="trusted-partners" style="padding: var(--space-2xl) 0;">
+        <div class="container">
+          <div class="trusted-partners__marquee">
+            <div class="trusted-partners__track" style="animation-duration: 30s;">
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <!-- duplicate set for loop -->
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <pre class="sg-snippet">&lt;section class="trusted-partners" data-section="trusted-partners" data-elementor-widget="container"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="trusted-partners__header"&gt;
+      &lt;p class="section-label"&gt;Industry Network&lt;/p&gt;
+      &lt;h2&gt;Partners &amp;amp; Hiring Network&lt;/h2&gt;
+      &lt;p class="trusted-partners__lede"&gt;...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="trusted-partners__marquee"&gt;
+      &lt;div class="trusted-partners__track"&gt;
+        &lt;div class="trusted-partners__item" data-partner-name="CMA CGM / APL" data-partner-logo-src=""&gt;
+          &lt;span class="trusted-partners__logo" data-logo-style="bold-italic"&gt;CMA CGM&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;span class="trusted-partners__sep" aria-hidden="true"&gt;&amp;diams;&lt;/span&gt;
+        &lt;!-- ...more partners... --&gt;
+        &lt;!-- Duplicate the whole set for seamless infinite loop --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class="trusted-partners__disclaimer"&gt;Fake wordmarks shown until real partner logos are published.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
   </section>
 
   <!-- =============================================================
@@ -543,15 +603,18 @@
        TRAINER CARD
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card">
-    <h2 data-number="09">Trainer card</h2>
-    <p class="sg-desc">Image-top biography card used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract).</p>
+    <h2 data-number="09">Trainer card (and placeholder variant)</h2>
+    <p class="sg-desc">Image-top biography card used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract). The <code>--placeholder</code> modifier reserves a slot for an unconfirmed trainer with a gold "Coming soon" badge, dashed border, and muted bio treatment so it reads as intentional.</p>
 
     <dl class="sg-meta">
       <dt>Class:</dt><dd>.trainer-card-v2, .trainer-card-v2__photo, .trainer-card-v2__info, .trainer-card-v2__name, .trainer-card-v2__role, .trainer-card-v2__bio</dd>
+      <dt>Modifier:</dt><dd>.trainer-card-v2--placeholder (+ .leader-card--placeholder on About) adds gold dashed border + gold-tinted background + badge</dd>
+      <dt>Badge:</dt><dd>.trainer-card-v2__coming-soon-badge (+ .leader-card__coming-soon-badge) absolute-positioned top-right of photo area</dd>
       <dt>Sibling:</dt><dd>.leader-card (About leadership), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__bio</dd>
-      <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes.</dd>
+      <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes. Placeholder state via ACF toggle field "is_placeholder" that conditionally applies --placeholder modifier.</dd>
     </dl>
 
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Regular trainer card:</p>
     <div class="sg-render" style="max-width: 400px;">
       <div class="trainer-card-v2">
         <div class="trainer-card-v2__photo">
@@ -561,6 +624,23 @@
           <h3 class="trainer-card-v2__name">Abraham Y. Elias</h3>
           <div class="trainer-card-v2__role">Co-Founder &amp; Lead Trainer</div>
           <p class="trainer-card-v2__bio">25+ years in global shipping and logistics. Former senior leadership at major international carriers across Southeast Asia.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (--placeholder modifier, reinstated 2026-04-16):</p>
+    <div class="sg-render" style="max-width: 400px;">
+      <div class="trainer-card-v2 trainer-card-v2--placeholder">
+        <div class="trainer-card-v2__photo">
+          <div class="trainer-placeholder-logo">
+            <img src="img/logo-cargonomics-white.png" alt="" loading="lazy">
+          </div>
+          <span class="trainer-card-v2__coming-soon-badge">Coming soon</span>
+        </div>
+        <div class="trainer-card-v2__info">
+          <h3 class="trainer-card-v2__name">Senior Industry Advisor</h3>
+          <div class="trainer-card-v2__role">Co-Founder &amp; Senior Trainer</div>
+          <p class="trainer-card-v2__bio">To be announced ahead of the June 1 cohort. A second senior veteran joins Elias with decades of industry experience and an extensive international network.</p>
         </div>
       </div>
     </div>

@@ -2539,16 +2539,35 @@ button {
 }
 
 /* =====================================================================
-   TRUSTED PARTNERS (v6, PRD 18 follow-through, D17/D18)
-   Social validation band used on homepage + course page.
-   Text-first now (logo-forward-compatible via data-partner-logo-src attr).
-   All values token-based, BEM-scoped, Elementor-migration-ready.
+   TRUSTED PARTNERS v2 (2026-04-16, premium marquee redesign)
+   Dark navy section with typographically-distinct fake wordmarks that
+   scroll horizontally in an infinite loop. Pauses on hover. Fades at
+   edges. Respects prefers-reduced-motion. Pure CSS, zero JS.
+   Previous grid version archived in docs/archived-components.md id=
+   section-trusted-partners-grid-v1.
    ===================================================================== */
 
 .trusted-partners {
   padding: var(--section-padding-y) 0;
-  background: var(--color-ivory);
+  background: var(--color-primary);
+  color: var(--color-white);
+  overflow: hidden;
+  position: relative;
 }
+
+/* Subtle gold top-bottom rules to frame the dark band */
+.trusted-partners::before,
+.trusted-partners::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--color-secondary-rgb, 212, 180, 104), 0.35), transparent);
+}
+
+.trusted-partners::before { top: 0; }
+.trusted-partners::after { bottom: 0; }
 
 .trusted-partners__header {
   text-align: center;
@@ -2558,11 +2577,15 @@ button {
   margin-right: auto;
 }
 
+.trusted-partners__header .section-label {
+  color: var(--color-secondary);
+}
+
 .trusted-partners__header h2 {
   font-family: var(--font-heading);
   font-weight: var(--font-weight-heading);
   font-size: 1.8rem;
-  color: var(--color-primary);
+  color: var(--color-white);
   margin-top: var(--space-sm);
   margin-bottom: var(--space-md);
 }
@@ -2570,92 +2593,260 @@ button {
 .trusted-partners__lede {
   font-family: var(--font-body);
   font-size: 1rem;
-  color: var(--color-text);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.6;
 }
 
-.trusted-partners__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
-  margin-bottom: var(--space-xl);
+/* ---------- Marquee container ---------- */
+
+.trusted-partners__marquee {
+  overflow: hidden;
+  position: relative;
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-lg);
+  /* Fade edges via mask-image so they dissolve into the section bg.
+     WebKit prefix for older Safari. */
+  -webkit-mask-image: linear-gradient(to right,
+    transparent 0,
+    black 10%,
+    black 90%,
+    transparent 100%);
+  mask-image: linear-gradient(to right,
+    transparent 0,
+    black 10%,
+    black 90%,
+    transparent 100%);
 }
 
-.trusted-partners__tile {
-  background: var(--color-stone);
-  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
-  border-radius: 6px;
-  padding: var(--space-lg) var(--space-md);
-  min-height: 80px;
+/* ---------- Scrolling track ---------- */
+
+.trusted-partners__track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  gap: var(--space-xl);
+  width: max-content;
+  animation: trusted-partners-scroll 60s linear infinite;
+  will-change: transform;
 }
 
-.trusted-partners__tile:hover {
+@keyframes trusted-partners-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* half because content is duplicated */
+}
+
+/* Pause on hover (desktop) */
+.trusted-partners__marquee:hover .trusted-partners__track {
+  animation-play-state: paused;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .trusted-partners__track {
+    animation: none;
+    animation-duration: 0ms;
+  }
+  /* Allow manual horizontal scroll as the fallback, but hide the scrollbar chrome
+     so it still reads as a premium band, not a scrollable container. */
+  .trusted-partners__marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;         /* Firefox */
+    -ms-overflow-style: none;      /* IE / legacy Edge */
+  }
+  .trusted-partners__marquee::-webkit-scrollbar {
+    display: none;                  /* WebKit / Chromium / Safari */
+  }
+}
+
+/* ---------- Individual partner item ---------- */
+
+.trusted-partners__item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  transition: transform 0.25s ease, filter 0.25s ease;
+  flex: 0 0 auto;
+}
+
+.trusted-partners__item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(var(--color-primary-rgb), 0.06);
-  border-color: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.4);
+  filter: brightness(1.15);
 }
 
-.trusted-partners__tile-name {
+/* Separator */
+.trusted-partners__sep {
+  color: var(--color-secondary);
+  opacity: 0.4;
+  font-size: 0.8rem;
+  flex: 0 0 auto;
+  transform: translateY(-1px);
+}
+
+/* ---------- Fake wordmark: base ---------- */
+
+.trusted-partners__logo {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-secondary);
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.trusted-partners__item:hover .trusted-partners__logo {
+  color: var(--color-white);
+}
+
+/* ---------- Fake wordmark: typographic variants ----------
+   Each variant makes the name feel like a distinct brand wordmark.
+   When real logos arrive, swap <span> for <img> and these variants
+   become irrelevant. */
+
+.trusted-partners__logo[data-logo-style="bold-italic"] {
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.trusted-partners__logo[data-logo-style="geometric-spaced"] {
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  font-size: 1.3rem;
+}
+
+.trusted-partners__logo[data-logo-style="light-lowercase"] {
+  font-weight: 300;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+}
+
+.trusted-partners__logo[data-logo-style="italic-caps"] {
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.5rem;
+}
+
+.trusted-partners__logo[data-logo-style="serif-feel"] {
+  /* No serif font loaded; simulate an elegant feel with light weight + tight letter spacing + italic */
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.trusted-partners__logo[data-logo-style="rounded-bold"] {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.6rem;
   letter-spacing: 0.02em;
 }
 
-/* "More" tile is styled as soft gold accent so it reads as "+ many more", not another partner */
-.trusted-partners__tile--more {
-  background: transparent;
-  border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
+.trusted-partners__logo[data-logo-style="condensed-caps"] {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.1rem;
+  transform: scaleY(1.15);
 }
 
-.trusted-partners__tile--more .trusted-partners__tile-name {
-  color: var(--color-secondary);
-  font-style: italic;
+.trusted-partners__logo[data-logo-style="muted-italic"] {
   font-family: var(--font-body);
-  font-weight: 500;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.6);
+  letter-spacing: 0.04em;
 }
+
+/* ---------- Disclaimer below marquee ---------- */
 
 .trusted-partners__disclaimer {
   text-align: center;
   font-family: var(--font-body);
   font-size: 0.8rem;
-  color: var(--color-text);
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.55);
   max-width: 640px;
   margin: 0 auto;
   line-height: 1.5;
+  font-style: italic;
 }
 
-/* Future logo mode: when data-partner-logo-src is populated, tiles can hide the name and show a logo img.
-   Opt-in by adding class .trusted-partners--logo-mode to the .trusted-partners wrapper. Not styled here;
-   wired via JS in a later PRD when real logos arrive (post partner confirmation). */
+/* ---------- Future logo-image mode ---------- */
 
-/* Tablet: 3-column grid */
+.trusted-partners__logo-img {
+  height: 40px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(2);
+  opacity: 0.85;
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.trusted-partners__item:hover .trusted-partners__logo-img {
+  filter: grayscale(0) brightness(1);
+  opacity: 1;
+}
+
+/* ---------- Responsive ---------- */
+
 @media (min-width: 768px) {
-  .trusted-partners__grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-  }
-
   .trusted-partners__header h2 {
     font-size: 2rem;
   }
-}
 
-/* Desktop: 4-column grid */
-@media (min-width: 1024px) {
-  .trusted-partners__grid {
-    grid-template-columns: repeat(4, 1fr);
+  .trusted-partners__track {
+    gap: var(--space-2xl);
   }
 
+  .trusted-partners__logo {
+    font-size: 1.6rem;
+  }
+
+  .trusted-partners__logo[data-logo-style="light-lowercase"],
+  .trusted-partners__logo[data-logo-style="italic-caps"],
+  .trusted-partners__logo[data-logo-style="serif-feel"],
+  .trusted-partners__logo[data-logo-style="rounded-bold"] {
+    font-size: 1.8rem;
+  }
+
+  .trusted-partners__logo[data-logo-style="condensed-caps"] {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .trusted-partners {
     padding: 96px 0;
+  }
+
+  .trusted-partners__track {
+    gap: calc(var(--space-2xl) * 1.5);
+    animation-duration: 80s; /* Slower on wider screens so partner names stay readable as they pass */
+  }
+
+  .trusted-partners__logo {
+    font-size: 1.8rem;
+  }
+
+  .trusted-partners__logo[data-logo-style="light-lowercase"],
+  .trusted-partners__logo[data-logo-style="italic-caps"],
+  .trusted-partners__logo[data-logo-style="serif-feel"],
+  .trusted-partners__logo[data-logo-style="rounded-bold"] {
+    font-size: 2rem;
+  }
+
+  .trusted-partners__logo[data-logo-style="condensed-caps"] {
+    font-size: 1.4rem;
   }
 }
 

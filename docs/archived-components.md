@@ -210,6 +210,97 @@ Note: the `.program-card`, `.program-card__name`, `.program-card__meta`, `.progr
 
 ---
 
+## section-trusted-partners-grid-v1
+
+**Status.** archived
+**Removed on.** 2026-04-16
+**Removed by.** Redesign (premium marquee replaces grid, same `.trusted-partners` section, new internal structure)
+**Reason.** The initial `.trusted-partners__grid` implementation (2/3/4-column grid of uniformly-sized text tiles) read as amateur and childish. Vasso flagged it comparing against premium B2B references (Flexe.com, ITS Logistics). Replaced with a dark-navy auto-scrolling marquee treatment using Orbitron typography + gold diamond separators + pause-on-hover, which feels more premium without requiring logos.
+**Reinstate via.** Paste HTML + CSS snapshots back. The section name `.trusted-partners` is preserved across the redesign so parent references still work; only internal structure changes. Reinstating means reverting the internal tile-grid structure.
+**Tokens used.** `--color-stone`, `--color-primary`, `--color-primary-rgb`, `--color-secondary`, `--color-secondary-rgb`, `--color-ivory`, `--space-md`, `--space-lg`, `--space-2xl`, `--space-xl`, `--font-heading`, `--font-body`, `--font-weight-heading`, `--transition-base`.
+**Elementor target.** Grid widget containing repeater-bound card widgets. Replaced by Slider / Carousel widget target.
+
+### HTML snapshot (grid version)
+
+```html
+<div class="trusted-partners__grid" data-slot="partners-grid" data-elementor-widget="container">
+  <div class="trusted-partners__tile" data-slot="partner" data-partner-name="CMA CGM Group / APL" data-partner-logo-src="">
+    <span class="trusted-partners__tile-name">CMA CGM / APL</span>
+  </div>
+  <!-- ...10 more tiles... -->
+  <div class="trusted-partners__tile trusted-partners__tile--more" data-slot="partner">
+    <span class="trusted-partners__tile-name">+ 1,000 more</span>
+  </div>
+</div>
+```
+
+### CSS snapshot (grid version, from css/style-v7.css)
+
+```css
+.trusted-partners__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.trusted-partners__tile {
+  background: var(--color-stone);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.08);
+  border-radius: 6px;
+  padding: var(--space-lg) var(--space-md);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.trusted-partners__tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--color-primary-rgb), 0.06);
+  border-color: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.4);
+}
+
+.trusted-partners__tile-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.trusted-partners__tile--more {
+  background: transparent;
+  border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
+}
+
+.trusted-partners__tile--more .trusted-partners__tile-name {
+  color: var(--color-secondary);
+  font-style: italic;
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .trusted-partners__grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+}
+
+@media (min-width: 1024px) {
+  .trusted-partners__grid { grid-template-columns: repeat(4, 1fr); }
+}
+```
+
+### Notes
+
+- Section background was `--color-ivory` (light). Marquee redesign inverts to navy for premium contrast.
+- Min-height 80px on mobile, 96px desktop (PRD 22 fix) to stop uneven tile heights.
+- The "+ 1,000 more" dashed-border tile was a nice visual but didn't rescue the overall look.
+- On reinstate: put back after reverting the marquee rules in style-v7.css. Make sure `.trusted-partners` section padding and background values match (`padding: var(--section-padding-y) 0; background: var(--color-ivory);`).
+
+---
+
 ## Changelog
 
 | Date | Change |

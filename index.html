@@ -520,46 +520,115 @@
         <p class="trusted-partners__lede" data-slot="body" data-elementor-widget="text-editor">Our graduates are placed directly with the industry leaders who know us. Drawn from 25+ years of senior leadership across global shipping and logistics.</p>
       </div>
 
-      <div class="trusted-partners__grid" data-slot="partners-grid" data-elementor-widget="container">
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="CMA CGM Group / APL" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">CMA CGM / APL</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="ZIM Integrated Shipping" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">ZIM</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Maersk" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">Maersk</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="MSC" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">MSC</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Hapag-Lloyd" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">Hapag-Lloyd</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Ocean Network Express" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">ONE</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Saigon Newport Corporation" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">Saigon Newport</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">Gemadept</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="Tan Cang Saigon" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">Tan Cang</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="DB Schenker" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">DB Schenker</span>
-        </div>
-        <div class="trusted-partners__tile" data-slot="partner" data-partner-name="DHL Global Forwarding" data-partner-logo-src="">
-          <span class="trusted-partners__tile-name">DHL Global Forwarding</span>
-        </div>
-        <div class="trusted-partners__tile trusted-partners__tile--more" data-slot="partner">
-          <span class="trusted-partners__tile-name">+ 1,000 more</span>
+      <!-- Premium marquee: typographically-distinct fake logos on navy background.
+           Each <span class="trusted-partners__logo" data-logo-style="..."> renders as
+           a pseudo-wordmark. When real logos arrive, replace each <span> with an
+           <img class="trusted-partners__logo-img"> using data-partner-logo-src as
+           the src value - zero CSS rewrite required on the wrapper. -->
+      <div class="trusted-partners__marquee" aria-label="Industry partners" data-slot="partners-marquee" data-elementor-widget="container">
+        <div class="trusted-partners__track">
+          <!-- Set 1 (visible) -->
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="CMA CGM / APL" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="ZIM Integrated Shipping" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Maersk" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="MSC" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Hapag-Lloyd" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Ocean Network Express" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Saigon Newport Corporation" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="bold-italic">Gemadept</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Tan Cang Saigon" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">TAN CANG</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="DB Schenker" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="italic-caps">DB SCHENKER</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="DHL Global Forwarding" data-partner-logo-src="">
+            <span class="trusted-partners__logo" data-logo-style="condensed-caps">DHL</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item trusted-partners__item--more" data-slot="partner">
+            <span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <!-- Set 2 (duplicate for seamless loop, aria-hidden to avoid screen reader double-read) -->
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="bold-italic">Gemadept</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">TAN CANG</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="italic-caps">DB SCHENKER</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="condensed-caps">DHL</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+          <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true">
+            <span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span>
+          </div>
+          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
         </div>
       </div>
 
-      <p class="trusted-partners__disclaimer fade-up">Representative companies from the Cargonomics industry network. Partner logos and formal hiring agreements published as they are confirmed.</p>
+      <p class="trusted-partners__disclaimer fade-up">Fake wordmarks shown until real partner logos are published. Representative companies from the Cargonomics industry network.</p>
     </div>
   </section>
 
