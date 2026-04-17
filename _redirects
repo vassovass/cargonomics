@@ -3,13 +3,25 @@
 #
 # Evaluation order: first match wins. Static rules first, wildcards later.
 
-# Clean-URL canonicalisation: .html extensions 301 to extensionless paths.
-# Activates on Cloudflare Pages. GitHub Pages does not honour this file.
-/index.html    /         301
-/about.html    /about    301
-/course.html   /course   301
-/contact.html  /contact  301
-/apply.html    /apply    301
+# Maintenance mode (main branch only): all content pages bounce to root so
+# visitors land on the "site launching soon" page regardless of entry URL.
+# Static assets under /img/, /css/, /js/ are NOT matched (filesystem serves
+# them directly). When the site is approved, restore the prior clean-URL
+# rules (/about.html -> /about etc., see git history) and revert index.html
+# from staging.
+/index.html              /    302
+/about                   /    302
+/about.html              /    302
+/course                  /    302
+/course.html             /    302
+/contact                 /    302
+/contact.html            /    302
+/apply                   /    302
+/apply.html              /    302
+/styleguide              /    302
+/styleguide.html         /    302
+/brand-rationale         /    302
+/brand-rationale.html    /    302
 
 # www apex canonicalisation is handled at the Cloudflare zone level
 # (DNS + Redirect Rule), not here. Documented in
