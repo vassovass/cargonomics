@@ -100,6 +100,13 @@
   font-family: var(--font-body);
 }
 
+/* Commit SHA suffix injected by functions/_middleware.js on Cloudflare Pages.
+   Absent on local dev and the GH Pages mirror. See docs/deferred-items.md D33. */
+.footer__commit {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Company-profile tagline (About page): was inline on <p> */
 .company-profile__tagline {
   font-family: var(--font-heading);
