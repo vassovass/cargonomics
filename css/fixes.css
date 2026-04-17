@@ -172,11 +172,13 @@
 
 /* Subtle gold-dashed outline on the placeholder card so it reads
    as a distinct "reserved slot" rather than a normal profile card
-   with a missing photo. Layers over existing card chrome. */
+   with a missing photo. White background to match the sibling
+   regular card on the same row (D34, 2026-04-17). The dashed gold
+   border + Coming soon badge alone carry the "reserved" signal. */
 .trainer-card-v2--placeholder,
 .leader-card--placeholder {
   border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
-  background: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.04);
+  background: var(--color-white);
 }
 
 .trainer-card-v2__coming-soon-badge,
@@ -236,7 +238,7 @@
 .trainer-card-v3--placeholder {
   position: relative;
   border: 1px dashed rgba(var(--color-secondary-rgb), 0.55);
-  background: rgba(var(--color-secondary-rgb), 0.05);
+  background: var(--color-white);
 }
 
 .trainer-card-v3--placeholder .trainer-card-v3__media {
