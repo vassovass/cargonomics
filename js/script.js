@@ -5,6 +5,23 @@
 (function () {
   'use strict';
 
+  // Footer version badge: append Cloudflare Pages commit SHA if available.
+  // Produces "v7 \u00b7 6c97f48" on deployed builds, stays at "v7" locally.
+  // Full rule: .claude/rules/website-conventions.md Version Management.
+  (function updateFooterVersion() {
+    const el = document.querySelector('.footer__version');
+    if (!el) return;
+    fetch('/api/version', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        if (!v || !v.sha || v.sha === 'dev') return;
+        const base = el.textContent.trim();
+        el.textContent = base + ' \u00b7 ' + v.sha;
+        el.title = 'Branch: ' + v.branch + '  \u00b7  Commit: ' + v.sha;
+      })
+      .catch(function () { /* local dev: fetch fails, keep plain version */ });
+  })();
+
   // Cache DOM references once
   const nav = document.querySelector('.nav');
   const navToggle = document.querySelector('.nav__mobile-toggle');
