@@ -9,8 +9,9 @@
 (function () {
   'use strict';
 
-  // REPLACE THIS after deploying Google Apps Script
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6AOARukN0nbULTzQ3u95Ams78SmqALhCZdxpEAWxvYCQ6UbI80t6dw1vniWBA2QBZIg/exec';
+  // Updated 2026-04-21 to Version 2 deployment (CV upload + Drive folder +
+  // applicant confirmation email). Previous V1 URL retired with commit 544513a.
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhs-VMvLE-amqPmyvEbo7-dwmLdw2z0-ldfIZewL1YfKvBoDUw40_85gi4O2QK0Fel7w/exec';
 
   // Environment-aware form source tag, derived at submit time from the
   // current hostname. Overrides any form-field value so staging and
