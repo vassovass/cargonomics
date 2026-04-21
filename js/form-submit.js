@@ -73,13 +73,20 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting\u2026';
 
-    // Collect form data as JSON
+    // Collect form data as JSON.
+    // Multi-value fields (e.g. checkbox groups like "how_did_you_hear")
+    // are joined into a comma-separated string so they land in one
+    // sheet column rather than overwriting each other.
     var formData = new FormData(form);
     var payload = {};
-    formData.forEach(function (value, key) {
-      if (key !== 'consent') {
-        payload[key] = value;
-      }
+    var seenKeys = {};
+    formData.forEach(function (_value, key) {
+      seenKeys[key] = true;
+    });
+    Object.keys(seenKeys).forEach(function (key) {
+      if (key === 'consent') return;
+      var values = formData.getAll(key);
+      payload[key] = values.length > 1 ? values.join(', ') : values[0];
     });
 
     // Add timestamp

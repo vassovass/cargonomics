@@ -418,6 +418,70 @@
       transform: scale(1.02);
     }
 
+    /* SCHEDULE CALLOUT */
+    .form__callout {
+      background: rgba(var(--color-primary-rgb), 0.04);
+      border-left: 3px solid var(--color-primary);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--input-radius);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      margin-bottom: var(--space-lg);
+    }
+
+    .form__callout-title {
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2xs);
+      font-size: 0.9rem;
+    }
+
+    .form__callout ul {
+      margin: var(--space-2xs) 0 0;
+      padding-left: var(--space-lg);
+    }
+
+    .form__callout li {
+      padding: 2px 0;
+    }
+
+    /* CHECKBOX GROUP */
+    .form__checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      padding: var(--space-xs) 0;
+    }
+
+    .form__checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    .form__checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    /* CONDITIONAL FOLLOWUP */
+    .form__followup {
+      padding-left: var(--space-md);
+      border-left: 2px solid var(--color-secondary);
+    }
+
+    .form__followup[hidden] {
+      display: none;
+    }
+
     /* RESPONSIVE */
     @media (min-width: 768px) {
       .contact-info__grid {
@@ -552,12 +616,99 @@
           </div>
         </fieldset>
 
-        <!-- Qualification -->
+        <!-- English Proficiency -->
         <fieldset class="form__fieldset">
-          <legend class="form__legend">Qualification</legend>
+          <legend class="form__legend">English Proficiency</legend>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-available">Are you available for the program dates? (June 1-4, 2026)</label>
+            <label class="form__label form__label--required" for="app-english-scale">Self-rated English level (1 to 10)</label>
+            <select
+              id="app-english-scale"
+              name="english_proficiency_scale"
+              class="form__select"
+              required
+              aria-required="true"
+              aria-describedby="app-english-scale-hint"
+            >
+              <option value="" disabled selected>Select 1 to 10</option>
+              <option value="1">1, just starting</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5, conversational</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8, confident</option>
+              <option value="9">9</option>
+              <option value="10">10, native or near-native</option>
+            </select>
+            <span class="form__hint" id="app-english-scale-hint">Your honest self-assessment.</span>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-english-qual">English qualification</label>
+            <select
+              id="app-english-qual"
+              name="english_proficiency_qualification"
+              class="form__select"
+              required
+              aria-required="true"
+              aria-describedby="app-english-qual-hint"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option value="IELTS">IELTS</option>
+              <option value="TOEFL">TOEFL</option>
+              <option value="CEFR A1">CEFR A1</option>
+              <option value="CEFR A2">CEFR A2</option>
+              <option value="CEFR B1">CEFR B1</option>
+              <option value="CEFR B2">CEFR B2</option>
+              <option value="CEFR C1">CEFR C1</option>
+              <option value="CEFR C2">CEFR C2</option>
+              <option value="No formal qualification yet">No formal qualification yet</option>
+            </select>
+            <span class="form__hint" id="app-english-qual-hint">Pick the closest. Add your band or score below if you have one.</span>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-english-score">Band or score (optional)</label>
+            <input
+              type="text"
+              id="app-english-score"
+              name="english_proficiency_score"
+              class="form__input"
+              placeholder="e.g. 7.5 or 100"
+            >
+          </div>
+        </fieldset>
+
+        <!-- Course & Availability -->
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">Course &amp; Availability</legend>
+
+          <div class="form__group">
+            <label class="form__label" for="app-course-date">Course date</label>
+            <select
+              id="app-course-date"
+              name="course_date"
+              class="form__select"
+              aria-describedby="app-course-date-hint"
+            >
+              <option value="1 June 2026" selected>1 June 2026</option>
+            </select>
+            <span class="form__hint" id="app-course-date-hint">Pre-selected for the current intake. More dates added as new groups open.</span>
+          </div>
+
+          <div class="form__callout" role="note" aria-label="Program schedule">
+            <div class="form__callout-title">Program schedule</div>
+            <ul>
+              <li>5 consecutive days</li>
+              <li>1 June to 5 June 2026</li>
+              <li>Daily times: to be confirmed</li>
+            </ul>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-available">Are you available for the program dates?</label>
             <select
               id="app-available"
               name="available_on_bootcamp_dates"
@@ -571,7 +722,7 @@
               <option value="No">No</option>
               <option value="Unsure">Unsure</option>
             </select>
-            <span class="form__hint" id="app-available-hint">The program runs for 5 consecutive days.</span>
+            <span class="form__hint" id="app-available-hint">1 June to 5 June 2026 inclusive.</span>
           </div>
 
           <div class="form__group">
@@ -587,9 +738,21 @@
               <option value="" disabled selected>Select an option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
-              <option value="Unsure">Unsure</option>
+              <option value="Maybe">Maybe</option>
             </select>
             <span class="form__hint" id="app-full-week-hint">Full attendance is required for certification and placement eligibility.</span>
+          </div>
+
+          <div class="form__group form__followup" id="app-full-week-followup" hidden>
+            <label class="form__label" for="app-full-week-followup-input">What would help you commit?</label>
+            <textarea
+              id="app-full-week-followup-input"
+              name="full_week_followup"
+              class="form__textarea"
+              placeholder="e.g. confirmation of daily times, an evening session option, leave from work"
+              aria-describedby="app-full-week-followup-hint"
+            ></textarea>
+            <span class="form__hint" id="app-full-week-followup-hint">Optional. Helps us see if there is something we can address.</span>
           </div>
 
           <div class="form__group">
@@ -608,13 +771,119 @@
               <option value="Flexible">Flexible</option>
               <option value="Not Working">Not Working</option>
             </select>
-            <span class="form__hint" id="app-schedule-hint">This helps us schedule sessions that work for you.</span>
+            <span class="form__hint" id="app-schedule-hint">Helps us understand your availability for the program.</span>
+          </div>
+        </fieldset>
+
+        <!-- After the Program -->
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">After the Program</legend>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-location">Preferred working location after the program</label>
+            <select
+              id="app-location"
+              name="preferred_working_location"
+              class="form__select"
+              required
+              aria-required="true"
+              aria-describedby="app-location-hint"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option value="HCMC">HCMC (Cat Lai, Hiep Phuoc)</option>
+              <option value="Cai Mep / Vung Tau">Cai Mep / Vung Tau (deepwater ports)</option>
+              <option value="Binh Duong / Dong Nai">Binh Duong / Dong Nai (industrial belt)</option>
+              <option value="Hai Phong">Hai Phong (Lach Huyen, northern port)</option>
+              <option value="Hanoi">Hanoi</option>
+              <option value="Da Nang">Da Nang</option>
+              <option value="Other in Vietnam">Other in Vietnam</option>
+              <option value="Abroad">Abroad</option>
+              <option value="Other">Other (please specify below)</option>
+            </select>
+            <span class="form__hint" id="app-location-hint">Where would you like to work after completing the program?</span>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-location-other">If "Other", please specify</label>
+            <input
+              type="text"
+              id="app-location-other"
+              name="preferred_working_location_other"
+              class="form__input"
+              placeholder="City or region"
+            >
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-internship">Have you done an internship or worked in shipping or logistics before?</label>
+            <select
+              id="app-internship"
+              name="prior_internship"
+              class="form__select"
+              required
+              aria-required="true"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-internship-where">If yes, where (and how long)?</label>
+            <input
+              type="text"
+              id="app-internship-where"
+              name="prior_internship_where"
+              class="form__input"
+              placeholder="Company name and duration"
+            >
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-eligibility">Can you work in Vietnam?</label>
+            <select
+              id="app-eligibility"
+              name="work_eligibility_vietnam"
+              class="form__select"
+              required
+              aria-required="true"
+              aria-describedby="app-eligibility-hint"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <option value="Yes, Vietnamese citizen or permanent resident">Yes, Vietnamese citizen or permanent resident</option>
+              <option value="Yes, I have a valid work permit">Yes, I have a valid work permit</option>
+              <option value="No, I would need sponsorship">No, I would need sponsorship</option>
+            </select>
+            <span class="form__hint" id="app-eligibility-hint">Useful for placement after the program.</span>
           </div>
         </fieldset>
 
         <!-- Additional Info -->
         <fieldset class="form__fieldset">
           <legend class="form__legend">Additional Information</legend>
+
+          <div class="form__group">
+            <label class="form__label">How did you hear about us?</label>
+            <div class="form__checkbox-group" role="group" aria-label="How did you hear about us">
+              <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="LinkedIn"> LinkedIn</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="Facebook"> Facebook</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="Referral"> Referral</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="University Events/Newsletter"> University Events / Newsletter</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="Other"> Other</label>
+            </div>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-hear-other">If "Other", please specify</label>
+            <input
+              type="text"
+              id="app-hear-other"
+              name="how_did_you_hear_other"
+              class="form__input"
+              placeholder="e.g. lecturer recommendation, a friend, TikTok"
+            >
+          </div>
 
           <div class="form__group">
             <label class="form__label" for="app-notes">Anything else you'd like us to know?</label>
@@ -788,6 +1057,23 @@
         }
       }
 
+      // Show or hide the "What would help you commit?" follow-up box based on
+      // the 5-day commitment dropdown. Triggered when value is "Maybe".
+      function setupMaybeFollowup() {
+        var select = document.getElementById('app-full-week');
+        var followup = document.getElementById('app-full-week-followup');
+        if (!select || !followup) return;
+        function update() {
+          if (select.value === 'Maybe') {
+            followup.hidden = false;
+          } else {
+            followup.hidden = true;
+          }
+        }
+        select.addEventListener('change', update);
+        update();
+      }
+
       // Initialize
       var appForm = document.getElementById('application-form');
       if (appForm) {
@@ -795,6 +1081,7 @@
       }
 
       preselectInquiryTopic();
+      setupMaybeFollowup();
 
       // Mobile nav toggle (duplicated from script.js in case this page loads independently)
       var navToggle = document.getElementById('nav-toggle');
