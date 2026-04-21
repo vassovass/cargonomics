@@ -1058,18 +1058,20 @@
         <button type="submit" class="form__submit" data-track="form" data-cta-type="apply" data-cta-location="application-form" data-cta-destination="form-submit">Submit Application</button>
         <p class="form__privacy">Your information is processed in accordance with our privacy policy and used only for application review and communication.</p>
         <p class="form__social-proof">Join 1,000+ industry professionals in our network</p>
-
-        <!-- Success / Error States -->
-        <div class="form__success" id="app-form-success" hidden role="status" aria-live="polite">
-          <h3 id="application-success">Application Received</h3>
-          <p>Thank you for applying to the Shipping and Logistics 101 Career Development Program. Your application is under review. We accept a limited number of students each quarter to ensure quality mentoring and placement outcomes. You will hear from us within 5 business days.</p>
-          <p>Questions? <a href="https://wa.me/" style="color: var(--color-primary); text-decoration: underline;">WhatsApp us</a> or email <a href="mailto:info@cargonomics.com.vn" style="color: var(--color-primary); text-decoration: underline;">info@cargonomics.com.vn</a></p>
-        </div>
-        <div class="form__error" id="app-form-error" hidden role="alert" aria-live="assertive">
-          <h3 id="application-error">Something Went Wrong</h3>
-          <p>Your submission could not be sent. Please try again or contact us directly via <a href="https://wa.me/" style="color: var(--color-signal); text-decoration: underline;">WhatsApp</a> or <a href="mailto:info@cargonomics.com.vn" style="color: var(--color-signal); text-decoration: underline;">email</a>.</p>
-        </div>
       </form>
+
+      <!-- Success / Error States — OUTSIDE the form so form.style.display='none'
+           on submit doesn't also hide the confirmation. Moved 2026-04-21 v9
+           after Vasso reported no "thank you" text appeared post-submit. -->
+      <div class="form__success" id="app-form-success" hidden role="status" aria-live="polite">
+        <h3 id="application-success">Application Received</h3>
+        <p>Thank you for applying to the Shipping and Logistics 101 Career Development Program. Your application is under review. We accept a limited number of students each quarter to ensure quality mentoring and placement outcomes. You will hear from us within 5 business days.</p>
+        <p>Questions? <a href="https://wa.me/" style="color: var(--color-primary); text-decoration: underline;">WhatsApp us</a> or email <a href="mailto:info@cargonomics.com.vn" style="color: var(--color-primary); text-decoration: underline;">info@cargonomics.com.vn</a></p>
+      </div>
+      <div class="form__error" id="app-form-error" hidden role="alert" aria-live="assertive">
+        <h3 id="application-error">Something Went Wrong</h3>
+        <p>Your submission could not be sent. Please try again or contact us directly via <a href="https://wa.me/" style="color: var(--color-signal); text-decoration: underline;">WhatsApp</a> or <a href="mailto:info@cargonomics.com.vn" style="color: var(--color-signal); text-decoration: underline;">email</a>.</p>
+      </div>
     </div>
   </section>
 

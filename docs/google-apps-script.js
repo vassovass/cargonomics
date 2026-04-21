@@ -122,6 +122,13 @@ function handleSubmission_(e, sheet) {
   try {
     var data = JSON.parse(e.postData.contents);
     var header = appendSubmission_(sheet, data);
+    // Fire-and-forget applicant confirmation email. Never let an email
+    // failure turn a successful submission into an error on the client.
+    try {
+      sendApplicantConfirmation_(data);
+    } catch (emailErr) {
+      Logger.log('applicant email failed: ' + emailErr.message);
+    }
     return jsonResponse_({ status: 'success', columns: header.length });
   } catch (err) {
     return jsonResponse_({ status: 'error', message: err.message });
@@ -227,6 +234,51 @@ function saveUploadToDrive_(upload, submission) {
   var blob = Utilities.newBlob(bytes, upload.mimeType, safeName);
   var file = folder.createFile(blob);
   return safeName;
+}
+
+/**
+ * Send the applicant a confirmation email. Uses MailApp so it counts
+ * against the daily quota (100/day on a free Google account, 1500/day
+ * on Workspace). If the data has no valid email, returns silently.
+ *
+ * BCC the team inbox so we have an audit trail of confirmations sent.
+ */
+function sendApplicantConfirmation_(data) {
+  var to = (data.email || '').trim();
+  if (!to || to.indexOf('@') === -1) return;
+
+  var name = (data.full_name || '').trim() || 'there';
+  var subject = 'We received your application - Cargonomics Shipping & Logistics 101';
+  var body = [
+    'Hi ' + name + ',',
+    '',
+    'Thank you for applying to the Shipping and Logistics 101 Career Development Program.',
+    '',
+    'We have received your application and it is under review. We accept a limited number of students each cohort to ensure quality mentoring and placement outcomes.',
+    '',
+    'Cohort dates: Monday 1 - Friday 5 June 2026 (weekdays, Ho Chi Minh City).',
+    '',
+    'What happens next:',
+    '  1. Our team reviews your application individually.',
+    '  2. Shortlisted candidates are invited to a short interview.',
+    '  3. Successful applicants receive a formal offer within 5 business days.',
+    '',
+    'If you have any questions in the meantime, reply to this email or message us on WhatsApp.',
+    '',
+    'Best regards,',
+    'The Cargonomics Team',
+    'info@cargonomics.com.vn',
+    'https://www.cargonomics.com.vn'
+  ].join('\n');
+
+  MailApp.sendEmail({
+    to: to,
+    bcc: 'info@cargonomics.com.vn',
+    subject: subject,
+    body: body,
+    name: 'Cargonomics',
+    replyTo: 'info@cargonomics.com.vn'
+  });
 }
 
 /**
