@@ -381,6 +381,21 @@ button {
   flex-wrap: wrap;
 }
 
+/* Hero image crop. Globe bleeds off the left edge for a designed feel
+   rather than a centered sphere. Mobile default: 4:3 forces enough
+   horizontal overflow for the object-position shift to be visible. */
+.hero__video-wrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.hero__video-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 50%;
+}
+
 /* ==========================================================================
    PILLARS v2 — Alternating image+text rows
    ========================================================================== */
@@ -1808,6 +1823,24 @@ button {
 
   .hero__headline {
     font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
+  /* Desktop hero crop: stretch the image grid cell to full row height,
+     then object-position shifts focus right so the globe bleeds off the
+     left edge. Aspect ratio drops away; the hero row is governed by the
+     content block, not the image. */
+  .hero__video,
+  .hero__video-wrapper {
+    align-self: stretch;
+    height: 100%;
+  }
+
+  .hero__video-wrapper {
+    aspect-ratio: auto;
+  }
+
+  .hero__video-wrapper img {
+    object-position: 72% 50%;
   }
 
   /* Pillars v2 — alternating rows side-by-side */
