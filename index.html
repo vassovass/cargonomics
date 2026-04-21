@@ -524,109 +524,101 @@
         <p class="trusted-partners__lede" data-slot="body" data-elementor-widget="text-editor">Our graduates are placed directly with the industry leaders who know us. Drawn from 25+ years of senior leadership across global shipping and logistics.</p>
       </div>
 
-      <!-- Premium marquee: typographically-distinct fake logos on navy background.
-           Each <span class="trusted-partners__logo" data-logo-style="..."> renders as
-           a pseudo-wordmark. When real logos arrive, replace each <span> with an
-           <img class="trusted-partners__logo-img"> using data-partner-logo-src as
-           the src value - zero CSS rewrite required on the wrapper. -->
+      <!-- Premium marquee: real partner logos landed 2026-04-20. Each
+           <img class="trusted-partners__logo-img"> points at img/partners/partner-<slug>.<ext>
+           with alt set to brand name and data-partner-logo-src mirroring src for Elementor ACF
+           mapping. Grayscale-default + hover-restores-colour treatment handles mixed brand
+           colours. Set 2 is aria-hidden to avoid screen-reader double-read. -->
       <div class="trusted-partners__marquee" aria-label="Industry partners" data-slot="partners-marquee" data-elementor-widget="container">
         <div class="trusted-partners__track">
           <!-- Set 1 (visible) -->
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="CMA CGM / APL" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="CMIT" data-partner-logo-src="img/partners/partner-cmit.png">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="CMIT" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="ZIM Integrated Shipping" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="img/partners/partner-gema-dept.webp">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="Gemadept" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Maersk" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Hateco" data-partner-logo-src="img/partners/partner-hateco.png">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="Hateco" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="MSC" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Headway Logistics" data-partner-logo-src="img/partners/partner-headway-logistics.svg">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="Headway Logistics" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Hapag-Lloyd" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="KLN" data-partner-logo-src="img/partners/partner-kln.png">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="KLN" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Ocean Network Express" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="LX Pantos" data-partner-logo-src="img/partners/partner-lx-pantos.png">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="LX Pantos" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Saigon Newport Corporation" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="OOCL" data-partner-logo-src="img/partners/partner-oocl.svg">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="OOCL" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="bold-italic">Gemadept</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="UPS" data-partner-logo-src="img/partners/partner-ups.svg">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="UPS" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Tan Cang Saigon" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">TAN CANG</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="Vantage" data-partner-logo-src="img/partners/partner-vantage.svg">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="Vantage" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="DB Schenker" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="italic-caps">DB SCHENKER</span>
-          </div>
-          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" data-slot="partner" data-partner-name="DHL Global Forwarding" data-partner-logo-src="">
-            <span class="trusted-partners__logo" data-logo-style="condensed-caps">DHL</span>
+          <div class="trusted-partners__item" data-slot="partner" data-partner-name="VinaLogistics" data-partner-logo-src="img/partners/partner-vinalogistics.svg">
+            <img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="VinaLogistics" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item trusted-partners__item--more" data-slot="partner">
-            <span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span>
+            <span class="trusted-partners__logo">+ 1,000 more</span>
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <!-- Set 2 (duplicate for seamless loop, aria-hidden to avoid screen reader double-read) -->
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="bold-italic">Gemadept</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="geometric-spaced">TAN CANG</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="italic-caps">DB SCHENKER</span>
-          </div>
-          <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-          <div class="trusted-partners__item" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="condensed-caps">DHL</span>
+            <img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="" aria-hidden="true" loading="lazy">
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
           <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true">
-            <span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span>
+            <span class="trusted-partners__logo">+ 1,000 more</span>
           </div>
           <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
         </div>

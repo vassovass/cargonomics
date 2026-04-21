@@ -518,13 +518,12 @@
     <h2 data-number="07">Trusted Partners marquee</h2>
     <details class="sg-details">
       <summary>Technical details</summary>
-      <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. Each partner rendered as a typographically-distinct fake wordmark so it reads as a real logo. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code>; the grayscale-default + colour-on-hover pattern is the industry-standard (Bain / Stripe / Figma / ITS Logistics) and accommodates any real partner brand colour. Earlier grid version and v2 dark-navy treatment both archived in docs/archived-components.md.</p>
+      <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. <strong>Real logos landed 2026-04-20</strong>: each <code>&lt;img class="trusted-partners__logo-img"&gt;</code> points at <code>img/partners/partner-&lt;slug&gt;.&lt;ext&gt;</code> with <code>alt</code> set to the brand name and <code>data-partner-logo-src</code> mirroring the src for Elementor ACF mapping. Grayscale-default (grayscale(1) + opacity 0.55) with hover restoring full colour; treatment matches Bain / Stripe / Figma / ITS Logistics. Earlier fake-wordmark version (typographic variants via <code>data-logo-style</code>), grid version, and v2 dark-navy treatment all documented in docs/archived-components.md.</p>
 
       <dl class="sg-meta">
         <dt>Used on:</dt><dd>index.html (after pillar rows) and course.html (between why-apply and curriculum-grid)</dd>
         <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__logo-img (real-logo swap), .trusted-partners__sep</dd>
-      <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile)</dd>
-      <dt>Variants (via data-logo-style attribute):</dt><dd>bold-italic, geometric-spaced, light-lowercase, italic-caps, serif-feel, rounded-bold, condensed-caps, muted-italic</dd>
+      <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile, remains a <code>&lt;span&gt;</code> since it is text, not a logo)</dd>
       <dt>Tokens:</dt><dd>--color-ivory (bg), --color-primary (logo text), --color-secondary (separator + gold accents), --font-heading, --font-body, --space-xl, --space-2xl</dd>
       <dt>Animation:</dt><dd>@keyframes trusted-partners-scroll (translateX 0 -> -50%, 60s mobile / 80s desktop, linear infinite, pause on hover). Respects prefers-reduced-motion: reduce (animation disabled, manual scroll as fallback with scrollbar hidden).</dd>
       <dt>Edge fade:</dt><dd>mask-image linear-gradient on .trusted-partners__marquee, 10% transparent -> 90% black -> transparent</dd>
@@ -540,38 +539,50 @@
         <div class="container">
           <div class="trusted-partners__marquee">
             <div class="trusted-partners__track" style="animation-duration: 30s;">
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="CMIT" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="Gemadept" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="Hateco" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="Headway Logistics" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="KLN" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="LX Pantos" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="OOCL" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item trusted-partners__item--more"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="UPS" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="Vantage" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="VinaLogistics" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more"><span class="trusted-partners__logo">+ 1,000 more</span></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
               <!-- duplicate set for loop -->
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true"><span class="trusted-partners__logo">+ 1,000 more</span></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
             </div>
           </div>
@@ -588,15 +599,15 @@
     &lt;/div&gt;
     &lt;div class="trusted-partners__marquee"&gt;
       &lt;div class="trusted-partners__track"&gt;
-        &lt;div class="trusted-partners__item" data-partner-name="CMA CGM / APL" data-partner-logo-src=""&gt;
-          &lt;span class="trusted-partners__logo" data-logo-style="bold-italic"&gt;CMA CGM&lt;/span&gt;
+        &lt;div class="trusted-partners__item" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="img/partners/partner-gema-dept.webp"&gt;
+          &lt;img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="Gemadept" loading="lazy"&gt;
         &lt;/div&gt;
         &lt;span class="trusted-partners__sep" aria-hidden="true"&gt;&amp;diams;&lt;/span&gt;
         &lt;!-- ...more partners... --&gt;
-        &lt;!-- Duplicate the whole set for seamless infinite loop --&gt;
+        &lt;!-- Closing "+ 1,000 more" tile remains a &lt;span&gt; (text, not a logo) --&gt;
+        &lt;!-- Duplicate the whole set aria-hidden for seamless infinite loop --&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;p class="trusted-partners__disclaimer"&gt;Fake wordmarks shown until real partner logos are published.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/section&gt;</pre>
   </section>
