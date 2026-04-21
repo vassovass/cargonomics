@@ -65,12 +65,24 @@
       text-align: center;
     }
 
-    .contact-hero__headline {
+    /* v9 (2026-04-21) wireframe structure: Title > Tagline > Description > Dates. */
+    .contact-hero__title {
       font-family: var(--font-heading);
       font-weight: var(--font-weight-heading);
       color: var(--color-primary);
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      margin-bottom: var(--space-md);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      line-height: 1.2;
+      max-width: 800px;
+      margin: 0 auto var(--space-sm);
+    }
+
+    .contact-hero__tagline {
+      font-family: var(--font-heading);
+      font-weight: 500;
+      color: var(--color-secondary);
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      letter-spacing: 0.02em;
+      margin: 0 auto var(--space-md);
     }
 
     .contact-hero__intro {
@@ -82,15 +94,21 @@
       line-height: 1.7;
     }
 
-    .contact-hero__cohort {
+    .contact-hero__dates {
       display: inline-block;
-      padding: var(--space-xs) var(--space-xl);
+      padding: var(--space-sm) var(--space-xl);
       background: rgba(var(--color-secondary-rgb), 0.15);
       color: var(--color-primary);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.95rem;
-      border-left: 3px solid var(--color-secondary);
+      font-family: var(--font-heading);
+      font-weight: var(--font-weight-heading);
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(var(--color-secondary-rgb), 0.4);
+      border-radius: 4px;
+    }
+
+    .contact-hero__dates time {
+      font-family: inherit;
     }
 
     /* FORM LAYOUT */
@@ -614,34 +632,24 @@
 
   <main id="main-content">
 
-  <!-- HERO / INTRO -->
+  <!-- HERO / INTRO
+       v9 (2026-04-21): restructured per Vasso wireframe — Title (program
+       name) > Tagline > Description > Date pill. "Why Apply?" moved to
+       bottom of page, after the form. -->
   <section class="contact-hero" id="contact-hero" data-section="contact-hero" data-elementor-widget="container">
     <div class="container">
-      <h1 class="contact-hero__headline" data-slot="heading" data-elementor-widget="heading">
-        Skip the Gatekeepers. Start Your Career.
+      <h1 class="contact-hero__title" data-slot="heading" data-elementor-widget="heading">
+        Shipping and Logistics 101 Career Development Program
       </h1>
-      <p class="contact-hero__intro" data-slot="body" data-elementor-widget="text-editor">
-        The Shipping and Logistics 101 Career Development Program is not a traditional workshop. It is a high-speed career accelerator. 5 days of intensive training including a full-day port excursion, and direct placement into the industry. Every application is reviewed individually. Only 30 places.
+      <p class="contact-hero__tagline" data-slot="tagline" data-elementor-widget="heading">
+        Skip the Gatekeepers. Start Your Career.
       </p>
-      <div class="contact-hero__cohort" data-slot="cta" data-elementor-widget="text-editor">
-        Q2 2026 cohort starts <time datetime="2026-06-01">June 1, 2026</time>. Limited spots.
+      <p class="contact-hero__intro" data-slot="body" data-elementor-widget="text-editor">
+        The Shipping and Logistics 101 Career Development Program is not a traditional workshop. It is a high-speed career accelerator. Intensive training including a full-day port excursion, and direct placement into the industry. Every application is reviewed individually. Only 30 places.
+      </p>
+      <div class="contact-hero__dates" data-slot="cta" data-elementor-widget="text-editor">
+        <time datetime="2026-06-01">Monday 1</time> &ndash; <time datetime="2026-06-05">Friday 5 June 2026</time>
       </div>
-    </div>
-  </section>
-
-  <!-- WHY APPLY — Collapsible reinforcement before the form (default closed) -->
-  <section class="form-section form-section--secondary" id="why-apply" data-section="why-apply-contact" data-elementor-widget="container">
-    <div class="container">
-      <details class="why-apply-details">
-        <summary class="why-apply-summary">Why Apply?</summary>
-        <ul class="why-apply-list">
-          <li><strong>Expert-Led Curriculum:</strong> Learn from veterans with over 50 years of combined experience in Vietnamese and international markets.</li>
-          <li><strong>Real-World Exposure:</strong> A full-day guided port excursion to see the mechanics of global trade in action.</li>
-          <li><strong>Cargonomics Certification:</strong> Graduate with a credential that signals to employers you are "day-one ready."</li>
-          <li><strong>Direct Placement:</strong> We bypass the gatekeepers and place top graduates directly into roles within our network.</li>
-          <li><strong>Free:</strong> Fully sponsored for selected candidates. No tuition, no fees.</li>
-        </ul>
-      </details>
     </div>
   </section>
 
@@ -1062,6 +1070,23 @@
           <p>Your submission could not be sent. Please try again or contact us directly via <a href="https://wa.me/" style="color: var(--color-signal); text-decoration: underline;">WhatsApp</a> or <a href="mailto:info@cargonomics.com.vn" style="color: var(--color-signal); text-decoration: underline;">email</a>.</p>
         </div>
       </form>
+    </div>
+  </section>
+
+  <!-- WHY APPLY - Moved below the form 2026-04-21 per Vasso wireframe.
+       Collapsible reinforcement for applicants who scroll past the form. -->
+  <section class="form-section form-section--secondary" id="why-apply" data-section="why-apply-contact" data-elementor-widget="container">
+    <div class="container">
+      <details class="why-apply-details">
+        <summary class="why-apply-summary">Why Apply?</summary>
+        <ul class="why-apply-list">
+          <li><strong>Expert-Led Curriculum:</strong> Learn from veterans with over 50 years of combined experience in Vietnamese and international markets.</li>
+          <li><strong>Real-World Exposure:</strong> A full-day guided port excursion to see the mechanics of global trade in action.</li>
+          <li><strong>Cargonomics Certification:</strong> Graduate with a credential that signals to employers you are "day-one ready."</li>
+          <li><strong>Direct Placement:</strong> We bypass the gatekeepers and place top graduates directly into roles within our network.</li>
+          <li><strong>Free:</strong> Fully sponsored for selected candidates. No tuition, no fees.</li>
+        </ul>
+      </details>
     </div>
   </section>
 
