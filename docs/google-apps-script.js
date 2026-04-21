@@ -66,7 +66,10 @@ var SPREADSHEET_ID = '1JdM2NkkSGRKsB6q63VdxFMQiZQRloAXFnkyYXgl8E8Q';
 // placeholders in the sheet instead of uploading. Once set, the helper
 // saveUploadToDrive_() will save the file and rewrite the cell to the
 // uniquified filename.
-var UPLOADS_FOLDER_ID = '';
+//
+// Set 2026-04-21 by Vasso. Drive URL:
+// https://drive.google.com/drive/folders/1cm_Y5yUuzTUatlt4ydVY4xuUFWLDt7rp
+var UPLOADS_FOLDER_ID = '1cm_Y5yUuzTUatlt4ydVY4xuUFWLDt7rp';
 
 var TEST_SHEET_NAME = '_tests';
 
