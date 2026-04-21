@@ -154,11 +154,15 @@
       margin-bottom: var(--space-lg);
     }
 
+    /* v9 (2026-04-21): labels share the legend's heading font per
+       Vasso's feedback. Kept at 0.9rem normal case so labels read as
+       form chrome, not as a section title. */
     .form__label {
       display: block;
       margin-bottom: var(--space-xs);
-      font-family: var(--font-body);
-      font-weight: 600;
+      font-family: var(--font-heading);
+      font-weight: var(--font-weight-heading);
+      letter-spacing: 0.02em;
       font-size: 0.9rem;
       color: var(--color-text);
     }
@@ -645,7 +649,7 @@
   <section class="form-section form-section--primary" id="application" data-section="application-form" data-elementor-widget="container">
     <div class="container">
       <div class="form-section__header" data-slot="heading" data-elementor-widget="heading">
-        <h2 class="form-section__title">Shipping and Logistics 101 Career Development Program Application</h2>
+        <h2 class="form-section__title">Shipping and Logistics 101 Career Development Program<br>Application</h2>
         <p class="form-section__subtitle">All fields marked with * are required.</p>
       </div>
 
@@ -702,6 +706,45 @@
             >
             <span class="form__hint" id="app-phone-hint">Optional. Vietnamese or international format accepted.</span>
           </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-university">University</label>
+            <input
+              type="text"
+              id="app-university"
+              name="university"
+              class="form__input"
+              required
+              aria-required="true"
+              placeholder="e.g. Foreign Trade University, RMIT Vietnam"
+            >
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-major">Major</label>
+            <input
+              type="text"
+              id="app-major"
+              name="major"
+              class="form__input"
+              required
+              aria-required="true"
+              placeholder="e.g. International Business, Supply Chain Management"
+            >
+          </div>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-gpa">GPA</label>
+            <input
+              type="text"
+              id="app-gpa"
+              name="gpa"
+              class="form__input"
+              required
+              aria-required="true"
+              placeholder="e.g. 3.4 / 4.0, 8.2 / 10, A-"
+            >
+          </div>
         </fieldset>
 
         <!-- English Proficiency -->
@@ -709,7 +752,7 @@
           <legend class="form__legend">English Proficiency</legend>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-english-scale">Self-rated English level (1 to 10)</label>
+            <label class="form__label form__label--required" for="app-english-scale">English fluency</label>
             <select
               id="app-english-scale"
               name="english_proficiency_scale"
@@ -718,55 +761,26 @@
               aria-required="true"
               aria-describedby="app-english-scale-hint"
             >
-              <option value="" disabled selected>Select 1 to 10</option>
-              <option value="1">1, just starting</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5, conversational</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8, confident</option>
-              <option value="9">9</option>
-              <option value="10">10, native or near-native</option>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+              <option value="Fluent">Fluent</option>
             </select>
             <span class="form__hint" id="app-english-scale-hint">Your honest self-assessment.</span>
           </div>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-english-qual">English qualification</label>
-            <select
-              id="app-english-qual"
-              name="english_proficiency_qualification"
-              class="form__select"
-              required
-              aria-required="true"
-              aria-describedby="app-english-qual-hint"
-            >
-              <option value="" disabled selected>Select an option</option>
-              <option value="IELTS">IELTS</option>
-              <option value="TOEFL">TOEFL</option>
-              <option value="CEFR A1">CEFR A1</option>
-              <option value="CEFR A2">CEFR A2</option>
-              <option value="CEFR B1">CEFR B1</option>
-              <option value="CEFR B2">CEFR B2</option>
-              <option value="CEFR C1">CEFR C1</option>
-              <option value="CEFR C2">CEFR C2</option>
-              <option value="No formal qualification yet">No formal qualification yet</option>
-            </select>
-            <span class="form__hint" id="app-english-qual-hint">Pick the closest. Add your band or score below if you have one.</span>
-          </div>
-
-          <div class="form__group">
-            <label class="form__label" for="app-english-score">Band or score (optional)</label>
+            <label class="form__label" for="app-english-qual">English qualification (optional)</label>
             <input
               type="text"
-              id="app-english-score"
-              name="english_proficiency_score"
+              id="app-english-qual"
+              name="english_proficiency_qualification"
               class="form__input"
-              placeholder="e.g. 7.5 or 100"
+              aria-describedby="app-english-qual-hint"
+              placeholder="e.g. IELTS 7.5, CEFR B2, TOEFL 100, none"
             >
-          </div>
+            <span class="form__hint" id="app-english-qual-hint">Free text. Leave blank if you don't have a formal qualification.</span>
         </fieldset>
 
         <!-- Course & Availability -->
@@ -796,51 +810,20 @@
           </div>
 
           <div class="form__group">
-            <label class="form__label form__label--required" for="app-available">Are you available for the program dates?</label>
+            <label class="form__label form__label--required" for="app-attendance">Are you committed to 100% attendance?</label>
             <select
-              id="app-available"
-              name="available_on_bootcamp_dates"
+              id="app-attendance"
+              name="attendance_commitment"
               class="form__select"
               required
               aria-required="true"
-              aria-describedby="app-available-hint"
+              aria-describedby="app-attendance-hint"
             >
               <option value="" disabled selected>Select an option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
-              <option value="Unsure">Unsure</option>
             </select>
-            <span class="form__hint" id="app-available-hint">1 June to 5 June 2026 inclusive.</span>
-          </div>
-
-          <div class="form__group">
-            <label class="form__label form__label--required" for="app-full-week">Can you commit to all 5 days?</label>
-            <select
-              id="app-full-week"
-              name="full_week_available"
-              class="form__select"
-              required
-              aria-required="true"
-              aria-describedby="app-full-week-hint"
-            >
-              <option value="" disabled selected>Select an option</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-              <option value="Maybe">Maybe</option>
-            </select>
-            <span class="form__hint" id="app-full-week-hint">Full attendance is required for certification and placement eligibility.</span>
-          </div>
-
-          <div class="form__group form__followup" id="app-full-week-followup" hidden>
-            <label class="form__label" for="app-full-week-followup-input">What would help you commit?</label>
-            <textarea
-              id="app-full-week-followup-input"
-              name="full_week_followup"
-              class="form__textarea"
-              placeholder="e.g. confirmation of daily times, an evening session option, leave from work"
-              aria-describedby="app-full-week-followup-hint"
-            ></textarea>
-            <span class="form__hint" id="app-full-week-followup-hint">Optional. Helps us see if there is something we can address.</span>
+            <span class="form__hint" id="app-attendance-hint">Full 5-day attendance (1 to 5 June 2026 inclusive) is required for certification and placement eligibility.</span>
           </div>
 
           <div class="form__group">
@@ -952,6 +935,32 @@
           <legend class="form__legend">Additional Information</legend>
 
           <div class="form__group">
+            <label class="form__label form__label--required">Which field(s) in logistics are you interested in?</label>
+            <div class="form__checkbox-group" role="group" aria-label="Logistics fields of interest">
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Documentation & Customer Service"> Documentation &amp; Customer Service</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Sales"> Sales</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Operation"> Operation</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Warehouse"> Warehouse</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Analytics & Planning"> Analytics &amp; Planning</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Procurement & Sourcing"> Procurement &amp; Sourcing</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Supply Chain"> Supply Chain</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="Other"> Other</label>
+              <label class="form__checkbox-label"><input type="checkbox" name="logistics_interest" value="I am not sure yet"> I am not sure yet</label>
+            </div>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-logistics-interest-other">If "Other", please specify</label>
+            <input
+              type="text"
+              id="app-logistics-interest-other"
+              name="logistics_interest_other"
+              class="form__input"
+              placeholder="Tell us which area"
+            >
+          </div>
+
+          <div class="form__group">
             <label class="form__label">How did you hear about us?</label>
             <div class="form__checkbox-group" role="group" aria-label="How did you hear about us">
               <label class="form__checkbox-label"><input type="checkbox" name="how_did_you_hear" value="LinkedIn"> LinkedIn</label>
@@ -983,6 +992,39 @@
               placeholder="Tell us about your interest in shipping and logistics, your background, or any questions you have."
             ></textarea>
             <span class="form__hint" id="app-notes-hint">Optional. Share anything relevant to your application.</span>
+          </div>
+        </fieldset>
+
+        <!-- Documents Upload -->
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">Documents</legend>
+
+          <div class="form__group">
+            <label class="form__label form__label--required" for="app-cv">CV / Resume</label>
+            <input
+              type="file"
+              id="app-cv"
+              name="cv_upload"
+              class="form__input"
+              required
+              aria-required="true"
+              aria-describedby="app-cv-hint"
+              accept=".pdf,.doc,.docx"
+            >
+            <span class="form__hint" id="app-cv-hint">PDF, DOC, or DOCX. Maximum 10MB. Required.</span>
+          </div>
+
+          <div class="form__group">
+            <label class="form__label" for="app-other-doc">Other related document (optional)</label>
+            <input
+              type="file"
+              id="app-other-doc"
+              name="other_attachment"
+              class="form__input"
+              aria-describedby="app-other-doc-hint"
+              accept=".pdf,.doc,.docx"
+            >
+            <span class="form__hint" id="app-other-doc-hint">e.g. transcript, certificate, portfolio. Optional.</span>
           </div>
         </fieldset>
 
@@ -1054,7 +1096,7 @@
       </div>
       <div class="footer__bottom">
         <span>&copy; 2026 Cargonomics. All rights reserved.</span>
-          <span class="footer__version">v8</span>
+          <span class="footer__version">v9</span>
         <div class="footer__social">
           <span class="footer__social-placeholder" aria-label="Follow us on Zalo" data-track="cta" data-cta-type="social" data-cta-location="footer" data-cta-destination="zalo">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -1145,23 +1187,6 @@
         }
       }
 
-      // Show or hide the "What would help you commit?" follow-up box based on
-      // the 5-day commitment dropdown. Triggered when value is "Maybe".
-      function setupMaybeFollowup() {
-        var select = document.getElementById('app-full-week');
-        var followup = document.getElementById('app-full-week-followup');
-        if (!select || !followup) return;
-        function update() {
-          if (select.value === 'Maybe') {
-            followup.hidden = false;
-          } else {
-            followup.hidden = true;
-          }
-        }
-        select.addEventListener('change', update);
-        update();
-      }
-
       // Initialize
       var appForm = document.getElementById('application-form');
       if (appForm) {
@@ -1169,7 +1194,6 @@
       }
 
       preselectInquiryTopic();
-      setupMaybeFollowup();
 
       // Mobile nav toggle (duplicated from script.js in case this page loads independently)
       var navToggle = document.getElementById('nav-toggle');

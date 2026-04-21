@@ -3156,26 +3156,17 @@ button {
 }
 
 /* ---------- Logo-image mode (activates automatically when <span> is
-   swapped for <img> inside .trusted-partners__item). Light-treatment
-   grayscale-default + colour-on-hover matches the industry-standard
-   premium partner wall pattern (Bain / Stripe / Figma / ITS Logistics).
-   Works regardless of real partner brand colour - accommodates Maersk
-   red, CMA CGM blue, MSC yellow, Hapag-Lloyd orange all in one coherent
-   row. ---------- */
+   swapped for <img> inside .trusted-partners__item). Full-colour
+   treatment. Partner brand colours render as-received. The marquee is
+   the social-validation band - we want brand recognition, not a tonal
+   wash. ---------- */
 
 .trusted-partners__logo-img {
   height: 40px;
   width: auto;
   max-width: 140px;
   object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.55;
   transition: filter 0.25s ease, opacity 0.25s ease;
-}
-
-.trusted-partners__item:hover .trusted-partners__logo-img {
-  filter: grayscale(0);
-  opacity: 1;
 }
 
 /* ---------- Responsive ---------- */

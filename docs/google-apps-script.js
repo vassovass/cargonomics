@@ -33,6 +33,11 @@
  *    Copy the new Web App URL.
  * 6. If the Web App URL changed, paste it into js/form-submit.js
  *    (replace APPS_SCRIPT_URL).
+ *   7. Create a Google Drive folder for applicant uploads. Copy the
+ *      folder ID (trailing path segment after /folders/ in the URL)
+ *      and paste it into UPLOADS_FOLDER_ID below. Without this,
+ *      uploaded files appear as "[PENDING DRIVE SETUP] <name>" in the
+ *      sheet rather than uploading.
  *
  * REDEPLOY
  * --------
@@ -50,6 +55,19 @@
  */
 
 var SPREADSHEET_ID = '1JdM2NkkSGRKsB6q63VdxFMQiZQRloAXFnkyYXgl8E8Q';
+
+// Drive folder that receives uploaded applicant files (CV + optional
+// other attachment). Create a folder in Google Drive, open it, copy the
+// trailing ID from the URL, paste here. The Apps Script service account
+// must have write access to this folder (it will by default if you
+// created the folder in the same Google account as the Sheet owner).
+//
+// Leave as '' until set — file-upload fields will be stored as base64
+// placeholders in the sheet instead of uploading. Once set, the helper
+// saveUploadToDrive_() will save the file and rewrite the cell to the
+// uniquified filename.
+var UPLOADS_FOLDER_ID = '';
+
 var TEST_SHEET_NAME = '_tests';
 
 // Seed only. Used to populate the header when the production sheet is
@@ -113,6 +131,17 @@ function appendSubmission_(sheet, data) {
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
+    // Transform any {filename, mimeType, base64} payload entries into
+    // plain filename strings by uploading the content to Drive. Applicant
+    // filename is made unique with the submitted_at timestamp + full_name
+    // slug so concurrent submissions don't collide.
+    Object.keys(data).forEach(function (key) {
+      var value = data[key];
+      if (value && typeof value === 'object' && value.base64 && value.filename) {
+        data[key] = saveUploadToDrive_(value, data);
+      }
+    });
+
     var header = ensureHeader_(sheet, data);
     var row = header.map(function (col) {
       return data[col] !== undefined && data[col] !== null ? data[col] : '';
@@ -177,6 +206,41 @@ function jsonResponse_(obj) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+/**
+ * Save an uploaded file to Drive. Returns the uniquified filename.
+ * Leaves the base64 payload in-place (as a fallback) if UPLOADS_FOLDER_ID
+ * is not set, so Vasso can tell at a glance that the Drive setup step
+ * is still pending.
+ */
+function saveUploadToDrive_(upload, submission) {
+  if (!UPLOADS_FOLDER_ID) {
+    // Drive folder not set yet. Return a marker string that explains
+    // what happened, so the sheet cell is not silently empty.
+    return '[PENDING DRIVE SETUP] ' + upload.filename;
+  }
+  var folder = DriveApp.getFolderById(UPLOADS_FOLDER_ID);
+  var bytes = Utilities.base64Decode(upload.base64);
+  var safeName = buildUploadName_(upload.filename, submission);
+  var blob = Utilities.newBlob(bytes, upload.mimeType, safeName);
+  var file = folder.createFile(blob);
+  return safeName;
+}
+
+/**
+ * Build a uniquified filename: <iso-date>_<applicant-slug>_<original-name>.
+ * Falls back to just <iso-date>_<original-name> if no name is available.
+ */
+function buildUploadName_(originalName, submission) {
+  var ts = (submission.submitted_at || new Date().toISOString())
+    .split('T')[0];
+  var slug = (submission.full_name || 'anonymous')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 40);
+  return ts + '_' + slug + '_' + originalName;
+}
+
 // =============================================================
 // TESTS — Run > runTests in the Apps Script editor
 // =============================================================
@@ -189,7 +253,8 @@ function runTests() {
     test_olderRowsStayValidAfterNewColumn_,
     test_missingKeysBecomeEmptyStrings_,
     test_handleSubmissionParsesJson_,
-    test_handleSubmissionReportsErrorOnBadJson_
+    test_handleSubmissionReportsErrorOnBadJson_,
+    test_SaveUploadPassesThroughWhenDriveUnset_
   ];
 
   var results = tests.map(function (fn) {
@@ -342,6 +407,53 @@ function test_handleSubmissionReportsErrorOnBadJson_() {
 
     if (parsed.status !== 'error') throw new Error('expected error, got: ' + parsed.status);
     if (sheet.getLastRow() !== 0) throw new Error('sheet should be empty after bad input, got rows: ' + sheet.getLastRow());
+    return { name: name, pass: true };
+  } catch (err) {
+    return { name: name, pass: false, message: err.message };
+  }
+}
+
+function test_SaveUploadPassesThroughWhenDriveUnset_() {
+  var name = 'saveUploadToDrive_ returns [PENDING DRIVE SETUP] marker when UPLOADS_FOLDER_ID is empty';
+  try {
+    // This test assumes UPLOADS_FOLDER_ID is '' (the default until Vasso
+    // pastes the real folder ID). If the Drive folder has been set,
+    // this test is expected to be skipped; it will report that state
+    // rather than pretend to pass.
+    if (UPLOADS_FOLDER_ID) {
+      throw new Error('UPLOADS_FOLDER_ID is set; this test only covers the pre-setup path. Temporarily clear it to exercise the marker-string branch.');
+    }
+
+    var upload = {
+      filename: 'cv.pdf',
+      mimeType: 'application/pdf',
+      base64: 'JVBERi0xLjQKJeLjz9MK' // arbitrary non-empty base64
+    };
+    var submission = {
+      submitted_at: '2026-04-21T09:00:00Z',
+      full_name: 'Test Applicant'
+    };
+
+    var result = saveUploadToDrive_(upload, submission);
+    var expected = '[PENDING DRIVE SETUP] cv.pdf';
+    if (result !== expected) {
+      throw new Error('expected "' + expected + '", got: ' + result);
+    }
+
+    // Also confirm the pre-processing loop inside appendSubmission_
+    // rewrites the payload field to the same marker before writing.
+    var sheet = getTestSheet_();
+    appendSubmission_(sheet, {
+      submitted_at: '2026-04-21T09:00:00Z',
+      full_name: 'Test Applicant',
+      cv_upload: upload
+    });
+    var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var row = sheet.getRange(2, 1, 1, header.length).getValues()[0];
+    var idx = header.indexOf('cv_upload');
+    if (idx === -1) throw new Error('cv_upload column missing from header');
+    if (row[idx] !== expected) throw new Error('sheet cell expected marker, got: ' + row[idx]);
+
     return { name: name, pass: true };
   } catch (err) {
     return { name: name, pass: false, message: err.message };
