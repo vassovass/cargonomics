@@ -254,11 +254,11 @@
 
   <header class="sg-header">
     <h1>Cargonomics Internal Styleguide</h1>
-    <p>Live render of every reusable component on the site. Each entry lists its BEM class, tokens used, data-slot/data-elementor-widget attributes (WordPress migration targets), and a copy-pasteable HTML snippet. Uses the same `style-v7.css`, `tokens-cargonomics.css`, and `v7-fixes.css` as production, so a regression here implies a regression on the live site.</p>
+    <p>Live render of every reusable component on the site. Each entry lists its BEM class, tokens used, data-slot/data-elementor-widget attributes (WordPress migration targets), and a copy-pasteable HTML snippet. Uses the same `style.css`, `tokens-cargonomics.css`, and `fixes.css` as production, so a regression here implies a regression on the live site.</p>
   </header>
 
   <div class="sg-notice">
-    <strong>Internal only.</strong> This page is <code>noindex, nofollow</code> and is not linked from public nav, site sitemap, or the footer. Reach it via direct URL: <code>/styleguide</code> or <code>/styleguide.html</code>. Complementary to <code>docs/archived-components.md</code>, which holds <em>removed</em> components; this page holds <em>current</em> components. Deprecated components are kept in-page with a <code>.sg-deprecated-badge</code> at the top of their section until they migrate to <code>docs/archived-components.md</code> once the replacement is stable. The trainer card v2 (below) is the first example of this pattern. Each component's "Technical details" panel (click to expand) carries a <strong>Used on</strong> row naming the live pages where it renders, and must be updated in the same commit whenever a component is added, removed, or moved on a live page. Full rule in <code>.claude/rules/website-conventions.md</code> "Styleguide Usage Log".
+    <strong>Internal only.</strong> This page is <code>noindex, nofollow</code> and is not linked from public nav, site sitemap, or the footer. Reach it via direct URL: <code>/styleguide</code> or <code>/styleguide.html</code>. Complementary to <code>docs/archived-components.md</code>, which holds <em>removed</em> components; this page holds <em>current</em> components. Deprecated components are kept in-page with a <code>.sg-deprecated-badge</code> at the top of their section until they migrate to <code>docs/archived-components.md</code> once the replacement is stable. <em>(No components currently use this pattern.)</em> Each component's "Technical details" panel (click to expand) carries a <strong>Used on</strong> row naming the live pages where it renders, and must be updated in the same commit whenever a component is added, removed, or moved on a live page. Full rule in <code>.claude/rules/website-conventions.md</code> "Styleguide Usage Log".
   </div>
 
   <nav class="sg-toc" aria-label="Styleguide table of contents">
@@ -271,10 +271,10 @@
       <li><a href="#sg-about-pillar">About pillar card</a></li>
       <li><a href="#sg-trusted-partners">Trusted Partners marquee</a></li>
       <li><a href="#sg-program-featured">Program featured card</a></li>
-      <li><a href="#sg-trainer-card">Trainer card v2 (deprecated)</a></li>
-      <li><a href="#sg-trainer-card-v3-editorial">Trainer card v3, A: Editorial (live default)</a></li>
-      <li><a href="#sg-trainer-card-v3-network">Trainer card v3, B: Network</a></li>
-      <li><a href="#sg-trainer-card-v3-split">Trainer card v3, C: Split</a></li>
+      <li><a href="#sg-trainer-card">Trainer card v2 (live default)</a></li>
+      <li><a href="#sg-trainer-card-v3-editorial">Trainer card v3, A: Editorial (explored, not live)</a></li>
+      <li><a href="#sg-trainer-card-v3-network">Trainer card v3, B: Network (explored, not live)</a></li>
+      <li><a href="#sg-trainer-card-v3-split">Trainer card v3, C: Split (explored, not live)</a></li>
       <li><a href="#sg-curriculum-grid">Curriculum grid card</a></li>
     </ol>
   </nav>
@@ -518,13 +518,12 @@
     <h2 data-number="07">Trusted Partners marquee</h2>
     <details class="sg-details">
       <summary>Technical details</summary>
-      <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. Each partner rendered as a typographically-distinct fake wordmark so it reads as a real logo. When real logos arrive, the <code>&lt;span class="trusted-partners__logo"&gt;</code> is swapped for <code>&lt;img class="trusted-partners__logo-img"&gt;</code>; the grayscale-default + colour-on-hover pattern is the industry-standard (Bain / Stripe / Figma / ITS Logistics) and accommodates any real partner brand colour. Earlier grid version and v2 dark-navy treatment both archived in docs/archived-components.md.</p>
+      <p class="sg-desc">Social-validation band. v3 light treatment (2026-04-16 evening): ivory background, navy typography at 55% opacity by default, full-opacity on hover. <strong>Real logos landed 2026-04-20</strong>: each <code>&lt;img class="trusted-partners__logo-img"&gt;</code> points at <code>img/partners/partner-&lt;slug&gt;.&lt;ext&gt;</code> with <code>alt</code> set to the brand name and <code>data-partner-logo-src</code> mirroring the src for Elementor ACF mapping. Grayscale-default (grayscale(1) + opacity 0.55) with hover restoring full colour; treatment matches Bain / Stripe / Figma / ITS Logistics. Earlier fake-wordmark version (typographic variants via <code>data-logo-style</code>), grid version, and v2 dark-navy treatment all documented in docs/archived-components.md.</p>
 
       <dl class="sg-meta">
         <dt>Used on:</dt><dd>index.html (after pillar rows) and course.html (between why-apply and curriculum-grid)</dd>
         <dt>Section:</dt><dd>.trusted-partners, .trusted-partners__header, .trusted-partners__marquee, .trusted-partners__track, .trusted-partners__item, .trusted-partners__logo, .trusted-partners__logo-img (real-logo swap), .trusted-partners__sep</dd>
-      <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile)</dd>
-      <dt>Variants (via data-logo-style attribute):</dt><dd>bold-italic, geometric-spaced, light-lowercase, italic-caps, serif-feel, rounded-bold, condensed-caps, muted-italic</dd>
+      <dt>Modifiers:</dt><dd>.trusted-partners__item--more (closing "+ 1,000 more" tile, remains a <code>&lt;span&gt;</code> since it is text, not a logo)</dd>
       <dt>Tokens:</dt><dd>--color-ivory (bg), --color-primary (logo text), --color-secondary (separator + gold accents), --font-heading, --font-body, --space-xl, --space-2xl</dd>
       <dt>Animation:</dt><dd>@keyframes trusted-partners-scroll (translateX 0 -> -50%, 60s mobile / 80s desktop, linear infinite, pause on hover). Respects prefers-reduced-motion: reduce (animation disabled, manual scroll as fallback with scrollbar hidden).</dd>
       <dt>Edge fade:</dt><dd>mask-image linear-gradient on .trusted-partners__marquee, 10% transparent -> 90% black -> transparent</dd>
@@ -540,38 +539,54 @@
         <div class="container">
           <div class="trusted-partners__marquee">
             <div class="trusted-partners__track" style="animation-duration: 30s;">
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="CMIT" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="Gemadept" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="Hateco" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="Headway Logistics" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="KLN" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="LX Pantos" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="OOCL" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item trusted-partners__item--more"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="UPS" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="Vantage" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-vietsea.png" alt="Vietsea" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item"><img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="VinaLogistics" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more"><span class="trusted-partners__logo">+ 1,000 more</span></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
               <!-- duplicate set for loop -->
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="bold-italic">CMA CGM</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-cmit.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="geometric-spaced">ZIM</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="light-lowercase">maersk</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-hateco.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="italic-caps">MSC</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-headway-logistics.svg" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="serif-feel">Hapag&#8209;Lloyd</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-kln.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="rounded-bold">ONE</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-lx-pantos.png" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="condensed-caps">SAIGON NEWPORT</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-oocl.svg" alt="" aria-hidden="true" loading="lazy"></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
-              <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true"><span class="trusted-partners__logo" data-logo-style="muted-italic">+ 1,000 more</span></div>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-ups.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-vantage.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-vietsea.png" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item" aria-hidden="true"><img class="trusted-partners__logo-img" src="img/partners/partner-vinalogistics.svg" alt="" aria-hidden="true" loading="lazy"></div>
+              <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
+              <div class="trusted-partners__item trusted-partners__item--more" aria-hidden="true"><span class="trusted-partners__logo">+ 1,000 more</span></div>
               <span class="trusted-partners__sep" aria-hidden="true">&diams;</span>
             </div>
           </div>
@@ -588,15 +603,15 @@
     &lt;/div&gt;
     &lt;div class="trusted-partners__marquee"&gt;
       &lt;div class="trusted-partners__track"&gt;
-        &lt;div class="trusted-partners__item" data-partner-name="CMA CGM / APL" data-partner-logo-src=""&gt;
-          &lt;span class="trusted-partners__logo" data-logo-style="bold-italic"&gt;CMA CGM&lt;/span&gt;
+        &lt;div class="trusted-partners__item" data-slot="partner" data-partner-name="Gemadept" data-partner-logo-src="img/partners/partner-gema-dept.webp"&gt;
+          &lt;img class="trusted-partners__logo-img" src="img/partners/partner-gema-dept.webp" alt="Gemadept" loading="lazy"&gt;
         &lt;/div&gt;
         &lt;span class="trusted-partners__sep" aria-hidden="true"&gt;&amp;diams;&lt;/span&gt;
         &lt;!-- ...more partners... --&gt;
-        &lt;!-- Duplicate the whole set for seamless infinite loop --&gt;
+        &lt;!-- Closing "+ 1,000 more" tile remains a &lt;span&gt; (text, not a logo) --&gt;
+        &lt;!-- Duplicate the whole set aria-hidden for seamless infinite loop --&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;p class="trusted-partners__disclaimer"&gt;Fake wordmarks shown until real partner logos are published.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/section&gt;</pre>
   </section>
@@ -626,9 +641,9 @@
         <div class="program-featured__content">
           <span class="program-card__badge">Applications Open</span>
           <span class="program-card__free-tag">Free: No Tuition</span>
-          <h3 class="program-card__name">Student Immersion Training Program</h3>
-          <div class="program-card__meta"><span>4 days intensive</span><span>3 classroom + 1 port</span><span>30&ndash;40 seats</span></div>
-          <p class="program-card__desc">From campus to career in 4 days. Expert-led curriculum, a full-day port excursion, Cargonomics certification.</p>
+          <h3 class="program-card__name">Shipping and Logistics 101 Career Development Program</h3>
+          <div class="program-card__meta"><span>5 days intensive</span><span>4 classroom + 1 port</span><span>30 seats</span></div>
+          <p class="program-card__desc">From campus to career in 5 days. Expert-led curriculum, a full-day port excursion, Cargonomics certification.</p>
           <a href="#" onclick="return false" class="program-card__cta">Apply Now</a>
         </div>
       </div>
@@ -639,21 +654,17 @@
        TRAINER CARD
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card">
-    <h2 data-number="09">Trainer card v2 (deprecated)</h2>
-
-    <div class="sg-deprecated-badge" role="note">
-      <strong>Deprecated.</strong> Superseded by <a href="#sg-trainer-card-v3-editorial">trainer card v3</a> on 2026-04-17. Kept here for reference while v3 beds in. Will migrate to <code>docs/archived-components.md</code> once v3 is stable through one cohort cycle. Note: the sibling <code>.leader-card</code> on <code>about.html</code> still uses this visual contract and is scheduled for a separate v3 alignment pass.
-    </div>
+    <h2 data-number="09">Trainer card v2 (live default)</h2>
 
     <details class="sg-details">
       <summary>Technical details</summary>
-      <p class="sg-desc">Image-top biography card previously used in the homepage "Your Instructors" section. Also used on the About leadership section via the sibling `.leader-card` class (same visual contract). The <code>--placeholder</code> modifier reserves a slot for an unconfirmed trainer with a gold "Coming soon" badge, dashed border, and muted bio treatment so it reads as intentional.</p>
+      <p class="sg-desc">Image-top biography card used in the homepage "Your Instructors" section and the course page instructors section. Also used on the About leadership section via the sibling <code>.leader-card</code> class (same visual contract). The <code>--placeholder</code> modifier reserves a slot for an unconfirmed trainer with a dashed gold border, white background, and a gold "Coming soon" badge so it reads as intentional.</p>
 
       <dl class="sg-meta">
-        <dt>Used on:</dt><dd>No live pages (deprecated 2026-04-17). Sibling <code>.leader-card</code> still renders on about.html #leadership pending separate v3 alignment.</dd>
-        <dt>Status:</dt><dd>Deprecated 2026-04-17. Replaced by <code>.trainer-card-v3--editorial</code> on <code>index.html</code> and <code>course.html</code>.</dd>
+        <dt>Used on:</dt><dd>index.html #trainers (homepage, both slots: Elias #elias + Anthony #anthony) and course.html #course-instructors (same two-trainer layout). Sibling <code>.leader-card</code> on about.html #leadership (same contract, both cards filled). Placeholder variant below is no longer live (both slots filled 2026-04-21) but retained as a reusable pattern for future coming-soon trainers.</dd>
+        <dt>Status:</dt><dd>Live default. A v3 alternative (editorial portrait + credential ribbon) was explored on 2026-04-17 and reverted same day after visual review (D34 in <code>docs/deferred-items.md</code>); v3 variants remain below for reference.</dd>
         <dt>Class:</dt><dd>.trainer-card-v2, .trainer-card-v2__photo, .trainer-card-v2__info, .trainer-card-v2__name, .trainer-card-v2__role, .trainer-card-v2__bio</dd>
-        <dt>Modifier:</dt><dd>.trainer-card-v2--placeholder (+ .leader-card--placeholder on About) adds gold dashed border + gold-tinted background + badge</dd>
+        <dt>Modifier:</dt><dd>.trainer-card-v2--placeholder (+ .leader-card--placeholder on About) adds gold dashed border + white card background + "Coming soon" badge (D35, 2026-04-17: background changed from gold-tint to white to match the sibling regular card on the same row).</dd>
         <dt>Badge:</dt><dd>.trainer-card-v2__coming-soon-badge (+ .leader-card__coming-soon-badge) absolute-positioned top-right of photo area</dd>
         <dt>Sibling:</dt><dd>.leader-card (About leadership), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__bio</dd>
         <dt>Elementor target:</dt><dd>Team Member widget (Image + Name + Role + Bio). Single ACF field group shared between both classes. Placeholder state via ACF toggle field "is_placeholder" that conditionally applies --placeholder modifier.</dd>
@@ -674,7 +685,7 @@
       </div>
     </div>
 
-    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (--placeholder modifier, reinstated 2026-04-16):</p>
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Placeholder trainer card (--placeholder modifier, no longer live — retained for reuse):</p>
     <div class="sg-render" style="max-width: 400px;">
       <div class="trainer-card-v2 trainer-card-v2--placeholder">
         <div class="trainer-card-v2__photo">
@@ -684,9 +695,9 @@
           <span class="trainer-card-v2__coming-soon-badge">Coming soon</span>
         </div>
         <div class="trainer-card-v2__info">
-          <h3 class="trainer-card-v2__name">Senior Industry Advisor</h3>
-          <div class="trainer-card-v2__role">Co-Founder &amp; Senior Trainer</div>
-          <p class="trainer-card-v2__bio">To be announced ahead of the June 1 cohort. A second senior veteran joins Elias with decades of industry experience and an extensive international network.</p>
+          <h3 class="trainer-card-v2__name">Trainer Name</h3>
+          <div class="trainer-card-v2__role">Role Title</div>
+          <p class="trainer-card-v2__bio">Short bio for a trainer whose profile is not yet public. Swap the logo panel for a portrait and remove the <code>--placeholder</code> modifier when the profile is confirmed.</p>
         </div>
       </div>
     </div>
@@ -696,14 +707,14 @@
        TRAINER CARD v3 — A: EDITORIAL (LIVE DEFAULT)
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card-v3-editorial">
-    <h2 data-number="09a">Trainer card v3, A: Editorial (live default)</h2>
+    <h2 data-number="09a">Trainer card v3, A: Editorial (explored, not live)</h2>
     <details class="sg-details">
       <summary>Technical details</summary>
-      <p class="sg-desc">Full-bleed editorial portrait with a translucent navy ribbon carrying credential chips (years, carrier names, cohort count). Decorative teal shipping-route SVG traces sit at low opacity behind the portrait to echo the hero's ship + world + tech visual read. This variant is the live default on <code>index.html</code> and <code>course.html</code>. Fallback imagery uses <code>img/elias.jpg</code> with <code>object-position: 50% 15%</code> until portrait-format photography lands.</p>
+      <p class="sg-desc">Full-bleed editorial portrait with a translucent navy ribbon carrying credential chips. Decorative teal shipping-route SVG traces echo the hero's ship + world + tech motif. Explored 2026-04-17 and reverted same day after visual review (ribbon and chips read as cluttered over the available classroom photography; also rejected on mobile). Retained here for future reference; revival would need proper 4:5 portrait photography of Elias and a rethink of chip density against the portrait composition.</p>
 
       <dl class="sg-meta">
-        <dt>Used on:</dt><dd>index.html #trainers and course.html #course-instructors (activated 2026-04-17)</dd>
-        <dt>Status:</dt><dd>Live default on <code>index.html</code> and <code>course.html</code> as of 2026-04-17.</dd>
+        <dt>Used on:</dt><dd>No live pages. Explored 2026-04-17, reverted same day via commit <code>662fbc9</code> (D34 in <code>docs/deferred-items.md</code>).</dd>
+        <dt>Status:</dt><dd>Explored alternative, not live. Revival needs 4:5 portrait photography and reduced ribbon density.</dd>
         <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--editorial, .trainer-card-v3__media, .trainer-card-v3__route (SVG), .trainer-card-v3__photo, .trainer-card-v3__ribbon, .trainer-card-v3__chip, .trainer-card-v3__info, .trainer-card-v3__name, .trainer-card-v3__role, .trainer-card-v3__bio</dd>
         <dt>Modifier:</dt><dd>.trainer-card-v3--placeholder reserves a slot for an unconfirmed trainer (dashed gold border, navy logo panel, gold "Coming soon" badge).</dd>
         <dt>Chip modifier:</dt><dd>.trainer-card-v3__chip--accent swaps the chip to solid gold with navy text for the lead credential.</dd>
@@ -753,9 +764,9 @@
           <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
         </div>
         <div class="trainer-card-v3__info">
-          <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
-          <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
-          <p class="trainer-card-v3__bio">To be announced ahead of the June 1 cohort. A second senior veteran joins Elias with decades of industry experience and an extensive international network.</p>
+          <h3 class="trainer-card-v3__name">Trainer Name</h3>
+          <div class="trainer-card-v3__role">Role Title</div>
+          <p class="trainer-card-v3__bio">Short bio for a trainer whose profile is not yet public. Swap the logo panel for a portrait and remove the <code>--placeholder</code> modifier when the profile is confirmed.</p>
         </div>
       </article>
     </div>
@@ -765,14 +776,14 @@
        TRAINER CARD v3 — B: NETWORK
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card-v3-network">
-    <h2 data-number="09b">Trainer card v3, B: Network</h2>
+    <h2 data-number="09b">Trainer card v3, B: Network (explored, not live)</h2>
     <details class="sg-details">
       <summary>Technical details</summary>
       <p class="sg-desc">Portrait with a decorative network motif layered over it: 5 nodes connected by curved shipping-route lines in teal, pulsing gently (3.5s cycle, staggered per node). Implies the trainer's network is the real asset being taught. Mix-blend luminosity on the portrait integrates the image with the navy media panel. On screens under 768px the network opacity reduces to avoid visual noise. Animation stops when <code>prefers-reduced-motion</code> is set.</p>
 
       <dl class="sg-meta">
-        <dt>Used on:</dt><dd>No live pages (styleguide-only). Swap-ready: change <code>.trainer-card-v3--editorial</code> to <code>.trainer-card-v3--network</code> on index.html #trainers and course.html #course-instructors.</dd>
-        <dt>Status:</dt><dd>Styleguide-only. Not live. Available via single-class swap on <code>index.html</code> / <code>course.html</code>.</dd>
+        <dt>Used on:</dt><dd>No live pages. Explored alternative alongside v3 editorial on 2026-04-17; never activated on live pages.</dd>
+        <dt>Status:</dt><dd>Explored alternative, not live. Retained for future reference (D34, 2026-04-17).</dd>
         <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--network, .trainer-card-v3__media, .trainer-card-v3__network (SVG), .trainer-card-v3__node, .trainer-card-v3__photo, .trainer-card-v3__info, .trainer-card-v3__name, .trainer-card-v3__role, .trainer-card-v3__teaches</dd>
         <dt>Node modifiers:</dt><dd>.trainer-card-v3__node--2 through --5 carry staggered <code>animation-delay</code> (0.5s steps).</dd>
         <dt>Animation:</dt><dd>@keyframes v3-node-pulse (opacity 0.4 to 1 and back, scale 1 to 1.3, 3.5s ease-in-out infinite). Respects <code>prefers-reduced-motion</code>.</dd>
@@ -816,9 +827,9 @@
           <span class="trainer-card-v3__coming-soon-badge">Coming soon</span>
         </div>
         <div class="trainer-card-v3__info">
-          <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
-          <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
-          <p class="trainer-card-v3__teaches">Will teach: strategy and operational excellence across the region, networks to be announced.</p>
+          <h3 class="trainer-card-v3__name">Trainer Name</h3>
+          <div class="trainer-card-v3__role">Role Title</div>
+          <p class="trainer-card-v3__teaches">Will teach: list of 1-2 subject areas.</p>
         </div>
       </article>
     </div>
@@ -828,14 +839,14 @@
        TRAINER CARD v3 — C: SPLIT
        ============================================================= -->
   <section class="sg-section" id="sg-trainer-card-v3-split">
-    <h2 data-number="09c">Trainer card v3, C: Split</h2>
+    <h2 data-number="09c">Trainer card v3, C: Split (explored, not live)</h2>
     <details class="sg-details">
       <summary>Technical details</summary>
       <p class="sg-desc">Two-panel card. Portrait on the left (45%), info panel on the right (55%). Default info shows name, role, one-liner. On hover (desktop) or <code>:focus-within</code> (keyboard, mobile tap), the panel swaps to a three-bullet "what I'll teach you" list. No JS needed. <code>tabindex="0"</code> on the card container plus a visible focus outline handle keyboard and mobile interaction. Stacks vertically on screens under 768px.</p>
 
       <dl class="sg-meta">
-        <dt>Used on:</dt><dd>No live pages (styleguide-only). Swap-ready: change <code>.trainer-card-v3--editorial</code> to <code>.trainer-card-v3--split</code> on index.html #trainers and course.html #course-instructors.</dd>
-        <dt>Status:</dt><dd>Styleguide-only. Not live. Available via single-class swap on <code>index.html</code> / <code>course.html</code>.</dd>
+        <dt>Used on:</dt><dd>No live pages. Explored alternative alongside v3 editorial on 2026-04-17; never activated on live pages.</dd>
+        <dt>Status:</dt><dd>Explored alternative, not live. Retained for future reference (D34, 2026-04-17).</dd>
         <dt>Class:</dt><dd>.trainer-card-v3, .trainer-card-v3--split, .trainer-card-v3__media, .trainer-card-v3__photo, .trainer-card-v3__info, .trainer-card-v3__face, .trainer-card-v3__face--default, .trainer-card-v3__face--reveal</dd>
         <dt>Interaction:</dt><dd>Pure CSS. <code>:hover</code> and <code>:focus-within</code> swap opacity on the two faces. Card carries <code>tabindex="0"</code> to be keyboard-focusable. Focus outline uses <code>--color-secondary</code>.</dd>
         <dt>Accessibility note:</dt><dd>Hover-on-touch is an anti-pattern in general, so <code>:focus-within</code> is the primary trigger and hover is additive. First tap focuses and reveals, tap outside blurs and hides. Do not replace this with JS unless the pure-CSS behaviour breaks in a target browser.</dd>
@@ -877,9 +888,9 @@
         </div>
         <div class="trainer-card-v3__info">
           <div class="trainer-card-v3__face trainer-card-v3__face--default">
-            <h3 class="trainer-card-v3__name">Senior Industry Advisor</h3>
-            <div class="trainer-card-v3__role">Co-Founder &amp; Senior Trainer</div>
-            <p class="trainer-card-v3__tagline">Announced ahead of the June 1 cohort.</p>
+            <h3 class="trainer-card-v3__name">Trainer Name</h3>
+            <div class="trainer-card-v3__role">Role Title</div>
+            <p class="trainer-card-v3__tagline">One-line summary of experience.</p>
           </div>
           <ul class="trainer-card-v3__face trainer-card-v3__face--reveal">
             <li>Operational excellence at scale</li>
@@ -919,7 +930,7 @@
       <article class="curriculum-grid__card curriculum-grid__card--highlight">
         <div class="curriculum-grid__card-number">02</div>
         <h3 class="curriculum-grid__card-title">Direct Placement (highlight variant)</h3>
-        <p class="curriculum-grid__card-desc">Top graduates are placed directly with hiring companies. Gold-accented card draws the eye to this key benefit.</p>
+        <p class="curriculum-grid__card-desc">Top graduates are placed directly with leading logistics companies including Gemadept, Vina Logistics, and Saigon Port. Gold-accented card draws the eye to this key benefit.</p>
       </article>
     </div>
   </section>

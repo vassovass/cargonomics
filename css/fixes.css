@@ -61,13 +61,37 @@
 /* Now uses .leader-card__photo--placeholder from style.css
    with inline styles on the img. No custom class needed. */
 
-/* --- Footer social icons (non-clickable state) --- */
+/* --- Footer social icons (non-clickable state) ---
+   Vasso v8 edits 2026-04-21: socials should NOT appear faded anymore.
+   Full opacity + keep non-clickable cursor until real destinations land. */
 .footer__social-placeholder {
-  opacity: 0.4;
+  opacity: 1;
   cursor: default;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-white);
+}
+
+/* Sibling rule: .footer__social a previously rendered at white/45%.
+   Force to full white so anchored socials match placeholders. */
+.footer .footer__social a,
+.footer .footer__social-placeholder {
+  color: var(--color-white);
+}
+
+/* v9 (2026-04-21): Per-icon brand colours on the footer socials.
+   The SVGs use `fill="currentColor"`, so the colour comes from the
+   parent span's `color` property. Three sibling placeholders on
+   every page, in DOM order: Zalo, Facebook, LinkedIn. */
+.footer__social .footer__social-placeholder:nth-of-type(1) {
+  color: #0068FF; /* Zalo blue */
+}
+.footer__social .footer__social-placeholder:nth-of-type(2) {
+  color: #1877F2; /* Facebook blue */
+}
+.footer__social .footer__social-placeholder:nth-of-type(3) {
+  color: #0A66C2; /* LinkedIn blue */
 }
 
 /* ============================================================
@@ -98,6 +122,13 @@
   font-size: 0.75rem;
   margin-left: 0.5rem;
   font-family: var(--font-body);
+}
+
+/* Commit SHA suffix injected by functions/_middleware.js on Cloudflare Pages.
+   Absent on local dev and the GH Pages mirror. See docs/deferred-items.md D33. */
+.footer__commit {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Company-profile tagline (About page): was inline on <p> */
@@ -172,11 +203,13 @@
 
 /* Subtle gold-dashed outline on the placeholder card so it reads
    as a distinct "reserved slot" rather than a normal profile card
-   with a missing photo. Layers over existing card chrome. */
+   with a missing photo. White background to match the sibling
+   regular card on the same row (D34, 2026-04-17). The dashed gold
+   border + Coming soon badge alone carry the "reserved" signal. */
 .trainer-card-v2--placeholder,
 .leader-card--placeholder {
   border: 1px dashed rgba(var(--color-secondary-rgb, 212, 180, 104), 0.45);
-  background: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.04);
+  background: var(--color-white);
 }
 
 .trainer-card-v2__coming-soon-badge,
@@ -236,7 +269,7 @@
 .trainer-card-v3--placeholder {
   position: relative;
   border: 1px dashed rgba(var(--color-secondary-rgb), 0.55);
-  background: rgba(var(--color-secondary-rgb), 0.05);
+  background: var(--color-white);
 }
 
 .trainer-card-v3--placeholder .trainer-card-v3__media {
@@ -396,3 +429,14 @@
   margin-top: 0;
 }
 
+/* ============================================================
+   v9 (2026-04-21): Form label font parity with legend.
+   Vasso feedback: Full Name / field labels should share the
+   "Personal Information" legend's font family.
+   ============================================================ */
+
+.form__label {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: 0.02em;
+}

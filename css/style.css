@@ -381,6 +381,21 @@ button {
   flex-wrap: wrap;
 }
 
+/* Hero image crop. Globe bleeds off the left edge for a designed feel
+   rather than a centered sphere. Mobile default: 4:3 forces enough
+   horizontal overflow for the object-position shift to be visible. */
+.hero__video-wrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.hero__video-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 50%;
+}
+
 /* ==========================================================================
    PILLARS v2 — Alternating image+text rows
    ========================================================================== */
@@ -1571,35 +1586,41 @@ button {
 
 .modal__close {
   position: absolute;
-  top: 10px;
-  right: 14px;
+  top: 8px;
+  right: 12px;
   background: none;
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.75rem;
   cursor: pointer;
-  color: rgba(var(--color-white-rgb), 0.7);
+  color: var(--color-white);
   line-height: 1;
   z-index: 2;
-  transition: color var(--transition-fast);
+  transition: opacity var(--transition-fast);
+  padding: 4px 8px;
 }
 
 .modal__close:hover {
-  color: var(--color-white);
+  opacity: 0.75;
 }
 
 .modal__free-banner {
   background: var(--color-secondary);
   color: var(--color-white);
   text-align: center;
-  padding: 18px 20px;
+  padding: 18px 40px;
 }
 
 .modal__free-banner-big {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 2.25rem;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.modal__free-banner-line {
+  display: block;
 }
 
 .modal__free-banner-sub {
@@ -1808,6 +1829,24 @@ button {
 
   .hero__headline {
     font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
+  /* Desktop hero crop: stretch the image grid cell to full row height,
+     then object-position shifts focus right so the globe bleeds off the
+     left edge. Aspect ratio drops away; the hero row is governed by the
+     content block, not the image. */
+  .hero__video,
+  .hero__video-wrapper {
+    align-self: stretch;
+    height: 100%;
+  }
+
+  .hero__video-wrapper {
+    aspect-ratio: auto;
+  }
+
+  .hero__video-wrapper img {
+    object-position: 72% 50%;
   }
 
   /* Pillars v2 — alternating rows side-by-side */
@@ -3123,26 +3162,17 @@ button {
 }
 
 /* ---------- Logo-image mode (activates automatically when <span> is
-   swapped for <img> inside .trusted-partners__item). Light-treatment
-   grayscale-default + colour-on-hover matches the industry-standard
-   premium partner wall pattern (Bain / Stripe / Figma / ITS Logistics).
-   Works regardless of real partner brand colour - accommodates Maersk
-   red, CMA CGM blue, MSC yellow, Hapag-Lloyd orange all in one coherent
-   row. ---------- */
+   swapped for <img> inside .trusted-partners__item). Full-colour
+   treatment. Partner brand colours render as-received. The marquee is
+   the social-validation band - we want brand recognition, not a tonal
+   wash. ---------- */
 
 .trusted-partners__logo-img {
   height: 40px;
   width: auto;
   max-width: 140px;
   object-fit: contain;
-  filter: grayscale(1);
-  opacity: 0.55;
   transition: filter 0.25s ease, opacity 0.25s ease;
-}
-
-.trusted-partners__item:hover .trusted-partners__logo-img {
-  filter: grayscale(0);
-  opacity: 1;
 }
 
 /* ---------- Responsive ---------- */

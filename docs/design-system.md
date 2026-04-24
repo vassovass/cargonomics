@@ -14,8 +14,8 @@ Last updated: April 10, 2026.
 
 | Layer | File | Role |
 |-------|------|------|
-| Layout + defaults | `css/style-v2.css` | All layout rules, components, responsive breakpoints. Declares default token values in `:root`. |
-| Brand overrides | `css/tokens-cargonomics.css` | Loaded AFTER style-v2.css. Overrides `:root` values with Cargonomics Navy + Gold palette. |
+| Layout + defaults | `css/style.css` | All layout rules, components, responsive breakpoints. Declares default token values in `:root`. |
+| Brand overrides | `css/tokens-cargonomics.css` | Loaded AFTER style.css. Overrides `:root` values with Cargonomics Navy + Gold palette. |
 | Brand overrides | `css/tokens-flexed.css` | Same structure, Flexed Blue + White palette. |
 
 **To add a new brand:** Duplicate `tokens-cargonomics.css`, change the values, swap the `<link>` tag in the HTML `<head>`. No layout CSS changes needed.
@@ -26,7 +26,7 @@ Last updated: April 10, 2026.
 
 ### Cascade Order
 
-1. `style-v2.css` `:root` block declares fallback defaults (Deep Slate + Copper palette)
+1. `style.css` `:root` block declares fallback defaults (Deep Slate + Copper palette)
 2. Brand token file loads second via a separate `<link>` tag and overrides with brand values
 3. CSS specificity is equal (both use `:root`), so load order wins
 
@@ -97,7 +97,7 @@ Last updated: April 10, 2026.
 - Open Sans weights loaded: 400, 600, 700.
 - `font-display: swap` on all Google Font imports for performance.
 
-**Flexed fonts:** Currently using Source Serif 4 + Outfit as placeholders. These are the style-v2.css defaults. Will be updated if Marilyn specifies Flexed-specific fonts.
+**Flexed fonts:** Currently using Source Serif 4 + Outfit as placeholders. These are the style.css defaults. Will be updated if Marilyn specifies Flexed-specific fonts.
 
 ---
 
@@ -195,7 +195,7 @@ Note: Desktop section padding (96px) is applied directly to section classes in t
 
 **Why:** CSS `rgba()` cannot accept a hex value inside `var()`. To enable transparent overlays, borders, and shadows that respond to brand swaps, each core colour has an RGB triplet token.
 
-**Usage in style-v2.css:**
+**Usage in style.css:**
 ```css
 background: rgba(var(--color-primary-rgb), 0.5);
 border: 1px solid rgba(var(--color-primary-rgb), 0.12);
@@ -209,7 +209,7 @@ border: 1px solid rgba(var(--color-primary-rgb), 0.12);
 | `--color-ivory-rgb` | `250, 249, 246` | `255, 255, 255` |
 | `--color-white-rgb` | `255, 255, 255` | `255, 255, 255` |
 
-When adding a new brand token file, always include RGB variants for every colour used in `rgba()` calls in style-v2.css.
+When adding a new brand token file, always include RGB variants for every colour used in `rgba()` calls in style.css.
 
 ---
 

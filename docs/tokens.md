@@ -2,7 +2,7 @@
 
 This file is the authoritative spec for the colour, typography, and logo tokens used across the Cargonomics and Flexed sites. It replaces the earlier approach of hardcoding values in the main stylesheet.
 
-**How it works:** the site loads `css/style-v2.css` (which contains the layout, components, and default tokens from the original mock), then loads ONE client token file (`css/tokens-cargonomics.css` or `css/tokens-flexed.css`) AFTER it. The client token file re-declares the `:root` custom properties, and because it loads second, its values win. Swapping clients is a one-line change in `index.html`.
+**How it works:** the site loads `css/style.css` (which contains the layout, components, and default tokens from the original mock), then loads ONE client token file (`css/tokens-cargonomics.css` or `css/tokens-flexed.css`) AFTER it. The client token file re-declares the `:root` custom properties, and because it loads second, its values win. Swapping clients is a one-line change in `index.html`.
 
 This same pattern maps directly to Elementor when we migrate to WordPress: each CSS custom property here corresponds to an Elementor Global Color or Global Font. One Elementor theme, two "Site Styles" configurations.
 
@@ -11,7 +11,7 @@ This same pattern maps directly to Elementor when we migrate to WordPress: each 
 ```
 cargonomics-site/
 ├── css/
-│   ├── style-v2.css            ← layout + components + default tokens (from original mock)
+│   ├── style.css            ← layout + components + default tokens (from original mock)
 │   ├── tokens-cargonomics.css  ← Cargonomics overrides (Navy Blue + Gold)
 │   └── tokens-flexed.css       ← Flexed overrides (Blue + White)
 └── docs/
@@ -23,15 +23,15 @@ cargonomics-site/
 In `index.html` the `<link>` order is:
 
 ```html
-<link rel="stylesheet" href="css/style-v2.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/tokens-cargonomics.css">  <!-- swap to tokens-flexed.css for Flexed -->
 ```
 
-The tokens file MUST come after `style-v2.css`. Reversing the order will cause the defaults to win.
+The tokens file MUST come after `style.css`. Reversing the order will cause the defaults to win.
 
 ## Token reference
 
-Every token lives in `:root` as a CSS custom property. Names follow the existing style-v2.css convention (`--color-primary`, `--color-secondary`, etc.) so the rest of the stylesheet picks them up without modification.
+Every token lives in `:root` as a CSS custom property. Names follow the existing style.css convention (`--color-primary`, `--color-secondary`, etc.) so the rest of the stylesheet picks them up without modification.
 
 ### Colour tokens
 
@@ -124,7 +124,7 @@ The template is designed to scale across Elias's ~11-project portfolio (Anne Hil
 4. Swap the `<link>` tag in `index.html` (or keep multiple for a multi-site build).
 5. Swap content per section.
 
-Nothing in `style-v2.css` changes. That is the point.
+Nothing in `style.css` changes. That is the point.
 
 ## Section conventions (not duplicated here)
 
@@ -201,7 +201,7 @@ Key differences between brands: Cargonomics buttons use Gold (`var(--color-secon
 
 ## RGB Variant Tokens
 
-These tokens provide RGB triplet versions of the core brand colours, enabling `rgba()` usage throughout `style-v2.css`. When the brand token file swaps (Cargonomics to Flexed or vice versa), all rgba-based overlays, borders, and shadows shift to the correct brand palette automatically. No manual rgba value changes needed.
+These tokens provide RGB triplet versions of the core brand colours, enabling `rgba()` usage throughout `style.css`. When the brand token file swaps (Cargonomics to Flexed or vice versa), all rgba-based overlays, borders, and shadows shift to the correct brand palette automatically. No manual rgba value changes needed.
 
 | Token | Cargonomics | Flexed |
 |-------|------------|--------|
@@ -211,4 +211,4 @@ These tokens provide RGB triplet versions of the core brand colours, enabling `r
 | `--color-ivory-rgb` | 250, 249, 246 | 255, 255, 255 |
 | `--color-white-rgb` | 255, 255, 255 | 255, 255, 255 |
 
-Usage in `style-v2.css`: `rgba(var(--color-primary-rgb), 0.5)` for a 50% transparent primary overlay. The `var()` resolves to the RGB triplet from whichever brand token file is loaded, so the same stylesheet line produces Navy at 50% for Cargonomics and Blue at 50% for Flexed.
+Usage in `style.css`: `rgba(var(--color-primary-rgb), 0.5)` for a 50% transparent primary overlay. The `var()` resolves to the RGB triplet from whichever brand token file is loaded, so the same stylesheet line produces Navy at 50% for Cargonomics and Blue at 50% for Flexed.
