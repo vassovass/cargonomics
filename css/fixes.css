@@ -440,3 +440,80 @@
   font-weight: var(--font-weight-heading);
   letter-spacing: 0.02em;
 }
+
+/* ============================================================
+   Leader card --timeline variant (D52, 2026-04-26)
+   Replaces the v2 paragraph bio with a richer career timeline
+   per Bala's authoritative bio (Marilyn email 24 Apr 18:21).
+   Lede + 5 timeline rows + degree/location footer.
+   Anthony's card retains the paragraph-bio default; only Elias
+   carries the --timeline modifier.
+   ============================================================ */
+.leader-card__lede {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(var(--color-primary-rgb, 17, 41, 75), 0.78);
+  margin: 0 0 var(--space-md, 16px);
+}
+
+.leader-card__timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md, 16px);
+  display: flex;
+  flex-direction: column;
+}
+
+.leader-card__timeline-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-sm, 12px);
+  align-items: center;
+  padding: 0.55rem 0;
+  border-top: 1px solid rgba(var(--color-primary-rgb, 17, 41, 75), 0.08);
+  font-size: 0.88rem;
+}
+
+.leader-card__timeline-row:first-child {
+  border-top-color: rgba(var(--color-primary-rgb, 17, 41, 75), 0.14);
+}
+
+.leader-card__timeline-period {
+  font-family: var(--font-body, "Open Sans"), sans-serif;
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.4px;
+  color: var(--color-primary, #11294B);
+  background: rgba(var(--color-secondary-rgb, 212, 180, 104), 0.18);
+  padding: 0.22rem 0.55rem;
+  border-radius: 3px;
+  text-align: center;
+  white-space: nowrap;
+  justify-self: start;
+  align-self: center;
+}
+
+.leader-card__timeline-role {
+  color: var(--color-primary, #11294B);
+  line-height: 1.4;
+}
+
+.leader-card__meta {
+  font-size: 0.8rem;
+  color: rgba(var(--color-primary-rgb, 17, 41, 75), 0.62);
+  margin: 0;
+  padding-top: var(--space-sm, 12px);
+  border-top: 1px solid rgba(var(--color-primary-rgb, 17, 41, 75), 0.12);
+}
+
+/* Mobile: stack period above role for narrow widths so role text
+   doesn't squash to 2-3 word column. */
+@media (max-width: 480px) {
+  .leader-card__timeline-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .leader-card__timeline-period {
+    justify-self: start;
+  }
+}
