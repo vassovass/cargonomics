@@ -442,12 +442,16 @@
 }
 
 /* ============================================================
-   Leader card --timeline variant (D52, 2026-04-26)
-   Replaces the v2 paragraph bio with a richer career timeline
-   per Bala's authoritative bio (Marilyn email 24 Apr 18:21).
-   Lede + 5 timeline rows + degree/location footer.
-   Anthony's card retains the paragraph-bio default; only Elias
-   carries the --timeline modifier.
+   Leader card --timeline variant (D52/D53 explored, D55 reverted)
+   Lede paragraph + 5-row career timeline + degree/location footer.
+   Briefly live on about.html via commits 1ebfca7 (Elias, D52) and
+   8442921 (Anthony parity, D53), then reverted same session in
+   D55 in favour of the paragraph .leader-card__bio default for
+   visual symmetry.
+   These rules are KEPT so the timeline variant remains usable as
+   a styleguide-only reference (sg-leader-card-timeline section in
+   styleguide.html). Do not delete unless the styleguide entry is
+   also removed.
    ============================================================ */
 .leader-card__lede {
   font-size: 0.95rem;

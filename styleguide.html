@@ -903,6 +903,65 @@
   </section>
 
   <!-- =============================================================
+       LEADER CARD --timeline (explored, not live)
+       ============================================================= -->
+  <section class="sg-section" id="sg-leader-card-timeline">
+    <h2 data-number="09d">Leader card --timeline (explored, not live)</h2>
+
+    <details class="sg-details">
+      <summary>Technical details</summary>
+      <p class="sg-desc">Richer about-page leadership card built around a 5-row career timeline (lede paragraph + dated rows + degree/location footer). Briefly live on <code>about.html #leadership</code> 2026-04-26 via D52 (Elias) and D53 (Anthony parity), then reverted same session in D55 in favour of the paragraph <code>.leader-card__bio</code> default for visual symmetry with the homepage trainer-card pair. Retained here as a reusable variant: revival is a single-class addition (<code>.leader-card--timeline</code>) plus the lede/timeline/meta markup below.</p>
+
+      <dl class="sg-meta">
+        <dt>Used on:</dt><dd>No live pages (styleguide-only). Was live on about.html #leadership briefly via commits <code>1ebfca7</code> (Elias) and <code>8442921</code> chain, then reverted same session via D55. Swap path to revive: add <code>leader-card--timeline</code> modifier on the article and replace the single <code>.leader-card__bio</code> paragraph with the <code>__lede</code> + <code>__timeline</code> + <code>__meta</code> triple shown below.</dd>
+        <dt>Status:</dt><dd>Explored, not live. Reverted on visual-symmetry grounds (live About page now matches the homepage trainer-card pair both visually). Revival would suit a longer-form bio page where the timeline density adds rather than competes with adjacent content.</dd>
+        <dt>Class:</dt><dd>.leader-card.leader-card--timeline (article), .leader-card__photo, .leader-card__info, .leader-card__name, .leader-card__role, .leader-card__lede, .leader-card__timeline (ol), .leader-card__timeline-row (li), .leader-card__timeline-period (span), .leader-card__timeline-role (span), .leader-card__meta</dd>
+        <dt>Modifier:</dt><dd>.leader-card--timeline applied to the article scopes the lede/timeline/meta block. Without the modifier the card falls back to the paragraph <code>.leader-card__bio</code> default.</dd>
+        <dt>Tokens:</dt><dd>--color-primary (navy, role + period text), --color-primary-rgb (lede + meta tints, timeline row borders), --space-md / --space-sm (vertical rhythm), --font-body (period span weight 600).</dd>
+        <dt>Mobile:</dt><dd>At &lt;= 480px the timeline row collapses from 110px-period + 1fr-role grid to a single column; period sits above the role text.</dd>
+        <dt>Elementor target:</dt><dd>Repeater field (career_rows) with two text fields per row (period, role). Lede + meta as Textarea fields. Variant toggle as ACF True/False (use_timeline) that conditionally renders the timeline block in place of the default bio.</dd>
+      </dl>
+    </details>
+
+    <p class="sg-desc" style="margin-top: var(--space-xl); margin-bottom: var(--space-sm); color: var(--color-primary); font-weight: 600;">Leader card with --timeline modifier (Elias example):</p>
+    <div class="sg-render" style="max-width: 480px;">
+      <article class="leader-card leader-card--timeline">
+        <div class="leader-card__photo">
+          <img src="img/elias.jpg" alt="Abraham Y. Elias" loading="lazy">
+        </div>
+        <div class="leader-card__info">
+          <h3 class="leader-card__name">Abraham Y. Elias</h3>
+          <div class="leader-card__role">Founder, Cargonomics</div>
+          <p class="leader-card__lede">25 years' experience in the container shipping industry, across various functions (shipping, ports, logistics) and geographies (India, the US, Sri Lanka, and Vietnam).</p>
+          <ol class="leader-card__timeline">
+            <li class="leader-card__timeline-row">
+              <span class="leader-card__timeline-period">2011&ndash;2015</span>
+              <span class="leader-card__timeline-role">APL Managing Director, Vietnam</span>
+            </li>
+            <li class="leader-card__timeline-row">
+              <span class="leader-card__timeline-period">2015&ndash;2019</span>
+              <span class="leader-card__timeline-role">CMA CGM Group, regional management roles in Vietnam</span>
+            </li>
+            <li class="leader-card__timeline-row">
+              <span class="leader-card__timeline-period">2019&ndash;2025</span>
+              <span class="leader-card__timeline-role">ZIM Country Manager, Vietnam</span>
+            </li>
+            <li class="leader-card__timeline-row">
+              <span class="leader-card__timeline-period">2023</span>
+              <span class="leader-card__timeline-role">Board representations, VICT Port and Lotus Link Shipping Line JV</span>
+            </li>
+            <li class="leader-card__timeline-row">
+              <span class="leader-card__timeline-period">Since 2019</span>
+              <span class="leader-card__timeline-role">Heads SingCham Vietnam Supply Chain Sector Committee</span>
+            </li>
+          </ol>
+          <p class="leader-card__meta">Master's degree, National University of Singapore. Based in HCM City.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
        CURRICULUM GRID CARD
        ============================================================= -->
   <section class="sg-section" id="sg-curriculum-grid">
