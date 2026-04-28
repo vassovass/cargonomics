@@ -46,6 +46,8 @@
   --color-whatsapp: #25D366;        /* WhatsApp brand green. Do not rebrand. */
   --color-whatsapp-hover: #1DA851;  /* WhatsApp darker green for hover/active. */
   --color-zalo: #0068FF;            /* Zalo brand blue. Do not rebrand. */
+  --color-facebook: #1877F2;        /* Facebook brand blue. Do not rebrand. */
+  --color-linkedin: #0A66C2;        /* LinkedIn brand blue. Do not rebrand. */
 
   /* TYPOGRAPHY — R2 brand guide pages 4, 11, 12.
      Heading font is Orbitron because the logo itself is set in Orbitron (R2 page 4 explicitly labels it).
