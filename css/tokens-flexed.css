@@ -40,6 +40,14 @@
   --font-weight-heading: 700;
   --font-weight-body: 400;
 
+  /* THIRD-PARTY BRAND COLOURS — mirrors Cargonomics tokens for parity.
+     Same off-palette values regardless of brand: these are external-service brand colours. */
+  --color-whatsapp: #25D366;        /* WhatsApp brand green. Do not rebrand. */
+  --color-whatsapp-hover: #1DA851;  /* WhatsApp darker green for hover/active. */
+  --color-zalo: #0068FF;            /* Zalo brand blue. Do not rebrand. */
+  --color-facebook: #1877F2;        /* Facebook brand blue. Do not rebrand. */
+  --color-linkedin: #0A66C2;        /* LinkedIn brand blue. Do not rebrand. */
+
   /* RGB VARIANTS — mirrors Cargonomics token names with Flexed palette values. */
   --color-primary-rgb: 30, 96, 145;      /* Flexed Blue */
   --color-secondary-rgb: 255, 255, 255;  /* White */

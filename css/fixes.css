@@ -61,37 +61,46 @@
 /* Now uses .leader-card__photo--placeholder from style.css
    with inline styles on the img. No custom class needed. */
 
-/* --- Footer social icons (non-clickable state) ---
-   Vasso v8 edits 2026-04-21: socials should NOT appear faded anymore.
-   Full opacity + keep non-clickable cursor until real destinations land. */
-.footer__social-placeholder {
-  opacity: 1;
-  cursor: default;
+/* --- Footer social icons (clickable, brand-coloured) ---
+   v9.1 2026-04-28: spans → anchors. Real destinations now wired:
+     Zalo:     https://zalo.me/84976875375
+     Facebook: https://www.facebook.com/CargonomicsJSC
+     LinkedIn: https://www.linkedin.com/company/cargonomics/
+   Brand colour comes from CSS tokens via `currentColor` on the SVG paths.
+   data-cta-destination drives the per-icon colour selector — semantic and
+   Elementor-portable (the same attribute also drives analytics filtering). */
+.footer__social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--color-white);
+  text-decoration: none;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* Sibling rule: .footer__social a previously rendered at white/45%.
-   Force to full white so anchored socials match placeholders. */
-.footer .footer__social a,
-.footer .footer__social-placeholder {
-  color: var(--color-white);
+.footer__social-link:hover,
+.footer__social-link:focus-visible {
+  transform: translateY(-2px);
+  opacity: 0.85;
 }
 
-/* v9 (2026-04-21): Per-icon brand colours on the footer socials.
-   The SVGs use `fill="currentColor"`, so the colour comes from the
-   parent span's `color` property. Three sibling placeholders on
-   every page, in DOM order: Zalo, Facebook, LinkedIn. */
-.footer__social .footer__social-placeholder:nth-of-type(1) {
-  color: #0068FF; /* Zalo blue */
+.footer__social-link[data-cta-destination="zalo"]     { color: var(--color-zalo); }
+.footer__social-link[data-cta-destination="facebook"] { color: var(--color-facebook); }
+.footer__social-link[data-cta-destination="linkedin"] { color: var(--color-linkedin); }
+
+/* --- Floating buttons: hide-on-footer-visible state ---
+   v9.1 2026-04-28: js/floating-buttons.js toggles the --hidden class via
+   IntersectionObserver when the footer enters the viewport, so the WhatsApp
+   FAB stops occluding the footer LinkedIn icon at scroll-end.
+   Pure visual transition — no layout impact. */
+.floating-buttons {
+  transition: opacity var(--transition-base), transform var(--transition-base);
 }
-.footer__social .footer__social-placeholder:nth-of-type(2) {
-  color: #1877F2; /* Facebook blue */
-}
-.footer__social .footer__social-placeholder:nth-of-type(3) {
-  color: #0A66C2; /* LinkedIn blue */
+
+.floating-buttons--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
 }
 
 /* ============================================================
