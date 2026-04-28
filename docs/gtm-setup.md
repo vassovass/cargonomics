@@ -3,8 +3,54 @@
 ## Container
 
 - **GTM Container ID:** `GTM-NCG2LPNQ`
-- **GA4 Property:** Configured inside GTM (no separate GA4 snippet on the page)
+- **GA4 Property:** Configured inside GTM (no separate GA4 snippet on the page). Measurement ID stored in the `GA4 Measurement ID` GTM constant variable.
 - **Deployment:** GTM snippet in `<head>` + `<noscript>` fallback after `<body>` on all 4 pages
+
+## Hostname filtering — GA4 fires on production only
+
+GTM published version 3 (2026-04-28) added a blocking trigger so GA4 only fires on the live hostnames. This stops staging clicks, GitHub Pages mirror traffic, branch previews, and local dev from polluting GA4.
+
+- **Blocking trigger:** `Block GA4 - Non-Production Hostname` (ID 32). Type: Custom Event with event name regex `.*` (catches every event, including the implicit `gtm.js` page-view event). Filter: `Page Hostname` not equal to `cargonomics.com.vn` AND not equal to `www.cargonomics.com.vn`.
+- **Applied as exception on all 4 GA4 tags:** GA4 - Configuration (31), GA4 Event - CTA Click (14), GA4 Event - Attribution Loaded (26), GA4 Event - Form Submit (29).
+- **Allowlist-prod, not blocklist-staging.** Anything other than the two production hostnames is excluded automatically. New preview environments (e.g. branch previews on `*.cargonomics-site.pages.dev`, `vassovass.github.io`, `cargonomics-site.pages.dev` bare URL) need no further config.
+- **Negation pattern in the API:** GTM v2 API has no `notEquals` filter type. The blocking trigger uses `equals` with `{type: "boolean", key: "negate", value: "true"}` as a third parameter. UI shows it as "does not equal".
+
+To verify a change to this filter:
+
+1. GTM → workspace → Preview, point at `https://staging.cargonomics-site.pages.dev/`. All 4 GA4 tags must appear under Tags Not Fired with reason "Blocked by Block GA4 - Non-Production Hostname".
+2. Browser DevTools Network tab on staging — filter for `google-analytics.com`. Zero hits.
+3. GA4 Realtime — staging activity must not show up.
+4. Same checks on `cargonomics.com.vn` post-DNS cutover; tags MUST fire there.
+
+If the production domain ever changes (e.g. to a new TLD), update the two `Page Hostname` values in trigger 32 and republish.
+
+## Internal team opt-out — cookie-based block on prod hostnames
+
+GTM published version 4 (2026-04-28) added a second blocking layer for known team / Marilyn / partner traffic on the live hostname. The hostname filter (trigger 32) doesn't catch these visits because they hit `cargonomics.com.vn` like any other visitor.
+
+**How it works:**
+
+- **Variable:** `Cookie - cgn_internal` (ID 33). 1st-party cookie, returns the cookie value or `undefined` if not set.
+- **Blocking trigger:** `Block GA4 - Internal Opt-Out Cookie` (ID 34). Type: Custom Event with `.*` regex. Filter: `Cookie - cgn_internal` equals `1`. Applied as a second exception alongside trigger 32 on all 4 GA4 tags. Either condition blocks GA4.
+- **Companion site code:** inline script in the `<head>` of `index.html`, `about.html`, `course.html`, `contact.html`, `apply.html`, placed before the GTM snippet so the cookie is set before any tag fires. Reads `?internal=1` from URL → sets `cgn_internal=1; max-age=31536000; SameSite=Lax; Secure` cookie with `domain=.cargonomics.com.vn` on prod (so it covers both `cargonomics.com.vn` and `www.cargonomics.com.vn`). `?internal=0` clears the cookie. The URL parameter is intentionally retained after handling so users can bookmark the opt-out link via Ctrl+D / Cmd+D; clicking the bookmark again later overwrites the cookie with a fresh 1-year `max-age`, effectively renewing the opt-out indefinitely as long as the user occasionally re-visits via the bookmark. Reload-while-on-the-page just re-sets the same cookie (idempotent, no harm).
+
+**Distribute to the team — INTERNAL REVIEWERS ONLY:**
+
+1. Send `https://www.cargonomics.com.vn/?internal=1` to anyone whose hits should not count in real-visitor stats: Marilyn, Vasso, Elias, Anthony Tay if he reviews pages, Lisa, Anne Hill staff who look at the site, future internal team members.
+2. **Never send to partners, applicants, prospective students, clients, or include in marketing materials / email signatures / social posts / ads / public-facing pages.** Partner referral traffic is something we explicitly want to track — opting them out defeats the point. If the link leaks externally, real visitors who click it stop counting for ~1 year and we lose visibility on traffic we actually want to measure.
+3. Each person opens the URL once on every browser/device they use to visit the site (laptop Chrome, laptop Safari, phone, work machine).
+4. Recommend they bookmark the URL with `?internal=1` via Ctrl+D / Cmd+D. Clicking the bookmark again at any time overwrites the cookie with a fresh 1-year `max-age`, effectively renewing the opt-out and recovering from cookie-clear events in one click.
+5. Confirmation: open DevTools Console after the visit. Should see `[Cargonomics] Internal traffic opt-out ENABLED on this browser. GA4 tracking is now disabled here for ~1 year.`
+6. They can verify it took by visiting any page and checking that there's no `_ga` activity (DevTools → Network filter `google-analytics.com` → empty).
+7. To opt back in: visit `https://www.cargonomics.com.vn/?internal=0`.
+
+**Limitations:**
+
+- **Per-browser, per-device.** Clearing site cookies undoes it. Incognito sessions are unaffected (incognito has no cookies). Different browser on same machine = separate opt-out. Phone vs laptop = separate opt-out.
+- **Not a privacy tool.** This is for keeping internal hits out of GA4, not for protecting personal data. The cookie itself is just a flag.
+- **Doesn't prevent server-side GA traffic** (the site has none) or extension-based tracking pixels (the site has none).
+
+**Recommended pairing with GA4 Internal Traffic IP filter** (set up in GA4 Admin, not GTM): for the Cargonomics office WiFi, define the public IP under Admin → Data Streams → Configure Tag Settings → Show all → Define Internal Traffic, then activate the built-in "Internal Traffic" data filter. This catches everyone on the office network without per-browser setup. The cookie covers home / mobile / VPN / partner machines.
 
 ## Architecture
 
